@@ -1,0 +1,23 @@
+name: A click path or screenshot is out of date
+description: Claude changed a menu, a button or a name, and a step no longer matches.
+labels: ["out of date"]
+body:
+  - type: input
+    id: step
+    attributes:
+      label: Which step?
+      placeholder: "Starter, step 1: Instructions for Claude"
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What do you see instead?
+      description: The menu path or button name you see now. A screenshot helps. Never include personal or client data.
+    validations:
+      required: true
+  - type: input
+    id: where
+    attributes:
+      label: Where and when
+      placeholder: "claude.ai in Chrome, 14 Oct 2026, Pro plan"
