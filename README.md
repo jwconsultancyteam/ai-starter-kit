@@ -33,8 +33,8 @@ No coding. No account on GitHub needed.
 | Level | Step | You learn | Status |
 |---|---|---|---|
 | Starter | [1. Instructions for Claude](starter/01-instructions-for-claude/) | Tell Claude once who you are and how you want answers | Live (13 Oct 2026) |
-| Starter | 2. Projects: Claude's own desk | One project per job, with its own instructions and files | Next (14 Oct 2026) |
-| Starter | 3. Which Claude for which job | When to pick which model: speed, depth, cost | Coming |
+| Starter | [2. Projects: Claude's own desk](starter/02-projects/) | One project per job, with its own instructions and files | Live (14 Oct 2026) |
+| Starter | 3. Which Claude for which job | When to pick which model: speed, depth, cost | Next (15 Oct 2026) |
 | Starter | 4. Memory | What Claude remembers about you, and how to check and delete it | Coming |
 | Starter | 5. Connectors | Your calendar, mail and files inside Claude | Coming |
 | Starter | 6. Skills | Teach Claude a job once; use it every time | Coming |
