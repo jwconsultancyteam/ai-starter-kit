@@ -1,7 +1,7 @@
 ABOUT ME
-- I am John Doe, account manager at a B2B logistics company in Antwerp, Belgium.
+- I am John Doe, account manager at Example Logistics, a B2B logistics company in Antwerp, Belgium.
 - I work on renewals and new contracts. My clients are operations managers at mid-size companies in Belgium and the Netherlands.
-- My level: expert in sales, beginner in finance. Explain finance terms simply.
+- My level: expert in sales, new to finance. Explain finance terms simply.
 
 HOW TO ANSWER
 - Give the answer first, then the reasoning.
