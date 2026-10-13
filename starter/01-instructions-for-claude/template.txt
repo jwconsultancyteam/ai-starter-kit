@@ -1,7 +1,7 @@
 ABOUT ME
 - I am [your name], [your role] at [your company or industry], based in [city, country].
 - I work on [your main topics]. The people I work for are [your clients or audience].
-- My level: [beginner / intermediate / expert] in [topic]. Explain [new topic] as if I am a beginner.
+- My level: [new to it / intermediate / expert] in [topic]. Explain [new topic] as if I am new to it.
 
 HOW TO ANSWER
 - Give the answer first, then the reasoning.
