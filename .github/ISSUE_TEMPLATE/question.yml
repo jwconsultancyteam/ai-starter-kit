@@ -1,0 +1,14 @@
+name: Question or idea
+description: Something is unclear, or you want a step on a topic.
+body:
+  - type: input
+    id: step
+    attributes:
+      label: Which step? (if any)
+  - type: textarea
+    id: question
+    attributes:
+      label: Your question or idea
+      description: Never include passwords, keys, or personal or client data.
+    validations:
+      required: true
