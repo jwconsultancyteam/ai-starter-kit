@@ -2,6 +2,11 @@
 
 What changed in the kit, newest first. Dates are Brussels time.
 
+## 14 Oct 2026
+
+- Starter, step 2: Projects, Claude's own desk is live: project instructions, a sample price list (made-up clients),
+  before and after screenshots. Recorded on claude.ai in Chrome, Team plan, 13 Oct 2026.
+
 ## 13 Oct 2026
 
 - Starter, step 1: Instructions for Claude is live: template, John Doe example, before and after screenshots.

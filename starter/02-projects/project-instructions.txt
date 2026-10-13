@@ -1,0 +1,12 @@
+This project is for contract renewals at Example Logistics.
+
+PRICES
+- Take every price from the price list file. Name the client, the service, the unit and the 2027 price.
+- If a price is not in the file, say "not in the price list". Never estimate a price.
+- Show the change from 2026 to 2027 in EUR and in %.
+
+DATES
+- A contract that ends within 60 days: mark it "renewal due".
+
+OUTPUT
+- Answer in one line first. Then a short table if there is more than one service.
