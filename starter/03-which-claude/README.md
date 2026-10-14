@@ -42,15 +42,15 @@ In the "Renewals" project from [step 2](../02-projects/), ask:
 "Gamma Tools asks for 6% off their 2027 road transport price. Give me three options and draft my reply."
 
 **Haiku 5.5** (about 15 seconds in our test): the right numbers. It spots that 6% off (EUR 700.30) is EUR 9.70
-below this year's price of EUR 710.00. But it also lists the whole price list, which we did not ask for, and writes
-one draft with the three options in brackets.
+below this year's price of EUR 710.00. But it also puts every client from the price list in a table, not just Gamma
+Tools, and writes one draft with the three options in brackets.
 
 ![Haiku 5.5: right numbers, one draft with the options in brackets](images/haiku-answer.jpg)
 
-**Opus 5.5, effort Medium** (about 25 seconds): three ready-to-send emails, one per option ("Hold the price",
-"Meet halfway", "6% for commitment"). And it says which sentences are general wording, not from your file.
+**Opus 5.5, effort Medium** (about 25 seconds): a full email for each option ("Hold the price", "Meet
+halfway", "6% for commitment"). You still fill in the names. And it says which sentences are general wording, not from your file.
 
-![Opus 5.5: three ready-to-send emails, one per option](images/opus-answer.jpg)
+![Opus 5.5: a full email for each option](images/opus-answer.jpg)
 
 Your answers will not be word for word the same. Models answer a little differently every time.
 
