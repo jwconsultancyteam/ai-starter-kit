@@ -34,8 +34,8 @@ No coding. No account on GitHub needed.
 |---|---|---|---|
 | Starter | [1. Instructions for Claude](starter/01-instructions-for-claude/) | Tell Claude once who you are and how you want answers | Live (13 Oct 2026) |
 | Starter | [2. Projects: Claude's own desk](starter/02-projects/) | One project per job, with its own instructions and files | Live (14 Oct 2026) |
-| Starter | 3. Which Claude for which job | When to pick which model: speed, depth, cost | Next (15 Oct 2026) |
-| Starter | 4. Memory | What Claude remembers about you, and how to check and delete it | Coming |
+| Starter | [3. Which Claude for which job](starter/03-which-claude/) | When to pick which model, and the effort | Live (15 Oct 2026) |
+| Starter | 4. Memory | What Claude remembers about you, and how to check and delete it | Next (16 Oct 2026) |
 | Starter | 5. Connectors | Your calendar, mail and files inside Claude | Coming |
 | Starter | 6. Skills | Teach Claude a job once; use it every time | Coming |
 | Builder | 7 to 14 | Agents, Claude Code, GitHub as your undo button, going live, tests, security checks | Coming |
