@@ -3,7 +3,7 @@
 **From your first chat to AI agents that work on their own: they talk to each other, have their own wallet, and pay or get paid for you.** Free templates, prompts and setups, one small step at a
 time, with the exact clicks. Claude first. Everything here is what we use ourselves to build and run real software.
 
-New step every weekday at 12:00 (Brussels time). Starter first, then Builder, then Expert.
+New step every day at 12:00 (Brussels time), weekends included. Starter first, then Builder, then Expert.
 
 ---
 
@@ -35,12 +35,15 @@ No coding. No account on GitHub needed.
 | Starter | [1. Instructions for Claude](starter/01-instructions-for-claude/) | Tell Claude once who you are and how you want answers | Live (13 Oct 2026) |
 | Starter | [2. Projects: Claude's own desk](starter/02-projects/) | One project per job, with its own instructions and files | Live (14 Oct 2026) |
 | Starter | [3. Which Claude for which job](starter/03-which-claude/) | When to pick which model, and the effort | Live (15 Oct 2026) |
-| Starter | 4. Memory | What Claude remembers about you, and how to check and delete it | Next (16 Oct 2026) |
-| Starter | 5. Connectors | Your calendar, mail and files inside Claude | Coming |
-| Starter | 6. Skills | Teach Claude a job once; use it every time | Coming |
-| Builder | 7 to 14 | Agents, Claude Code, GitHub as your undo button, going live, tests, security checks | Coming |
-| Expert | 15 to 22 | Guardrails, workflows, AI review, second opinions, tracing every AI call, agents that run overnight, connecting your own tools, agents with their own wallet that pay and get paid | Coming |
-
+| Starter | [4. Memory](starter/04-memory/) | What Claude remembers about you, and how to check and change it | Live (16 Oct 2026) |
+| Starter | 5. Chat, Cowork, Code | Three ways to work with Claude, and when to use which | Next (17 Oct 2026) |
+| Starter | 6. Artifacts | Turn an answer into a page you can share | Coming |
+| Starter | 7. Connectors | Your calendar, mail and files inside Claude | Coming |
+| Starter | 8. Skills | Teach Claude a job once; use it every time | Coming |
+| Starter | 9. Cowork, a task with steps | Give Claude a goal and let it work through the steps | Coming |
+| Starter | 10. Scheduled tasks | Work that runs on its own, on a schedule | Coming |
+| Builder | 11 to 20 | Claude Code, agents, house rules, mods, a second brain, GitHub as your undo button, going live, tests and security checks | Coming |
+| Expert | 21 to 30 | Guardrails, workflows, AI review, second opinions, tracing every AI call, agents that run overnight, connecting your own tools, agents that talk to each other and agents with their own wallet | Coming |
 ---
 
 ## What every step contains
