@@ -35,7 +35,7 @@ means more thorough answers, but it takes longer and uses your limits faster. Ma
 
 Start on Medium. Go higher only when an answer misses something.
 
-## Test it: the same question, two models
+## Test it: the same question, three models
 
 In the "Renewals" project from [step 2](../02-projects/), ask:
 
@@ -47,16 +47,26 @@ Tools, and writes one draft with the three options in brackets.
 
 ![Haiku 5.5: right numbers, one draft with the options in brackets](images/haiku-answer.jpg)
 
+**Sonnet 5.5, effort Medium** (about 17 seconds): only the Gamma Tools rows, three options in a table (hold EUR 745.00,
+freeze at this year's EUR 710.00, or grant the 6% at EUR 700.30) and one complete email. But it adds "the fuel
+surcharge remains separate", and says this comes from the price list notes. In the price list that note is on Alpha
+Retail's row. Gamma Tools' note only says "Renewal due". So read a Sonnet draft before you send it.
+
+![Sonnet 5.5: one complete email, with a fuel surcharge note taken from another client's row](images/sonnet-answer.jpg)
+
 **Opus 5.5, effort Medium** (about 25 seconds): a full email for each option ("Hold the price", "Meet
 halfway", "6% for commitment"). You still fill in the names. And it says which sentences are general wording, not from your file.
 
 ![Opus 5.5: a full email for each option](images/opus-answer.jpg)
+
+All three got the maths right. Only Opus flagged its own sentences that were not from the file.
 
 Your answers will not be word for word the same. Models answer a little differently every time.
 
 ## Rule of thumb
 
 - A quick check or a short answer: Haiku.
+- A draft you will read and check yourself: Sonnet.
 - Something you will send, sign or decide on: Opus.
 - Not sure: Opus (Anthropic's advice), on effort Medium (the level the menu recommends).
 
@@ -68,7 +78,7 @@ Your answers will not be word for word the same. Models answer a little differen
 
 ## Time win and solution win
 
-- Time win: the fast model for quick jobs (in our test: about 15 seconds instead of 25).
+- Time win: the fast model for quick jobs (in our test: Haiku about 15 seconds, Sonnet 17, Opus 25).
 - Solution win: depth only where you need it, so your usage limits go to the work that matters.
 
 ## Next
