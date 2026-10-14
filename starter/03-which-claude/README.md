@@ -41,13 +41,13 @@ In the "Renewals" project from [step 2](../02-projects/), ask:
 
 "Gamma Tools asks for 6% off their 2027 road transport price. Give me three options and draft my reply."
 
-**Haiku 5.5** (about 17 seconds in our test): the right numbers. It spots that 6% off (EUR 700.30) is EUR 9.70
+**Haiku 5.5** (about 15 seconds in our test): the right numbers. It spots that 6% off (EUR 700.30) is EUR 9.70
 below this year's price of EUR 710.00. But it also lists the whole price list, which we did not ask for, and writes
 one draft with the three options in brackets.
 
 ![Haiku 5.5: right numbers, one draft with the options in brackets](images/haiku-answer.jpg)
 
-**Opus 5.5, effort Medium** (about 27 seconds): three ready-to-send emails, one per option ("Hold the price",
+**Opus 5.5, effort Medium** (about 25 seconds): three ready-to-send emails, one per option ("Hold the price",
 "Meet halfway", "6% for commitment"). And it says which sentences are general wording, not from your file.
 
 ![Opus 5.5: three ready-to-send emails, one per option](images/opus-answer.jpg)
@@ -67,7 +67,7 @@ Your answers will not be word for word the same. Models answer a little differen
 
 ## Time win and solution win
 
-- Time win: the fast model for quick jobs (in our test: 17 seconds instead of 27).
+- Time win: the fast model for quick jobs (in our test: about 15 seconds instead of 25).
 - Solution win: depth only where you need it, so your usage limits go to the work that matters.
 
 ## Next
