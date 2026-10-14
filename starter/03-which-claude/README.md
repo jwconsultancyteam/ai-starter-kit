@@ -6,7 +6,7 @@ hard it thinks before it answers.
 | | |
 |---|---|
 | Time to learn | about 5 minutes |
-| You need | a Claude account on claude.ai. Which models you see depends on your plan |
+| You need | a Claude account on claude.ai. We tested on the Team plan; your plan can show other models |
 | Tested | claude.ai in Chrome, Team plan, 14 Oct 2026 |
 
 ## Where
@@ -58,12 +58,13 @@ Your answers will not be word for word the same. Models answer a little differen
 
 - A quick check or a short answer: Haiku.
 - Something you will send, sign or decide on: Opus.
-- Not sure: Opus on Medium, as Anthropic advises.
+- Not sure: Opus (Anthropic's advice), on effort Medium (the level the menu recommends).
 
 ## Good to know
 
-- The model is set per chat. A new chat starts with the model you picked last.
-- Which models you see depends on your plan. "More models" in the menu shows older ones.
+- The model is set per chat. In our test the project page kept the model we picked last, while a new chat outside
+  the project started on Opus 5.5. So check the model name before you send.
+- "More models" in the menu shows older models, such as Opus 4.8 and Haiku 4.5.
 
 ## Time win and solution win
 
