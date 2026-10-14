@@ -11,7 +11,7 @@ hard it thinks before it answers.
 
 ## Where
 
-claude.ai > the chat box > click the model name next to the send button (for example "Opus 5.5 Medium").
+claude.ai > the chat box > click the model name at the right of the box (for example "Opus 5.5 Medium").
 
 ![The model menu: Fable 5.1, Opus 5.5, Sonnet 5.5, Haiku 5.5, Effort](images/model-menu.jpg)
 
