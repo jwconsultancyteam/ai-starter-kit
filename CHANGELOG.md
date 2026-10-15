@@ -2,6 +2,14 @@
 
 What changed in the kit, newest first. Dates are Brussels time.
 
+## 16 Oct 2026
+
+- Starter, step 4: Memory is live: where the switches are, the same question asked three times (memory off, after
+  one normal chat, after "Remember this"), how to change or delete what Claude kept. Recorded on claude.ai in
+  Chrome, Team plan, 15 Oct 2026.
+- The road now follows the 30-day plan: 10 Starter steps, then Builder 11 to 20 and Expert 21 to 30. A new step
+  every day, weekends included.
+
 ## 15 Oct 2026
 
 - Starter, step 3: Which Claude for which job is live: the four models and the effort levels as the menu shows
