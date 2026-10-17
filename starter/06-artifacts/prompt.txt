@@ -1,0 +1,8 @@
+Make a one-page overview of our upcoming renewals as an artifact, so I can share it with my manager.
+
+---
+How to use it:
+1. Open your project with the price list (step 2, Renewals) and start a new chat there.
+2. Paste the line above and send it.
+3. Change "renewals" and "my manager" to your own job and reader.
+Tip: ask for a page you would put in front of someone. Add "as an artifact" if Claude answers in the chat instead.
