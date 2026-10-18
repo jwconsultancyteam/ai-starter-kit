@@ -7,6 +7,7 @@ What changed in the kit, newest first. Dates are Brussels time.
 - Starter, step 6: Artifacts is live: the same job twice in the Renewals project (an email with a table, then a
   one-page overview as an artifact), the prompt, and how sharing works per plan. Recorded on claude.ai in Chrome,
   Team plan, 16 Oct 2026.
+- Starter, step 6: added a diagram, "Three readers: three copies, or one page?", with its Excalidraw source.
 
 ## 17 Oct 2026
 
