@@ -50,6 +50,15 @@ It starts private. Nobody sees it until you share it.
 - Everyone who opens it needs a Claude account, also with the link.
 - You cannot change sharing settings in the iOS or Android app. Use the web or the desktop app.
 
+## In one picture
+
+Three readers. An email gives each one a copy. An artifact gives everyone the same page.
+
+![Three readers: three copies, or one page?](images/copies-vs-page.png)
+
+Drawn with Excalidraw. To change it, open [copies-vs-page.excalidraw](images/copies-vs-page.excalidraw) on
+excalidraw.com.
+
 ## No artifact?
 
 - Ask for it by name: "...as an artifact".
