@@ -9,6 +9,7 @@ share it.
 | Time to set up | about 5 minutes |
 | You need | a Claude account on claude.ai. For the test below: the Renewals project from [step 2](../02-projects/) |
 | Tested | claude.ai in Chrome, Team plan, 16 Oct 2026 |
+| Download | [the carousel as a PDF](starter-step6-artifacts-carousel.pdf) (5 slides) |
 
 ## Where
 

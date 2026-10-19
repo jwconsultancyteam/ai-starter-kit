@@ -8,6 +8,7 @@ What changed in the kit, newest first. Dates are Brussels time.
   meetings, the same question before and after, the connector's tools (it can also create, update and delete events)
   and how to keep changes on Needs approval, plus a connector safety checklist. Recorded on claude.ai in a Chromium
   browser, Team plan, 19 Oct 2026.
+- Steps 5, 6 and 7: the carousel of each step is now in its folder as a PDF to download.
 
 ## 18 Oct 2026
 
