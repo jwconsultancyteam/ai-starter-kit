@@ -2,6 +2,13 @@
 
 What changed in the kit, newest first. Dates are Brussels time.
 
+## 19 Oct 2026
+
+- Starter, step 7: Connectors is live: connect Google Calendar and test it on a separate calendar with four made-up
+  meetings, the same question before and after, the connector's tools (it can also create, update and delete events)
+  and how to keep changes on Needs approval, plus a connector safety checklist. Recorded on claude.ai in a Chromium
+  browser, Team plan, 19 Oct 2026.
+
 ## 18 Oct 2026
 
 - Starter, step 6: Artifacts is live: the same job twice in the Renewals project (an email with a table, then a
