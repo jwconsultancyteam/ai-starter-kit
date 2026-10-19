@@ -8,6 +8,7 @@ chat inside the project can use them.
 | Time to set up | about 10 minutes |
 | You need | a Claude account on claude.ai. Free plans can have up to 5 projects |
 | Tested | claude.ai in Chrome, Team plan, 13 Oct 2026 |
+| Download | [the carousel as a PDF](starter-step2-projects-carousel.pdf) (6 slides) |
 
 ## What goes where
 

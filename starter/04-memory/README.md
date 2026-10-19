@@ -8,6 +8,7 @@ yourself. Here, Claude takes the notes.
 | Time to check | about 5 minutes |
 | You need | a Claude account on claude.ai |
 | Tested | claude.ai in Chrome, Team plan, 15 Oct 2026 |
+| Download | [the carousel as a PDF](starter-step4-memory-carousel.pdf) (7 slides) |
 
 ## Is yours on?
 

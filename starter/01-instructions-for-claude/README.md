@@ -7,6 +7,7 @@ Tell Claude once who you are and how you want answers. It keeps this in mind in 
 | Time to set up | about 10 minutes |
 | You need | a Claude account on claude.ai |
 | Tested | claude.ai in Chrome, 13 Oct 2026 |
+| Download | [the carousel as a PDF](starter-step1-instructions-carousel.pdf) (6 slides) |
 
 ## Instructions and memory: two different things
 
