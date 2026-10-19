@@ -38,7 +38,7 @@ No coding. No account on GitHub needed.
 | Starter | [4. Memory](starter/04-memory/) | What Claude remembers about you, and how to check and change it | Live (16 Oct 2026) |
 | Starter | [5. Chat, Cowork, Code](starter/05-chat-cowork-code/) | Three ways to work with Claude, and when to use which | Live (17 Oct 2026) |
 | Starter | [6. Artifacts](starter/06-artifacts/) | Turn an answer into a page you can share | Live (18 Oct 2026) |
-| Starter | 7. Connectors | Your calendar, mail and files inside Claude | Coming |
+| Starter | [7. Connectors](starter/07-connectors/) | Let Claude read your calendar, on a test calendar first, and decide what it may change | Live (19 Oct 2026) |
 | Starter | 8. Skills | Teach Claude a job once; use it every time | Coming |
 | Starter | 9. Cowork, a task with steps | Give Claude a goal and let it work through the steps | Coming |
 | Starter | 10. Scheduled tasks | Work that runs on its own, on a schedule | Coming |
