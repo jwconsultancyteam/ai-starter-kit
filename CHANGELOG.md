@@ -2,6 +2,12 @@
 
 What changed in the kit, newest first. Dates are Brussels time.
 
+## 20 Oct 2026
+
+- Starter, step 8: Skills is live: upload a free skill (a follow-up email after a client call), what is in a
+  SKILL.md, the same call notes before and after, and how to make your own. Recorded on claude.ai in a Chromium
+  browser, Team plan, 19 Oct 2026.
+
 ## 19 Oct 2026
 
 - Starter, step 7: Connectors is live: connect Google Calendar and test it on a separate calendar with four made-up
