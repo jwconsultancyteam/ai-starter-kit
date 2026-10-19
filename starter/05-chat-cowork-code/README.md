@@ -7,6 +7,7 @@ Claude has three ways to work. Pick the one that fits the job.
 | Time to learn | about 5 minutes |
 | You need | a Claude account on claude.ai. Chat works on every plan. Cowork and Code need a paid plan |
 | Tested | claude.ai in Chrome, Team plan, 16 Oct 2026 |
+| Download | [the carousel as a PDF](starter-step5-chat-cowork-code-carousel.pdf) (8 slides) |
 
 ## The three ways
 
