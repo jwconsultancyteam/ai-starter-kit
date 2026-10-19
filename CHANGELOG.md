@@ -2,6 +2,12 @@
 
 What changed in the kit, newest first. Dates are Brussels time.
 
+## 21 Oct 2026
+
+- Starter, step 9: Cowork is live: the same export first in Chat (one Excel file is a Chat job), then a weekly report
+  task in Cowork with three outputs (Excel, a one-page PDF, an email draft), Manually approve and Allow once, and the
+  expected numbers to check the result against. Recorded on claude.ai in a Chromium browser, Team plan, 19 Oct 2026.
+
 ## 20 Oct 2026
 
 - Starter, step 8: Skills is live: upload a free skill (a follow-up email after a client call), what is in a
