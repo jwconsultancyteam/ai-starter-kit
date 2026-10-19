@@ -8,6 +8,7 @@ hard it thinks before it answers.
 | Time to learn | about 5 minutes |
 | You need | a Claude account on claude.ai. We tested on the Team plan; your plan can show other models |
 | Tested | claude.ai in Chrome, Team plan, 14 Oct 2026 |
+| Download | [the carousel as a PDF](starter-step3-which-claude-carousel.pdf) (7 slides) |
 
 ## Where
 

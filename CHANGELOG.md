@@ -14,6 +14,11 @@ What changed in the kit, newest first. Dates are Brussels time.
   SKILL.md, the same call notes before and after, and how to make your own. Recorded on claude.ai in a Chromium
   browser, Team plan, 19 Oct 2026.
 
+## 19 Oct 2026, evening
+
+- Steps 1 to 4: each step folder now has its carousel as a PDF to download, built from the step's tested screenshots
+  and README. Steps 5 to 9 already had one, so every step now has a carousel.
+
 ## 19 Oct 2026
 
 - Starter, step 7: Connectors is live: connect Google Calendar and test it on a separate calendar with four made-up
