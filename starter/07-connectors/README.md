@@ -10,6 +10,7 @@ This step connects one calendar. Start with a test calendar, not your real one.
 | Time to set up | about 10 minutes, including the test calendar |
 | You need | a Claude account on a Pro, Max, Team or Enterprise plan, and a Google account for the test calendar |
 | Tested | claude.ai in a Chromium browser, Team plan, 19 Oct 2026 |
+| Download | [the carousel as a PDF](starter-step7-connectors-carousel.pdf) (6 slides) |
 
 ## Where
 
