@@ -1,0 +1,1 @@
+Every Monday I report on last week's shipments. From this export: 1) build the weekly overview in Excel (top 5 clients by pallets, pallets per week, a chart), 2) make a one-page PDF for the team with the three biggest changes in the last week compared with the week before, 3) write a short email to the team to send with it. Check your numbers against the export before you finish.
