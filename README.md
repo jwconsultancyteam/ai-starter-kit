@@ -41,7 +41,7 @@ No coding. No account on GitHub needed.
 | Starter | [7. Connectors](starter/07-connectors/) | Let Claude read your calendar, on a test calendar first, and decide what it may change | Live (19 Oct 2026) |
 | Starter | [8. Skills](starter/08-skills/) | Teach Claude a job once; use it every time | Live (20 Oct 2026) |
 | Starter | [9. Cowork, a task with steps](starter/09-cowork/) | Give Claude a goal and let it work through the steps | Live (21 Oct 2026) |
-| Starter | 10. Scheduled tasks | Work that runs on its own, on a schedule | Coming |
+| Starter | [10. Scheduled tasks](starter/10-scheduled-tasks/) | Work that runs on its own, on a schedule | Live (22 Oct 2026) |
 | Builder | 11 to 20 | Claude Code, agents, house rules, mods, a second brain, GitHub as your undo button, going live, tests and security checks | Coming |
 | Expert | 21 to 30 | Guardrails, workflows, AI review, second opinions, tracing every AI call, agents that run overnight, connecting your own tools, agents that talk to each other and agents with their own wallet | Coming |
 ---

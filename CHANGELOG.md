@@ -2,6 +2,13 @@
 
 What changed in the kit, newest first. Dates are Brussels time.
 
+## 22 Oct 2026
+
+- Starter, step 10: Scheduled tasks is live: the step 9 Monday report as a scheduled task in a project with the
+  export, Weekly on Monday at 07:00, Automatically approve with "Do not send anything" in the instructions, one test
+  run with Run now checked against the expected numbers, how to pause it, and what to check before you let it run.
+  Recorded on claude.ai in a Chromium browser, Team plan, 21 Oct 2026.
+
 ## 21 Oct 2026
 
 - Starter, step 9: Cowork is live: the same export first in Chat (one Excel file is a Chat job), then a weekly report
