@@ -80,6 +80,9 @@ It also told us three things:
 - "Biggest changes" was its own call: it mixed routes and clients.
 - The email ends with a "[Name]" placeholder for you to fill in.
 
+One thing to notice: its three biggest changes left out route NL-BE, 77 to 101 (+24), which grew more than
+Beta Foods (+22). Every number was right; the pick was its own. That is why you read the first runs.
+
 ![The email draft](images/email.jpg)
 
 The run used Sonnet 5.5, the task's default model.
