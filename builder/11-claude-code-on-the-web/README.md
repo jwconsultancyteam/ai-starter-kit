@@ -11,8 +11,8 @@ so the answer is the same every week.
 |---|---|
 | Time to set up | about 15 minutes, including your first repository |
 | You need | a Claude account on Pro, Max, Team or Enterprise (not on Free), and a GitHub account (free is enough) |
-| Tested | claude.ai/code in a Chromium browser, Team plan, [FILL date of recording] |
-| Download | [shipments-export-sample.csv](shipments-export-sample.csv), [task-prompt.txt](task-prompt.txt), [expected-output.md](expected-output.md), [first-repository.md](first-repository.md) |
+| Tested | claude.ai/code in Chrome, Max plan, 23 Oct 2026 |
+| Download | [shipments-export-sample.csv](shipments-export-sample.csv), [task-prompt.txt](task-prompt.txt), [expected-output.md](expected-output.md), [first-repository.md](first-repository.md) and [the carousel as a PDF](builder-step11-claude-code-on-the-web-carousel.pdf) (8 slides) |
 
 ## Before and after
 
@@ -38,8 +38,6 @@ The same job: "the three biggest changes between last week and the week before".
 6. Below the message box, pick your repository and the branch **main**.
 7. Pick the mode **Plan**. Claude shows its plan before it changes a file.
 
-![Where: repository, branch and mode](images/where.jpg)
-
 ## The task
 
 Paste [task-prompt.txt](task-prompt.txt):
@@ -49,9 +47,29 @@ Paste [task-prompt.txt](task-prompt.txt):
 > the size of the change, up or down. Use ISO weeks. Add a README that explains the rule and how to run it. Run it
 > once on the sample file and show me the output.
 
-[FILL from the recording: what the plan said, what you approved, the files and the diff count.]
+![The task, with repository, branch main and Plan](images/where.png)
 
-![The plan](images/plan.jpg)
+What happened in our run:
+
+1. **It asked for the rule first.** Before it wrote any code, Claude Code asked what counts as one item: each client
+   on each route, client totals and route totals ranked together, or a top 3 of each. In step 10 Claude chose on its
+   own. Here it asked. We chose **Clients and routes, pooled**: that is the rule behind
+   [expected-output.md](expected-output.md).
+2. **It showed its plan.** The rule in five points, the files it would make, and the result it expected from its own
+   separate count. Nothing changed yet. You can accept, revise or reject.
+3. **It asked before it ran a command.** After we accepted the plan, it asked to run `python3 changes.py` on the
+   sample file.
+4. **It tested two edge cases on its own:** a week with no rows, and a year boundary (ISO week 1 of 2026 starts on
+   29 Dec 2025).
+5. **The result:** two new files on its own branch, `changes.py` and `README.md`, +109 -0. Our main version did not
+   change.
+
+If Claude does not ask the question, read the rule in its plan. It must rank client totals and route totals together.
+If it says something else, click **Revise** and ask for that rule.
+
+![It asked for the rule first](images/question.png)
+
+![The plan](images/plan.png)
 
 ## Check the result
 
@@ -65,7 +83,11 @@ route BE-FR: 71 -> 48 (-23)
 
 If your numbers differ, ask Claude why before you accept anything. Do not fix the expected numbers to match.
 
-![The diff and the output](images/result.jpg)
+![The output](images/result.png)
+
+We also downloaded `changes.py` from the branch and ran it ourselves: the same three lines.
+
+![Two files on its own branch, +109 -0, and the Create PR button](images/diff.png)
 
 ## Keep it or throw it away
 
@@ -89,6 +111,7 @@ If your numbers differ, ask Claude why before you accept anything. Do not fix th
 
 | Mistake | Fix |
 |---|---|
+| Your top 3 has clients in it | You picked another rule. Choose **Clients and routes, pooled**, or click **Revise** |
 | The repository list is empty | Give the Claude GitHub App access to that repository (step 4) |
 | You picked Auto or Accept edits | Start in Plan the first time, so you see what it will do |
 | Real data in the test repository | Use the made-up sample only |
