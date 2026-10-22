@@ -2,6 +2,13 @@
 
 What changed in the kit, newest first. Dates are Brussels time.
 
+## 23 Oct 2026
+
+- Builder, step 11: Claude Code on the web is live: the step 10 Monday report becomes a small script in your own
+  repository, written by Claude Code on claude.ai/code in Plan mode, on its own branch, with the rule for "biggest
+  change" written down and the output checked against a separate count. Includes how to make your first repository.
+  Recorded on claude.ai/code in a Chromium browser, Team plan, [FILL date].
+
 ## 22 Oct 2026
 
 - Starter, step 10: Scheduled tasks is live: the step 9 Monday report as a scheduled task in a project with the
