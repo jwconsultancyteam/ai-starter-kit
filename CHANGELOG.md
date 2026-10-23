@@ -2,6 +2,13 @@
 
 What changed in the kit, newest first. Dates are Brussels time.
 
+## 24 Oct 2026
+
+- Builder, step 12: What an agent is is live: the four parts (a goal, tools, a loop and a stop rule), a chat answer
+  vs a workflow vs an agent, step 11 read as an agent, and a one-page agent brief with a fifth line for what the agent
+  may never do. Includes the step 11 job as a filled-in brief. Tested in Claude Code on 23 Oct 2026: Plan mode first,
+  it asked one question the brief left open, and the output matched step 11's expected output.
+
 ## 23 Oct 2026
 
 - Builder, step 11: Claude Code on the web is live: the step 10 Monday report becomes a small script in your own
