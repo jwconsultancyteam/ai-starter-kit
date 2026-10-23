@@ -42,7 +42,8 @@ No coding. No account on GitHub needed.
 | Starter | [8. Skills](starter/08-skills/) | Teach Claude a job once; use it every time | Live (20 Oct 2026) |
 | Starter | [9. Cowork, a task with steps](starter/09-cowork/) | Give Claude a goal and let it work through the steps | Live (21 Oct 2026) |
 | Starter | [10. Scheduled tasks](starter/10-scheduled-tasks/) | Work that runs on its own, on a schedule | Live (22 Oct 2026) |
-| Builder | 11 to 20 | Claude Code, agents, house rules, mods, a second brain, GitHub as your undo button, going live, tests and security checks | Coming |
+| Builder | [11. Claude Code on the web](builder/11-claude-code-on-the-web/) | Turn a weekly job into a script in your own repository, with nothing to install | Live (23 Oct 2026) |
+| Builder | 12 to 20 | Agents, installing Claude Code, house rules, plan mode and undo, a second brain, GitHub as your undo button, going live, tests and security checks, and other models with Pi | Coming |
 | Expert | 21 to 30 | Guardrails, workflows, AI review, second opinions, tracing every AI call, agents that run overnight, connecting your own tools, agents that talk to each other and agents with their own wallet | Coming |
 ---
 
