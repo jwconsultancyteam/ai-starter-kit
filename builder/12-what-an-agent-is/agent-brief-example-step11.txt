@@ -1,0 +1,22 @@
+AGENT BRIEF
+
+Goal (what must be true at the end):
+A small Python script, changes.py, that reads shipments-export-sample.csv and prints the three biggest changes in
+pallets between the last week in the file and the week before. Count the total per client and the total per route,
+and rank them all together by the size of the change, up or down. Use ISO weeks. Add a README that explains the rule
+and how to run it.
+
+Tools (what it may use):
+The file shipments-export-sample.csv, Python 3 with the standard library only, and the files in this folder.
+
+Loop (how it checks its own work):
+Write the script, run it on the sample file, and compare the output with a count of your own. If they differ, find
+out why before you go on.
+
+Stop rule (when it stops, or stops and asks you):
+- Done when: the script ran once on the sample file and you showed me the output.
+- Stop and ask me when: the rule for one item is unclear, or the file has columns you did not expect.
+- Show me your plan before you change a file.
+
+Never (what it may never do):
+Never change or delete shipments-export-sample.csv. Never install packages. Never send anything outside this folder.

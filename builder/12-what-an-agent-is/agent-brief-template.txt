@@ -1,0 +1,18 @@
+AGENT BRIEF
+
+Goal (what must be true at the end):
+[One or two sentences. Describe the result, not the steps.]
+
+Tools (what it may use):
+[The files, programs and places it may use. Nothing else.]
+
+Loop (how it checks its own work):
+[What it does after each try: run it, look at the result, compare it with something you trust, then adjust.]
+
+Stop rule (when it stops, or stops and asks you):
+- Done when: [a check anyone can do: "the output matches expected-output.md", not "it looks good"]
+- Stop and ask me when: [the moments it must not guess: an unclear rule, a missing file, a cost]
+- Show me your plan before you change a file.
+
+Never (what it may never do):
+[Hard limits: never change main, never delete files, never send anything, never use real client data.]
