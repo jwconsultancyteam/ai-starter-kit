@@ -92,6 +92,20 @@ not change files. Then ask the three questions in [first-three-questions.txt](fi
 The one-line install updates itself in the background. Installs with Homebrew or WinGet do not: run
 `brew upgrade claude-code` or `winget upgrade Anthropic.ClaudeCode` from time to time.
 
+## In your editor
+
+| Editor | How |
+|---|---|
+| VS Code | Extensions view (Cmd+Shift+X or Ctrl+Shift+X), search "Claude Code", click Install |
+| Cursor | The same: search "Claude Code" in its Extensions view |
+| Other VS Code forks | Search "Claude Code" in the Extensions view, or install it from the [Open VSX registry](https://open-vsx.org/extension/Anthropic/claude-code) |
+| JetBrains (IntelliJ, PyCharm, Android Studio and more) | The Claude Code plugin: [code.claude.com/docs/en/jetbrains](https://code.claude.com/docs/en/jetbrains) |
+| Any other editor, such as Antigravity | Open its built-in terminal and type `claude`. The CLI works in any terminal |
+
+The extension has its own copy of Claude Code for its chat panel. To type `claude` in the editor's terminal, you
+also need the one-line install from step 2. Source:
+[code.claude.com/docs/en/vs-code](https://code.claude.com/docs/en/vs-code).
+
 ## No terminal at all
 
 The Claude desktop app has a **Code** tab with Claude Code inside. You do not need the terminal for it. Download it

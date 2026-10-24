@@ -61,6 +61,10 @@ When an answer matters, ask which lines it read.
 - **Not on Free.** Claude Code needs Pro, Max, Team or Enterprise. It uses your normal Claude limits.
 - **No terminal?** The Claude desktop app has a **Code** tab with Claude Code inside. See the end of
   [install-steps.md](install-steps.md). We did not test that route today.
+- **In your editor.** Claude Code has an extension for VS Code (what I use) and Cursor, and other VS Code forks can
+  install it from the Open VSX registry. JetBrains IDEs (IntelliJ, PyCharm, Android Studio and more) have a plugin.
+  In any other editor, type `claude` in its built-in terminal: the CLI works in any terminal. See
+  [VS Code](https://code.claude.com/docs/en/vs-code) and [JetBrains](https://code.claude.com/docs/en/jetbrains).
 - **Updates.** The one-line install updates itself. Homebrew and WinGet installs do not.
 - **Started on the web?** Anthropic's docs say `claude --teleport` pulls a web session into your terminal. It needs a
   checkout of the same repository, the session's branch pushed, and a sign-in with your claude.ai account. We did not
