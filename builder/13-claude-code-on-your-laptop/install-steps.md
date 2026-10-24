@@ -2,7 +2,9 @@
 
 The commands come from Anthropic's setup page:
 [code.claude.com/docs/en/setup](https://code.claude.com/docs/en/setup) (read on 24 Oct 2026). We tested the Mac command
-on 24 Oct 2026. We did not test the Windows commands.
+on 24 Oct 2026. We did not run the Windows commands on Windows. We read both Windows scripts: they download
+`claude.exe` from downloads.claude.ai, check its checksum and run its installer. The 2.1.310 downloads for Windows
+x64 and ARM64 exist.
 
 You need a paid Claude plan: Pro, Max, Team or Enterprise. The Free plan does not include Claude Code.
 

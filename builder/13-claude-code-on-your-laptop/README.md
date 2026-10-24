@@ -7,7 +7,7 @@ computer, in your own folders. The install is one line in the terminal.
 |---|---|
 | Time | about 10 minutes |
 | You need | a paid Claude plan (Pro, Max, Team or Enterprise), and a Mac or a Windows computer |
-| Tested | the Mac install and the three questions, Claude Code 2.1.310, 24 Oct 2026. Windows: not tested |
+| Tested | the Mac install and the three questions, Claude Code 2.1.310, 24 Oct 2026. Windows: we read both install scripts and checked that the 2.1.310 Windows downloads exist, but we did not run them on Windows |
 | Download | [install-steps.md](install-steps.md), [first-three-questions.txt](first-three-questions.txt), [shipments-export-sample.csv](shipments-export-sample.csv) and [the carousel as a PDF](builder-step13-claude-code-on-your-laptop-carousel.pdf) (8 slides) |
 
 ## The one line
@@ -67,8 +67,9 @@ When an answer matters, ask which lines it read.
   [VS Code](https://code.claude.com/docs/en/vs-code) and [JetBrains](https://code.claude.com/docs/en/jetbrains).
 - **Updates.** The one-line install updates itself. Homebrew and WinGet installs do not.
 - **Started on the web?** Anthropic's docs say `claude --teleport` pulls a web session into your terminal. It needs a
-  checkout of the same repository, the session's branch pushed, and a sign-in with your claude.ai account. We did not
-  test it today. See [Claude Code on the web](https://code.claude.com/docs/en/claude-code-on-the-web).
+  checkout of the same repository, the session's branch pushed, and a sign-in with your claude.ai account. We ran it in
+  a checkout of this kit: it checked the repository and said `No Claude Code sessions found for
+  jwconsultancyteam/ai-starter-kit`, because our step 11 session ran in a different repository. See [Claude Code on the web](https://code.claude.com/docs/en/claude-code-on-the-web).
 - **Trust only your own folders.** When it asks "Do you trust this folder?", the answer gives it read, edit and run
   rights in that folder.
 - Never put real client data in a test folder. The sample export is made up.
