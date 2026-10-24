@@ -2,6 +2,15 @@
 
 What changed in the kit, newest first. Dates are Brussels time.
 
+## 25 Oct 2026
+
+- Builder, step 13: Claude Code on your own laptop is live: the one-line install for Mac, Windows PowerShell and
+  Windows CMD from Anthropic's setup page, `claude --version` as the check, the first start (sign-in and the trust
+  question), Plan mode before the first question, and three read-only questions on the step 11 sample export with
+  the right answers to check. Includes the Desktop app Code tab as the route with no terminal. Tested on a Mac,
+  Claude Code 2.1.310, 24 Oct 2026: the install took 10 seconds, and the first answer missed one route because it
+  had read only the first 5 lines. Windows: not tested.
+
 ## 24 Oct 2026
 
 - Builder, step 12: What an agent is is live: the four parts (a goal, tools, a loop and a stop rule), a chat answer
