@@ -2,6 +2,15 @@
 
 What changed in the kit, newest first. Dates are Brussels time.
 
+## 26 Oct 2026
+
+- Builder, step 14: CLAUDE.md, the house rules for one folder is live: what goes in (what the folder is, rules you
+  can check, a pointer to a context pack, Never lines), what stays out, a 15-line template, the Monday context pack and
+  a blank one, and our /init output. Tested on 24 Oct 2026, Claude Code 2.1.310: the same question without and with a
+  CLAUDE.md, two runs each (about 500 words and 65 to 87 seconds without; 111 to 149 words and 25 seconds with). One
+  rule ("Start with a table") was ignored in both runs with the file. A concrete rule in a context pack was followed
+  in one run.
+
 ## 25 Oct 2026
 
 - Builder, step 13: Claude Code on your own laptop is live: the one-line install for Mac, Windows PowerShell and

@@ -1,0 +1,15 @@
+# House rules for this folder
+
+## What this folder is
+A weekly shipments export from our transport planning. The data is made up.
+
+## Rules
+- A week is an ISO week, Monday to Friday. "This week" is the last full week in the file.
+- BE-NL and NL-BE are two separate routes.
+- Every number comes from the file. Name the weeks you compared.
+- For the Monday overview, follow monday-overview.md.
+
+## Never
+- Never change or delete shipments-export-sample.csv.
+- Never create a file unless I ask for one.
+- Never send anything.

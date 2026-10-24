@@ -45,7 +45,8 @@ No coding. No account on GitHub needed.
 | Builder | [11. Claude Code on the web](builder/11-claude-code-on-the-web/) | Turn a weekly job into a script in your own repository, with nothing to install | Live (23 Oct 2026) |
 | Builder | [12. What an agent is](builder/12-what-an-agent-is/) | Write a one-page agent brief: a goal, tools, a loop, a stop rule and what it may never do | Live (24 Oct 2026) |
 | Builder | [13. Claude Code on your own laptop](builder/13-claude-code-on-your-laptop/) | Install Claude Code with one line, check it, and ask three questions in Plan mode | Live (25 Oct 2026) |
-| Builder | 14 to 20 | House rules, plan mode and undo, a second brain, GitHub as your undo button, going live, tests and security checks, and other models with Pi | Coming |
+| Builder | [14. CLAUDE.md, the house rules for one folder](builder/14-claude-md-house-rules/) | Write a short CLAUDE.md and a context pack for one job, and see the difference in one test | Live (26 Oct 2026) |
+| Builder | 15 to 20 | Plan mode and undo, a second brain, GitHub as your undo button, going live, tests and security checks, and other models with Pi | Coming |
 | Expert | 21 to 30 | Guardrails, workflows, AI review, second opinions, tracing every AI call, agents that run overnight, connecting your own tools, agents that talk to each other and agents with their own wallet | Coming |
 ---
 
