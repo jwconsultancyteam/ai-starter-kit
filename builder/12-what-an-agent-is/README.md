@@ -33,8 +33,8 @@ main version, never delete a file, never send anything.
 | | Chat answer | Workflow | Agent |
 |---|---|---|---|
 | What it does | Answers once | Follows steps that you fixed in advance | Decides its own next step toward a goal |
-| Tools | None | The ones in each step | The ones you allow |
-| Loop | No | Only where you built one | Yes: act, look at the result, adjust |
+| Tools | Sometimes, inside one answer | The ones in each step | The ones you allow |
+| Loop | No. You are the loop | Only where you built one | Yes: act, look at the result, adjust |
 | When it stops | After one answer | At the last step | When the stop rule says so |
 
 Anthropic draws the same line. Workflows follow "predefined code paths". Agents "dynamically direct their own
@@ -66,7 +66,7 @@ Paste the brief into Claude Code in **Plan** mode, as in step 11. Read the plan 
 ## Our test: the step 11 job as a brief
 
 [agent-brief-example-step11.txt](agent-brief-example-step11.txt) is the step 11 task, written as a brief with all five
-parts. On 23 Oct 2026 we pasted it into Claude Code in Plan mode, in a test folder with only the sample export.
+parts. On 23 Oct 2026 we gave it to Claude Code in the terminal, in Plan mode, in a test folder with only the sample export.
 
 1. **The plan came first.** No file changed. The plan had the rule, the two files it would make, and the result it
    expected from a count of its own: BE-BE +35, NL-BE +24, BE-FR -23.
