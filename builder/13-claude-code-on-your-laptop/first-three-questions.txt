@@ -1,0 +1,19 @@
+First three questions for Claude Code
+Builder, step 13
+
+Use a test folder with only shipments-export-sample.csv in it.
+Press Shift + Tab until the bottom line says "plan mode on". Then ask one question at a time.
+
+1. What is in this folder? Answer in three short lines.
+
+2. What does shipments-export-sample.csv contain? Name the columns and which weeks it covers.
+
+3. Do not change or create any file. Which three routes changed most in pallets between the last two weeks in the file?
+
+Check the answers yourself:
+- 198 rows, 7 columns: date, shipment_id, client, route, pallets, weight_kg, status
+- Weeks 35 to 42 of 2026, from 24 August to 16 October
+- Four routes: NL-BE, BE-NL, BE-FR and BE-BE
+- Week 41 to week 42: BE-BE +35, NL-BE +24, BE-FR -23 (the same three as step 11)
+
+If an answer is wrong, ask: "Which lines of the file did you read for that answer?"
