@@ -124,8 +124,8 @@ steps.
 - **Rewind does not track everything.** Not shell commands, not your own edits outside Claude Code, and not edits from
   other sessions ([docs](https://code.claude.com/docs/en/checkpointing)).
 - **It keeps file snapshots for the last 100 checkpoints** of a session, and you can still `/rewind` after you resume a session.
-- **Claude can make its own files.** In one shell test it left a `shipments-export-sample.csv.bak` backup in the
-  folder. Look at the folder after a change, not only at the file.
+- **`Esc` twice needs an empty input.** If the input has text, `Esc` twice clears it instead of
+  opening rewind ([docs](https://code.claude.com/docs/en/checkpointing)).
 
 ## Time win and solution win
 
@@ -140,7 +140,6 @@ steps.
 | "Restore code" only | Choose "Restore code and conversation", so Claude does not remember an edit that is gone |
 | You count on rewind after a shell command | Rewind does not undo it. Keep a copy, or use Git (step 17) |
 | You run a one-line command Claude suggests | Ask for a plan first. The `sed` line we got broke a column |
-| You check only the file | Look at the whole folder. Claude can leave extra files |
 
 ## Next
 
