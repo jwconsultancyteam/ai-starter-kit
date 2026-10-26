@@ -40,7 +40,8 @@ On 24 Oct 2026 we ran the Mac line on a Mac, in a clean home folder with no earl
 2. **The check.** `claude --version` printed `2.1.310 (Claude Code)`.
 3. **The first start.** `claude` in a test folder asked for a text style, then how to sign in, then whether we trust
    the folder.
-4. **Plan mode.** The new default mode is Auto mode. We pressed Shift + Tab until it said `plan mode on`. In Plan mode
+4. **Plan mode.** Ours started in Auto mode, because of our own settings. Without them, Claude Code starts in
+   manual mode ([step 15](../15-plan-mode-and-undo/)). We pressed Shift + Tab until it said `plan mode on`. In Plan mode
    it reads, but it does not change files.
 5. **Three questions** from [first-three-questions.txt](first-three-questions.txt), in a folder with only the sample
    export.
