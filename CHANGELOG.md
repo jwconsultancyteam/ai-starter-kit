@@ -2,6 +2,14 @@
 
 What changed in the kit, newest first. Dates are Brussels time.
 
+## 27 Oct 2026
+
+- Builder, step 15: Plan mode and undo is live: the three modes to start with (manual, plan, accept edits) and
+  Shift+Tab to switch, the ask screen and its three answers, and rewind with "Restore code and conversation". Includes
+  a one-page cheat sheet. Tested on a Mac, Claude Code 2.1.310, 26 Oct 2026, with no personal settings: one task (add
+  a column) in each mode. Manual and plan left the file unchanged (80 and 26 seconds), accept edits changed it right
+  (31 seconds). Rewind put back a file edit, but did not undo a change made only by a shell command.
+
 ## 26 Oct 2026
 
 - Builder, step 14: CLAUDE.md, the house rules for one folder is live: what goes in (what the folder is, rules you
