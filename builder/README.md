@@ -9,6 +9,7 @@ Steps 11 to 20 of the journey. One folder per step, with the task, the sample fi
 | [13. Claude Code on your own laptop](13-claude-code-on-your-laptop/) | Install Claude Code with one line, check it, and ask three questions in Plan mode | Live (25 Oct 2026) |
 | [14. CLAUDE.md, the house rules for one folder](14-claude-md-house-rules/) | Write a short CLAUDE.md and a context pack for one job, and see the difference in one test | Live (26 Oct 2026) |
 | [15. Plan mode and undo](15-plan-mode-and-undo/) | Switch between plan, manual and accept edits, answer the ask screen, and undo a step with rewind | Live (27 Oct 2026) |
-| 16 to 20 | A second brain, GitHub as your undo button, going live, tests and security checks, and other models with Pi | Coming |
+| [16. A second brain](16-second-brain/) | Let Claude Code remember what you tell it with auto memory, and let it write a wiki from your notes | Live (28 Oct 2026) |
+| 17 to 20 | GitHub as your undo button, going live, tests and security checks, and other models with Pi | Coming |
 
 The full road, Starter to Expert, is in the [main README](../README.md).

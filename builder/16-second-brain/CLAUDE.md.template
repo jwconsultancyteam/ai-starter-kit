@@ -1,0 +1,19 @@
+# Client notes (made-up data)
+
+notes/ has the raw notes: calls, emails, quotes. One file per note. Never change or delete a file in notes/.
+wiki/ is your knowledge base. You write it. I read it.
+
+## The wiki
+
+- wiki/index.md: one line per page: link, then one sentence. Read it first for every question.
+- One page per client in wiki/clients/. One page per topic in wiki/topics/.
+- Each page starts with "## Current state": the facts that are true now, each with its date and source note.
+- When a fact changes, replace it in "Current state". Move the old value to "## History" with its date.
+- A note that was not sent or not agreed is not a fact. Put it under "## Not agreed".
+- wiki/log.md: one line per change, newest last: date, what changed, which note.
+
+## Jobs
+
+- "Add notes/<file>": read the note, update every page it touches, update index.md and log.md.
+- A question: read index.md, then the pages it points to. Answer with the source note. Open notes/ only if the wiki has no answer.
+- "Check the wiki": list facts that disagree, pages not in index.md, and Current state lines without a source.

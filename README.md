@@ -47,7 +47,8 @@ No coding. No account on GitHub needed.
 | Builder | [13. Claude Code on your own laptop](builder/13-claude-code-on-your-laptop/) | Install Claude Code with one line, check it, and ask three questions in Plan mode | Live (25 Oct 2026) |
 | Builder | [14. CLAUDE.md, the house rules for one folder](builder/14-claude-md-house-rules/) | Write a short CLAUDE.md and a context pack for one job, and see the difference in one test | Live (26 Oct 2026) |
 | Builder | [15. Plan mode and undo](builder/15-plan-mode-and-undo/) | Switch between plan, manual and accept edits, answer the ask screen, and undo a step with rewind | Live (27 Oct 2026) |
-| Builder | 16 to 20 | A second brain, GitHub as your undo button, going live, tests and security checks, and other models with Pi | Coming |
+| Builder | [16. A second brain](builder/16-second-brain/) | Let Claude Code remember what you tell it with auto memory, and let it write a wiki from your notes | Live (28 Oct 2026) |
+| Builder | 17 to 20 | GitHub as your undo button, going live, tests and security checks, and other models with Pi | Coming |
 | Expert | 21 to 30 | Guardrails, workflows, AI review, second opinions, tracing every AI call, agents that run overnight, connecting your own tools, agents that talk to each other and agents with their own wallet | Coming |
 ---
 
