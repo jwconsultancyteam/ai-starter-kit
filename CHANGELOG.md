@@ -2,6 +2,15 @@
 
 What changed in the kit, newest first. Dates are Brussels time.
 
+## 28 Oct 2026
+
+- Builder, step 16: A second brain is live: auto memory next to CLAUDE.md, and a wiki that Claude Code writes from
+  your notes (Andrej Karpathy's LLM Wiki pattern), with a 19-line CLAUDE.md for the wiki, templates for the index and
+  a page, 16 made-up client notes and a cheat sheet. Tested on a Mac, Claude Code 2.1.312, 28 Oct 2026, with no
+  personal settings: one fact told in chat, then asked in a new session, in 4 setups. With auto memory on, the new
+  session knew it (6 seconds); with auto memory off, it did not. In a wiki folder in manual mode, the save needed a yes
+  and was lost. The wiki build took 72 seconds; with 16 notes, Claude found the right answers with and without it.
+
 ## 27 Oct 2026
 
 - Builder, step 15: Plan mode and undo is live: the three modes to start with (manual, plan, accept edits) and
