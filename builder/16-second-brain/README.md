@@ -100,8 +100,8 @@ Your wiki looks different from ours? Claude may choose other topic pages. Check 
 
 - **Auto memory is per project and per computer.** All folders in one git repository share one memory. Anthropic: "Files
   are not shared across machines or cloud environments" ([docs](https://code.claude.com/docs/en/memory)).
-- **Keep `MEMORY.md` short.** Only the first 200 lines or 25KB load. Ours has 106 lines (17KB). Its folder has 258
-  topic files.
+- **Keep `MEMORY.md` short.** Only the first 200 lines or 25KB load. Ours has just over 100 lines (about 17KB). Its
+  folder has 250+ topic files.
 - **A date does not retire an old fact.** In our own vault in August, almost every note had a date, but none said which
   older note it replaced. Two versions of one fact loaded into the same session. Hence the rule in the template: one
   "Current state", and the old value moves to "History".
