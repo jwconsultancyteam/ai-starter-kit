@@ -112,8 +112,8 @@ We ran these steps on GitHub, with our own private `weekly-shipments` repository
   `--top` change was "untested", and it was right: the script then printed 1 line instead of 3. With `python3`
   allowed, Claude ran the script and the change worked.
 - **Check the commit code in `git log`.** Claude told us the revert was `fc99b44`. Then it changed that commit, so in
-  `git log` it was `ca0e8cb`. The only difference: `ca0e8cb` has the `Co-Authored-By` line, `fc99b44`
-  did not.
+  `git log` it was `ca0e8cb`. The files stayed the same. Only the message changed: `ca0e8cb` has a line
+  about the conflict and the `Co-Authored-By` line, `fc99b44` had neither.
 
 Your commits look different from ours? Claude may write other messages or take another route. Check the output, not
 the steps.
