@@ -11,7 +11,7 @@ takes out one change, even a change from days ago, and keeps everything you did 
 |---|---|
 | Time | about 20 minutes |
 | You need | Claude Code, as in [step 13](../13-claude-code-on-your-laptop/), and the `weekly-shipments` repository from [step 11](../11-claude-code-on-the-web/), or the two files in this folder |
-| Tested | the step 11 repository in a folder on a Mac: a wrong change, a good change after it, then one ask to undo the wrong one, with and without git. Print mode (`claude -p`), no personal settings loaded. Claude Code 2.1.312, git 2.54, 28 Oct 2026 |
+| Tested | the step 11 repository in a folder on a Mac: a wrong change, a good change after it, then one ask to undo the wrong one, with and without git. Then the "Do it yourself" steps on GitHub, in a new clone of our private repository. Print mode (`claude -p`), no personal settings loaded. Claude Code 2.1.312, git 2.54, 28 Oct 2026 |
 | Download | [changes.py](changes.py) and [shipments-export-sample.csv](shipments-export-sample.csv) (the step 11 script and export), [git-cheat-sheet.md](git-cheat-sheet.md), [gitignore.template](gitignore.template) and [the carousel as a PDF](builder-step17-github-undo-button-carousel.pdf) (8 slides) |
 
 ## Five words first
@@ -75,23 +75,44 @@ what it understood, and said so. In the git repository, it took the old lines ba
 
 ## Do it yourself
 
+We ran these steps on GitHub, with our own private `weekly-shipments` repository.
+
 1. **Get the step 11 work into main.** On github.com, open `weekly-shipments`, then **Pull requests**. If the step 11
    pull request is still open, open it and click **Merge pull request**. No repository? Make one with
    [first-repository.md](../11-claude-code-on-the-web/first-repository.md) and upload [changes.py](changes.py) too.
-2. **Clone it.** In the terminal, go to the folder for your projects and type
-   `git clone https://github.com/<your-name>/weekly-shipments.git`. Then `cd weekly-shipments`. The repository is
-   private, so git needs your GitHub sign-in. We were already signed in with the GitHub CLI (`gh auth login`), so we
-   did not test the sign-in screen.
+2. **Sign in, then clone.** The repository is private, so git needs your GitHub sign-in. Install the
+   [GitHub CLI](https://cli.github.com), type `gh auth login` and follow the prompts. When it asks if you want to
+   authenticate Git with your GitHub credentials, say yes. Then go to the folder for your projects and type
+   `git clone https://github.com/<your-name>/weekly-shipments.git`, then `cd weekly-shipments`. We were already signed
+   in, so we did not see the prompts of `gh auth login`.
 3. Run `python3 changes.py`. Check the three lines against the output above.
-4. Start `claude`. Press `Shift+Tab` until it says `accept edits on`. Paste ask 1 from [our test](#our-test). Run
-   `python3 changes.py` again: NL-BE is gone.
-5. Say: "Commit this change." When it asks before `git commit`, choose **1. Yes**.
+4. Start `claude`. Press `Shift+Tab` until it says `accept edits on`. Paste ask 1 from [our test](#our-test). When it
+   wants to run `python3 changes.py`, say yes: that is how it checks its own work. Run `python3 changes.py` again:
+   NL-BE is gone.
+5. Say: "Commit this change." Say yes to each git command it asks for. Claude may first make a new branch, such as
+   `rank-by-percent-change`. That is fine: your main branch stays as it was.
 6. Paste ask 2. Commit it the same way.
 7. Type `git log --oneline` in the terminal. You see one line per commit.
 8. Say: "Ranking by percent was a mistake. Undo only that change with git revert and keep the --top option." Run
    `python3 changes.py`: the three lines are back. Run `python3 changes.py --top 5`: five lines.
-9. Type `git push`. Open the repository on github.com and click the commit count above the file list: the revert is
-   there too.
+9. Type `git push`. On a new branch, git stops and shows the command to use instead:
+   `git push --set-upstream origin <your-branch>`. Type that. Your commits, the revert too, are now on GitHub, on that
+   branch. To get them into main, open the pull request that GitHub suggests and merge it, as in step 1. We
+   stopped before that merge.
+
+### What we saw on GitHub
+
+- **Without a sign-in, git asks for a username and a password.** Your GitHub password does not work there. GitHub:
+  "Password-based authentication for Git has been removed"
+  ([docs.github.com](https://docs.github.com/en/get-started/git-basics/about-remote-repositories)). With an empty
+  sign-in, git said `Repository not found`, for a repository that does exist.
+- **Claude made a branch before it committed,** in 2 of 2 runs. After the merge, `main` had a pull request in its
+  history, and Claude said: "You were on `main`, so I branched first rather than committing there."
+- **When it could not run the script, it committed a bug.** In one run, we did not allow `python3`. Claude said its
+  `--top` change was "untested", and it was right: the script then printed 1 line instead of 3. With `python3`
+  allowed, Claude ran the script and the change worked.
+- **Check the commit code in `git log`.** Claude told us the revert was `fc99b44`. Then it changed that commit, so in
+  `git log` it was `ca0e8cb`.
 
 Your commits look different from ours? Claude may write other messages or take another route. Check the output, not
 the steps.
@@ -131,6 +152,9 @@ the steps.
 | `git revert` stops with a conflict | That is normal when a later change touched the same lines. Ask Claude to fix the conflict and keep the later change |
 | A `.env` file with keys is in your commits | Replace the key at the service first. Then add `.gitignore` |
 | You made the repository public to share one page | Keep it private. Step 18 shows another way |
+| `git clone` says `Repository not found` for your own repository | Git has no sign-in, so the private repository looks like it does not exist. Type `gh auth login`, then clone again |
+| `git push` says the branch has no upstream branch | Type the command git shows: `git push --set-upstream origin <your-branch>` |
+| You say no when Claude wants to run the script | Then it cannot check its work. Say yes to `python3 changes.py` |
 
 ## In our own work
 

@@ -10,7 +10,8 @@ What changed in the kit, newest first. Dates are Brussels time.
   settings: a wrong change, a good change after it, then "Undo it", in a plain folder and in a git repository. Both
   undos gave the right output. Without git, Claude rebuilt the file by hand and said it "may not match your original
   exactly"; with git, it made a revert commit. It did not commit on its own, and accept edits mode still needed a yes
-  before `git commit`.
+  before `git commit`. Then we ran "Do it yourself" on GitHub: a private clone needs `gh auth login` first,
+  Claude made a new branch before it committed, and a plain `git push` on that branch needs `--set-upstream`.
 
 ## 28 Oct 2026
 
