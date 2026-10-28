@@ -112,7 +112,8 @@ We ran these steps on GitHub, with our own private `weekly-shipments` repository
   `--top` change was "untested", and it was right: the script then printed 1 line instead of 3. With `python3`
   allowed, Claude ran the script and the change worked.
 - **Check the commit code in `git log`.** Claude told us the revert was `fc99b44`. Then it changed that commit, so in
-  `git log` it was `ca0e8cb`.
+  `git log` it was `ca0e8cb`. In another run it said why: "I also amended the revert commit to add the
+  Co-Authored-By line."
 
 Your commits look different from ours? Claude may write other messages or take another route. Check the output, not
 the steps.

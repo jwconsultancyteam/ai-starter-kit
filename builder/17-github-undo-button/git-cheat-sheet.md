@@ -29,7 +29,8 @@ before you say yes.
 
 - "Commit this change."
 - "Undo only the change of commit a39580d with git revert. Keep everything after it."
-- "Show me the git commands first. Do not run them yet." (plan mode)
+- "Show me the git commands first. Do not run them yet." Put it before your ask, in plan mode. In our test, Claude ran
+  nothing and said which commands it would use.
 
 ## Never
 
@@ -37,4 +38,5 @@ before you say yes.
 - `git push --force`: it can overwrite commits on GitHub.
 - A `.env` file or a key in a commit. Use [gitignore.template](gitignore.template).
 
-From step 17 of the AI Starter Kit. Tested with git 2.54 and Claude Code 2.1.312, 28 Oct 2026.
+From step 17 of the AI Starter Kit. Tested with git 2.54 and Claude Code 2.1.312, 28 Oct 2026. We ran the three asks
+above in print mode, with no personal settings.
