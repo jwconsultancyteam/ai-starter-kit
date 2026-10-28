@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}*,*::before,*::after{box-sizing:border-box}body{margin:0}</style>
+<title>Pallet Changes W41→W42</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one narrow column: header, three ranked change rows with before/after bars, then the raw script output. */
+:root {
+  --bg: #f3f5f7;
+  --surface: #ffffff;
+  --fg: #1b232c;
+  --muted: #5b6875;
+  --line: #d9dfe5;
+  --before: #b4c0cc;
+  --after: #2f5d86;
+  --up: #1f7a52;
+  --down: #b3392f;
+  --term-bg: #1e2730;
+  --term-fg: #dbe3ea;
+  --font-display: "Barlow Condensed", "Arial Narrow", system-ui, sans-serif;
+  --font-body: "Barlow", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12171c; --surface: #1a2128; --fg: #e4e9ee; --muted: #93a1ae; --line: #2c3640;
+    --before: #4a5866; --after: #7fb0dc; --up: #5cc495; --down: #ef7b70;
+    --term-bg: #0b0f13; --term-fg: #d3dce4; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12171c; --surface: #1a2128; --fg: #e4e9ee; --muted: #93a1ae; --line: #2c3640;
+  --before: #4a5866; --after: #7fb0dc; --up: #5cc495; --down: #ef7b70;
+  --term-bg: #0b0f13; --term-fg: #d3dce4; color-scheme: dark;
+}
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 16px; line-height: 1.5; }
+.wrap {
+  max-width: 720px; margin: 0 auto;
+  padding-block: 40px 56px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; gap: 28px;
+}
+header { display: grid; gap: 6px; }
+.eyebrow { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+h1 { font-family: var(--font-display); font-weight: 700; font-size: clamp(32px, 7vw, 44px); line-height: 1.05; margin: 0; text-wrap: balance; }
+h1 .arrow { color: var(--muted); font-weight: 600; }
+.lede { margin: 4px 0 0; color: var(--muted); max-width: 60ch; }
+
+.legend { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.swatch { width: 14px; height: 8px; border-radius: 2px; display: inline-block; }
+
+.list { list-style: none; margin: 0; padding: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; }
+.row { display: grid; grid-template-columns: 2.2em minmax(0, 1fr) auto; gap: 4px 14px; align-items: start; padding: 18px 18px; }
+.row + .row { border-top: 1px solid var(--line); }
+.rank { font-family: var(--font-display); font-weight: 700; font-size: 26px; line-height: 1; color: var(--muted); padding-top: 2px; }
+.what { min-width: 0; display: grid; gap: 10px; }
+.name { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.name strong { font-family: var(--font-display); font-size: 24px; font-weight: 700; letter-spacing: 0.02em; line-height: 1; }
+.kind { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: var(--muted); border: 1px solid var(--line); border-radius: 3px; padding: 1px 6px; }
+.bars { display: grid; gap: 5px; }
+.bar { display: grid; grid-template-columns: 3.4em minmax(0, 1fr) 3em; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.track { height: 10px; background: color-mix(in srgb, var(--line) 45%, transparent); border-radius: 2px; overflow: hidden; }
+.fill { height: 100%; border-radius: 2px; }
+.bar.before .fill { background: var(--before); }
+.bar.after .fill { background: var(--after); }
+.bar .n { text-align: right; color: var(--fg); font-family: var(--font-mono); font-size: 13px; }
+.delta { font-family: var(--font-mono); font-weight: 500; font-size: 18px; font-variant-numeric: tabular-nums; padding: 2px 8px; border-radius: 4px; white-space: nowrap; }
+.delta.up { color: var(--up); background: color-mix(in srgb, var(--up) 12%, transparent); }
+.delta.down { color: var(--down); background: color-mix(in srgb, var(--down) 12%, transparent); }
+
+section h2 { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin: 0 0 8px; }
+.term { background: var(--term-bg); color: var(--term-fg); border-radius: 6px; overflow-x: auto; }
+.term pre { margin: 0; padding: 16px 18px; font-family: var(--font-mono); font-size: 13px; line-height: 1.6; }
+.term .prompt { color: #8fa3b5; }
+.notes { font-size: 14px; color: var(--muted); margin: 0; padding-left: 1.2em; display: grid; gap: 4px; max-width: 65ch; }
+code { font-family: var(--font-mono); font-size: 0.9em; }
+@media (max-width: 440px) {
+  .row { grid-template-columns: 1.6em minmax(0, 1fr); }
+  .delta { grid-column: 2; justify-self: start; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">weekly-shipments · changes.py</div>
+    <h1>Pallet changes, 2026-W41 <span class="arrow">→</span> 2026-W42</h1>
+    <p class="lede">The three biggest week-over-week changes in pallets, with clients and routes ranked together by size of change, up or down.</p>
+  </header>
+
+  <div class="legend" aria-hidden="true">
+    <span><i class="swatch" style="background: var(--before)"></i>W41 (week before)</span>
+    <span><i class="swatch" style="background: var(--after)"></i>W42 (last week)</span>
+  </div>
+
+  <ol class="list" id="list"></ol>
+
+  <section>
+    <h2>Script output</h2>
+    <div class="term"><pre><span class="prompt">$ python3 changes.py</span>
+Pallet changes, 2026-W41 -> 2026-W42 (clients and routes)
+1. route  BE-BE    25 ->   60  +35
+2. route  NL-BE    77 ->  101  +24
+3. route  BE-FR    71 ->   48  -23</pre></div>
+  </section>
+
+  <ul class="notes">
+    <li>Source: <code>shipments-export-sample.csv</code>, a made-up export (198 shipments).</li>
+    <li>Weeks are ISO weeks (Monday to Sunday). Every row counts, whatever its status.</li>
+    <li>The biggest client change, Beta Foods (+22), ranks 4th and is not in the top three.</li>
+  </ul>
+</div>
+
+<script>
+const rows = [
+  { kind: "route", name: "BE-BE", before: 25, after: 60 },
+  { kind: "route", name: "NL-BE", before: 77, after: 101 },
+  { kind: "route", name: "BE-FR", before: 71, after: 48 },
+];
+const max = Math.max(...rows.flatMap(r => [r.before, r.after]));
+document.getElementById("list").innerHTML = rows.map((r, i) => {
+  const d = r.after - r.before;
+  const bar = (cls, label, v) =>
+    `<div class="bar ${cls}"><span>${label}</span><div class="track"><div class="fill" style="width:${(v / max * 100).toFixed(1)}%"></div></div><span class="n">${v}</span></div>`;
+  return `<li class="row">
+    <span class="rank">${i + 1}</span>
+    <div class="what">
+      <div class="name"><strong>${r.name}</strong><span class="kind">${r.kind}</span></div>
+      <div class="bars">${bar("before", "W41", r.before)}${bar("after", "W42", r.after)}</div>
+    </div>
+    <span class="delta ${d >= 0 ? "up" : "down"}">${d >= 0 ? "+" : "−"}${Math.abs(d)}</span>
+  </li>`;
+}).join("");
+</script>
+</body>
+</html>
