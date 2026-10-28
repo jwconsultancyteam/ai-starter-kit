@@ -11,6 +11,7 @@ before you say yes.
 | See the lines that changed | `git diff` | Shows each changed line: `-` old, `+` new |
 | Save a version | `git add changes.py` then `git commit -m "What changed"` | One commit, with your message |
 | Send it to GitHub | `git push` | Your new commits are now online too |
+| Send a new branch to GitHub, the first time | `git push --set-upstream origin <branch>` | Git shows this command when a plain `git push` stops. After that, `git push` is enough |
 | Get the latest from GitHub | `git pull` | Commits made on github.com come to your computer |
 | See the history | `git log --oneline` | One line per commit, newest first |
 
