@@ -108,7 +108,7 @@ the steps.
 - **Keep secrets out before the first commit.** Copy [gitignore.template](gitignore.template) into the folder as
   `.gitignore`, so git never saves your `.env` file. A key that reached GitHub must be replaced at the service it
   belongs to. Deleting the commit is not enough.
-- **Private stays private.** Keep `weekly-shipments` private. Step 18 puts a page online without making it public.
+- **Private stays private.** Keep `weekly-shipments` private. Step 18 puts one page online from a separate repository, so this one stays private.
 - **Auto memory is not in your repository.** It lives in `~/.claude/projects/` on your own computer
   ([step 16](../16-second-brain/)), so git does not save it.
 - **No terminal?** GitHub Desktop can clone, commit and revert: **History**, right-click a commit, **Revert Changes in
