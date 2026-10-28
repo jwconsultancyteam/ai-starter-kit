@@ -4,6 +4,10 @@ What changed in the kit, newest first. Dates are Brussels time.
 
 ## 28 Oct 2026
 
+- The main README now matches what the kit is: steps come at 08:00 (Brussels time) from step 15, the Builder steps
+  from step 12 are tested in Claude Code on a Mac, the Starter steps need no GitHub account, and "What every step
+  contains" is split into Starter and Builder. Step 17 has one name everywhere: GitHub, your real undo button. The
+  step 16 wiki index template says its links are examples.
 - Builder, step 16: A second brain is live: auto memory next to CLAUDE.md, and a wiki that Claude Code writes from
   your notes (Andrej Karpathy's LLM Wiki pattern), with a 19-line CLAUDE.md for the wiki, templates for the index and
   a page, 16 made-up client notes and a cheat sheet. Tested on a Mac, Claude Code 2.1.312, 28 Oct 2026, with no
