@@ -60,8 +60,8 @@ what it understood, and said so. In the git repository, it took the old lines ba
 ### Four things we saw on the way
 
 - **It did not commit on its own.** After the wrong change, the file was changed but not committed. When we asked
-  "Commit the change", accept edits mode still asked before it ran `git commit`. In print mode there is nobody to say
-  yes ([step 15](../15-plan-mode-and-undo/)), so nothing was committed until we allowed git commands.
+  "Commit the change", accept edits mode still needed a yes before `git commit`. In print mode nobody can say yes
+  ([step 15](../15-plan-mode-and-undo/)), so nothing was committed until we allowed git commands.
 - **Its commits have your name, and a second line.** The commit was made under our own git name. At the end of the
   message, Claude Code added `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`.
 - **In plan mode, it warned about a conflict before it changed anything.** We asked which git commands it would run.
@@ -69,7 +69,7 @@ what it understood, and said so. In the git repository, it took the old lines ba
   change had touched the lines next to the percent code. In a new session we asked for the revert. It fixed the two
   places by hand and kept `--top`.
 - **It chose `git revert` on its own.** In the last run we allowed every git command and only said "Undo it". It chose
-  revert, not `git reset --hard`, which throws work away. That was one run. In public bug reports, Claude Code has run
+  revert, not `git reset --hard`, which throws work away. That was one run. A public bug report says Claude Code ran
   `git reset --hard` and lost work that was not committed
   ([#34327](https://github.com/anthropics/claude-code/issues/34327)). So say "with git revert" when you ask for an undo.
 
