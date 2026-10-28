@@ -1,6 +1,6 @@
 # Builder
 
-Steps 11 to 20 of the journey. One folder per step, with the task, the sample files, the expected result and the carousel.
+Steps 11 to 20 of the journey. One folder per step, with the task, the sample files, the result of our own test and the carousel.
 
 | Step | What you build | Status |
 |---|---|---|
