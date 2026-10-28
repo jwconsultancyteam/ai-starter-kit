@@ -9,8 +9,8 @@ What changed in the kit, newest first. Dates are Brussels time.
   step 11 script and export. Tested on a Mac, Claude Code 2.1.312 and git 2.54, 28 Oct 2026, with no personal
   settings: a wrong change, a good change after it, then "Undo it", in a plain folder and in a git repository. Both
   undos gave the right output. Without git, Claude rebuilt the file by hand and said it "may not match your original
-  exactly"; with git, it made a revert commit. It did not commit on its own, and accept edits mode still asked before
-  `git commit`.
+  exactly"; with git, it made a revert commit. It did not commit on its own, and accept edits mode still needed a yes
+  before `git commit`.
 
 ## 28 Oct 2026
 

@@ -60,7 +60,7 @@ what it understood, and said so. In the git repository, it took the old lines ba
 ### Four things we saw on the way
 
 - **It did not commit on its own.** After the wrong change, the file was changed but not committed. When we asked
-  "Commit the change", accept edits mode still needed a yes before `git commit`. In print mode nobody can say yes
+  "Commit the change to changes.py.", accept edits mode still needed a yes before `git commit`. In print mode nobody can say yes
   ([step 15](../15-plan-mode-and-undo/)), so nothing was committed until we allowed git commands.
 - **Its commits have your name, and a second line.** The commit was made under our own git name. At the end of the
   message, Claude Code added `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`.
