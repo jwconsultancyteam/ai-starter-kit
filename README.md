@@ -3,7 +3,7 @@
 **From your first chat to AI agents that work on their own: they talk to each other, have their own wallet, and pay or get paid for you.** Free templates, prompts and setups, one small step at a
 time, with the exact clicks. Claude first. Everything here is what we use ourselves to build and run real software.
 
-New step every day at 12:00 (Brussels time), weekends included. Starter first, then Builder, then Expert.
+New step every day, weekends included: at 12:00 (Brussels time) up to step 14, at 08:00 from step 15. Starter first, then Builder, then Expert.
 
 ---
 
@@ -13,7 +13,7 @@ New step every day at 12:00 (Brussels time), weekends included. Starter first, t
 2. Copy the template, fill in your details, paste it into Claude.
 3. Ask the test question in the step. See the difference yourself.
 
-No coding. No account on GitHub needed.
+No coding. The Starter steps (1 to 10) need no GitHub account.
 
 ---
 
@@ -48,21 +48,23 @@ No coding. No account on GitHub needed.
 | Builder | [14. CLAUDE.md, the house rules for one folder](builder/14-claude-md-house-rules/) | Write a short CLAUDE.md and a context pack for one job, and see the difference in one test | Live (26 Oct 2026) |
 | Builder | [15. Plan mode and undo](builder/15-plan-mode-and-undo/) | Switch between plan, manual and accept edits, answer the ask screen, and undo a step with rewind | Live (27 Oct 2026) |
 | Builder | [16. A second brain](builder/16-second-brain/) | Let Claude Code remember what you tell it with auto memory, and let it write a wiki from your notes | Live (28 Oct 2026) |
-| Builder | 17 to 20 | GitHub as your undo button, going live, tests and security checks, and other models with Pi | Coming |
+| Builder | 17 to 20 | GitHub, your real undo button, going live, tests and security checks, and other models with Pi | Coming |
 | Expert | 21 to 30 | Guardrails, workflows, AI review, second opinions, tracing every AI call, agents that run overnight, connecting your own tools, agents that talk to each other and agents with their own wallet | Coming |
+
 ---
 
 ## What every step contains
 
-| File | What it is |
-|---|---|
-| `README.md` | What it does, where to find it in Claude, the exact clicks, how to test it, what to keep out |
-| `template.txt` | The template with `[placeholders]`. Replace every bracket with your own details |
-| `example-*.txt` | The same template, filled in for an example person (John Doe), so you see what good looks like |
-| `images/` | Screenshots of the before and after, taken from the video of that step |
+Every step folder has a `README.md` and the carousel of that step as a PDF. The README says what the step does, where
+to find it, the exact clicks, how to test it, and what can go wrong.
 
-Every step shows one **before and after**: the same question, with one thing changed. So you see exactly what that one
-setting does.
+| Level | Also in the folder |
+|---|---|
+| Starter (1 to 10) | The template or sample files of that step, if it has any (for example `template.txt` and `example-john-doe.txt` in step 1), and `images/` with screenshots of the before and after |
+| Builder (11 to 20) | The sample files, templates and cheat sheet of that step, if it has any. Step 11 also has `images/` and `expected-output.md` |
+
+Most steps show a **before and after**, or a test with the result we got: the same question, with one thing changed.
+So you see exactly what that one setting does.
 
 ---
 
@@ -77,9 +79,10 @@ setting does.
 
 ## Works with
 
-Every step is made and tested on Claude on the web (claude.ai, in Chrome), on the date in the step. Some features need a
-paid plan; each step says which menu to open, as it looked on the day we tested it. Menus change; if a click path is out
-of date, open an issue and we fix it. What changed and when: [CHANGELOG.md](CHANGELOG.md).
+The Starter steps are made and tested on Claude on the web (claude.ai, in Chrome or another Chromium browser). The
+Builder steps from step 12 are tested in Claude Code in the terminal on a Mac. Each step says what we tested and on which
+date. Some features need a paid plan; each step says which menu to open, as it looked on the day we tested it. Menus
+change; if a click path is out of date, open an issue and we fix it. What changed and when: [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
