@@ -22,6 +22,9 @@ What changed in the kit, newest first. Dates are Brussels time.
   exactly"; with git, it made a revert commit. It did not commit on its own, and accept edits mode still needed a yes
   before `git commit`. Then we ran "Do it yourself" on GitHub: a private clone needs `gh auth login` first,
   Claude made a new branch before it committed, and a plain `git push` on that branch needs `--set-upstream`.
+- Builder, step 17 git cheat sheet: three lines are now exact. `git diff` shows only changes you did not `git add`
+  yet, `git restore` needs `--staged` first after `git add`, and `git reset --hard` keeps new files you never added.
+  We tested all three on git 2.54.
 
 ## 28 Oct 2026
 
