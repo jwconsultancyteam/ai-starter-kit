@@ -80,6 +80,9 @@ Your page looks different from ours? Claude designs each page again. Check the n
   repository for the site is private." Only put made-up or public data on it.
 - **Never make `weekly-shipments` public to share one page.** On GitHub Free, a Pages site needs a public repository.
   Make a new one that holds only the page, as in ask 2.
+- **Private is not a safe.** Never push keys, passwords or tokens, not even to a private repository. Keep them in a
+  `.env` file: the [`.gitignore` template from step 17](../17-github-undo-button/gitignore.template) keeps `.env` out
+  of git.
 - **An artifact starts private.** Anthropic: "A new artifact is visible only to you." You share it from the
   **Share** control in the page header. On Team and Enterprise plans, public links are off until an owner turns them
   on.
@@ -111,7 +114,7 @@ Your page looks different from ours? Claude designs each page again. Check the n
 
 ## In our own work
 
-Before this test, I had 24 artifacts in my claude.ai gallery: reports, plans and dashboards. None of my 32
+Before this test, I had 24 artifacts in my claude.ai gallery: reports, plans and dashboards. None of my 31
 repositories used GitHub Pages. We counted both on 28 Oct 2026.
 
 ## Next
