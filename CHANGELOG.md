@@ -2,6 +2,16 @@
 
 What changed in the kit, newest first. Dates are Brussels time.
 
+## 30 Oct 2026
+
+- Builder, step 18: from an artifact link to a real website is live: one page from the step 11 script, put online
+  as a claude.ai artifact link and as a GitHub Pages site from a new public repository, while `weekly-shipments`
+  stays private. Includes the page we put online and a publish cheat sheet. Tested in an interactive Claude Code
+  session on a Mac, Claude Code 2.1.312, 28 Oct 2026, with no personal settings. The artifact link came 47 seconds
+  after the ask, with one yes. The website opened under 3 minutes after the ask, with 7 yeses, and its repository
+  holds only `index.html`. Claude typed the numbers into the page, so new data means: publish again. We did not test
+  the deletes or a signed-out view of a shared artifact.
+
 ## 29 Oct 2026
 
 - Builder, step 17: GitHub, your real undo button is live: five git words, commit every change, and undo one wrong

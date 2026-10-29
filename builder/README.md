@@ -11,6 +11,7 @@ Steps 11 to 20 of the journey. One folder per step, with the task, the sample fi
 | [15. Plan mode and undo](15-plan-mode-and-undo/) | Switch between plan, manual and accept edits, answer the ask screen, and undo a step with rewind | Live (27 Oct 2026) |
 | [16. A second brain](16-second-brain/) | Let Claude Code remember what you tell it with auto memory, and let it write a wiki from your notes | Live (28 Oct 2026) |
 | [17. GitHub, your real undo button](17-github-undo-button/) | Commit every change, and take one wrong change back with git revert, while the changes after it stay | Live (29 Oct 2026) |
-| 18 to 20 | Going live, tests and security checks, and other models with Pi | Coming |
+| [18. From artifact link to a real website](18-artifact-to-website/) | Put one page online, as a private artifact link and as a public website, while your repository stays private | Live (30 Oct 2026) |
+| 19 to 20 | Tests and security checks, and other models with Pi | Coming |
 
 The full road, Starter to Expert, is in the [main README](../README.md).
