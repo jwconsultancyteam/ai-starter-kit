@@ -1,0 +1,13 @@
+# Copy this file into your repository as .gitignore (with the dot).
+# Git never saves the files that match a line below.
+
+# Keys and passwords
+.env
+.env.*
+
+# Claude Code settings for your own computer only
+.claude/settings.local.json
+
+# Files your computer or Python makes on its own
+.DS_Store
+__pycache__/

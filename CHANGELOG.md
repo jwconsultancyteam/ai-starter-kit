@@ -2,6 +2,17 @@
 
 What changed in the kit, newest first. Dates are Brussels time.
 
+## 29 Oct 2026
+
+- Builder, step 17: GitHub, your real undo button is live: five git words, commit every change, and undo one wrong
+  change with `git revert` while a later change stays. Includes a git cheat sheet, a `.gitignore` template and the
+  step 11 script and export. Tested on a Mac, Claude Code 2.1.312 and git 2.54, 28 Oct 2026, with no personal
+  settings: a wrong change, a good change after it, then "Undo it", in a plain folder and in a git repository. Both
+  undos gave the right output. Without git, Claude rebuilt the file by hand and said it "may not match your original
+  exactly"; with git, it made a revert commit. It did not commit on its own, and accept edits mode still needed a yes
+  before `git commit`. Then we ran "Do it yourself" on GitHub: a private clone needs `gh auth login` first,
+  Claude made a new branch before it committed, and a plain `git push` on that branch needs `--set-upstream`.
+
 ## 28 Oct 2026
 
 - The main README now matches what the kit is: steps come at 08:00 (Brussels time) from step 15, the Builder steps
