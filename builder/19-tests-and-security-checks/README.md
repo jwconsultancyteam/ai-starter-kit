@@ -53,7 +53,8 @@ red."
 **Ask 3:** "On a new branch from main, change changes.py to rank by percent, not by pallets. Do not change the test.
 Open a pull request, wait for the checks and tell me the result. Do not merge."
 
-- pytest went red: `'1. route  BE-BE                       25 ->   60  +140.0%' != '1. route  BE-BE    25 ->   60  +35'`.
+- pytest went red: `'1. route  BE-BE                       25 ->   60  +140.0%' != '1. route  BE-BE    25 ->   60 
+  +35'`.
 - gitleaks stayed green.
 - Claude said: "Nothing blocks this merge".
 
@@ -82,7 +83,8 @@ for the checks and tell me the result. Do not merge."
 
 ### What we saw on the way
 
-- **The prompt suggested changing the test.** After the red check, the next suggestion in the prompt was: "update the test
+- **The prompt suggested changing the test.** After the red check, the next suggestion in the prompt was: "update the
+  test
   to the new output". A red test goes green if you change the test. So when a pull request touches a test, read that
   change first.
 - **It changed more than we asked.** "I updated the rule and sample output to match, even though you only named
@@ -90,7 +92,8 @@ for the checks and tell me the result. Do not merge."
 - **Claude tested its own block.** In the public copy, it opened a test pull request with a broken test, and tried
   a normal merge and a merge with admin rights. That pull request stays visible, closed.
 - **Our computer is not your computer.** A pre-push hook on our own computer blocks pushes from a local `main`. It
-  stopped the first push to the new repository. We allowed one exception, for that first push only. You will not see this unless
+  stopped the first push to the new repository. We allowed one exception, for that first push only. You will not see
+  this unless
   you have the same setting.
 
 ## Do it yourself
@@ -128,7 +131,8 @@ for the checks and tell me the result. Do not merge."
 ## Time win and solution win
 
 - **Time win:** in our test, every later pull request was checked in under a minute, with no person watching.
-- **Solution win:** a change that fails the test or the scan shows up red before it is in, not after. And you know which of
+- **Solution win:** a change that fails the test or the scan shows up red before it is in, not after. And you know
+  which of
   your repositories really block, and which only warn.
 
 ## Common mistakes
@@ -145,7 +149,8 @@ for the checks and tell me the result. Do not merge."
 ## In our own work
 
 Our own main repository runs five security scanners on pull requests: gitleaks, semgrep, bandit, pip-audit and zizmor.
-New findings fail. Findings already in the baseline do not. And there, a required check stops a normal merge. An admin can still override it.
+New findings fail. Findings already in the baseline do not. And there, a required check stops a normal merge. An admin
+can still override it.
 
 ## Next
 
