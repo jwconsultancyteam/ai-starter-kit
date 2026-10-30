@@ -1,4 +1,4 @@
-# Checks cheat sheet: test and scan every change
+# Checks cheat sheet: test and scan every pull request
 
 ## Ask Claude Code
 
@@ -36,6 +36,8 @@ the key at the service it belongs to.
 | The checks of a pull request | `gh pr checks <number>` |
 | Can this pull request merge? | `gh pr view <number> --json mergeStateStatus` |
 | Which checks are required | `gh api repos/<you>/<repository>/branches/main/protection` |
+
+On a private repository on GitHub Free, the last command returns the upgrade message.
 
 `mergeStateStatus` says `UNSTABLE` when a red check does not block, and `BLOCKED` when it does.
 
