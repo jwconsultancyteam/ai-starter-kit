@@ -76,6 +76,9 @@ Your page looks different from ours? Claude designs each page again. Check the n
 
 ## Good to know
 
+- **GitHub Pages is the quick way.** It shows something fast. For a product site, I point my own domain through DNS to
+  Cloudflare Pages or my own server. GitHub Pages can use your own domain too: add a DNS record, and enter the domain
+  under **Settings** > **Pages** in the repository. GitHub: it "supports using custom domains".
 - **GitHub Pages is public.** GitHub: "GitHub Pages sites are publicly available on the internet, even if the
   repository for the site is private." Only put made-up or public data on it.
 - **Never make `weekly-shipments` public to share one page.** On GitHub Free, a Pages site needs a public repository.
@@ -116,6 +119,8 @@ Your page looks different from ours? Claude designs each page again. Check the n
 
 Before this test, I had 24 artifacts in my claude.ai gallery: reports, plans and dashboards. None of my 31
 repositories used GitHub Pages. We counted both on 28 Oct 2026.
+
+My live websites run elsewhere, like Cloudflare Pages or my own server. I point my own domain to them through DNS.
 
 ## Next
 
