@@ -2,6 +2,15 @@
 
 What changed in the kit, newest first. Dates are Brussels time.
 
+## 31 Oct 2026
+
+- Builder, step 19: tests and security checks on every change is live: one test and a gitleaks scan on every pull
+  request, and what a red check really does. Includes the test, the workflow and a cheat sheet. Tested in an
+  interactive Claude Code session on a Mac, Claude Code 2.1.314, 30 Oct 2026, with no personal settings, on a personal
+  GitHub Free account. In the private repository, GitHub refused required checks and a pull request with a red check
+  merged. In a public copy with made-up data, the same merge was refused, also with admin rights. We did not test
+  GitHub Pro.
+
 ## 30 Oct 2026
 
 - Builder, step 18: from an artifact link to a real website is live: one page from the step 11 script, put online
