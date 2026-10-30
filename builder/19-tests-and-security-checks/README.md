@@ -28,7 +28,7 @@ in our own test.
 | Checks run on every pull request | Yes | Yes |
 | Make the checks required | Refused, HTTP 403 | Works |
 | Merge with a red check | Went through | Refused, HTTP 405 |
-| Merge with a red check and admin rights | Not needed: it merges without them | Refused |
+| Merge with a red check and admin rights | Not needed: it merges without them | Refused, on a test pull request |
 | Push a made-up key | Went through, then gitleaks went red | GitHub stopped the push |
 
 ## Our test
@@ -36,8 +36,8 @@ in our own test.
 **Ask 1:** "Add a test test_changes.py that fails if the three lines of python3 changes.py change. Add a GitHub
 Actions workflow that runs pytest and gitleaks on every pull request. Put it on a branch and open a pull request."
 
-- It asked for a yes 7 times, and the pull request was open about 2 minutes after the ask.
-- pytest and gitleaks were both green.
+- It asked for a yes 7 times. Under 2 minutes after the ask, the pull request was open and pytest and gitleaks were
+  both green.
 - Claude said: "I didn't plant a fake secret to confirm gitleaks finds one, so that path is untested."
 - Claude also said that a failing check would not stop a merge until the checks are required.
 
@@ -61,15 +61,17 @@ as in step 17, with `git revert` in a new pull request. Both checks were green, 
 **The same bad change in a public copy.** We asked Claude to make a new public repository,
 [weekly-shipments-public](https://github.com/JWconsultancy1234/weekly-shipments-public), with the same files and the
 two checks required, with no exception for admins. The data is made up, so that is fine. Then the same percent change,
-and a try to merge it. GitHub answered: `Required status check "pytest" is failing.` A merge with admin rights was
-refused as well. You can see [the blocked pull request](https://github.com/JWconsultancy1234/weekly-shipments-public/pull/2).
+and a try to merge it. GitHub answered: `Required status check "pytest" is failing.` On a test pull request that
+Claude opened in that copy, a merge with admin rights was refused as well. You can see
+[the blocked pull request](https://github.com/JWconsultancy1234/weekly-shipments-public/pull/2).
 
 **The key scan, with a made-up key.** We asked: "On a new branch from main, add a file config.py with one made-up
 example API key in the format of a Stripe test key. Make it up, it must not be a real key. Open a pull request, wait
 for the checks and tell me the result. Do not merge."
 
 - The session was still working in the public copy, so it tried there first. GitHub stopped the push: "Push cannot
-  contain secrets". The key never reached the public repository. GitHub offered a link to allow the key. We did not use it.
+  contain secrets". The key never reached the public repository. GitHub offered a link to allow the key. We did
+  not use it.
 - We sent it to the private repository instead. The push went through, and gitleaks went red, pytest stayed green.
 - The red check only warned there too: GitHub's merge status was `UNSTABLE`, not `BLOCKED`. We closed the pull request
   without merging.
@@ -82,8 +84,9 @@ for the checks and tell me the result. Do not merge."
   change first.
 - **It changed more than we asked.** "I updated the rule and sample output to match, even though you only named
   changes.py." The README was in the pull request too. Read the whole change.
-- **Claude tested its own block.** In the public copy, it opened a test pull request of its own to prove the block.
-  That pull request stays visible, closed. GitHub does not let you delete a pull request.
+- **Claude tested its own block.** In the public copy, it opened a test pull request with a broken test, and tried
+  a normal merge and a merge with admin rights. That pull request stays visible, closed. GitHub does not let you
+  delete a pull request.
 - **Our computer is not your computer.** A git setting on our own computer blocks pushes to `main`. It stopped the
   first push to the new repository. We allowed one exception, for that first push only. You will not see this unless
   you have the same setting.
@@ -103,9 +106,9 @@ for the checks and tell me the result. Do not merge."
 ## Good to know
 
 - **A check that nobody must obey is only a warning.** GitHub's plans page lists protected branches for private
-  repositories under GitHub Pro. On its pricing page, repository rules on Free are for "Public repositories".
-- **GitHub's own secret scanning does not help a private repository on Free.** It "runs automatically for free" on
-  public repositories. That is why this workflow runs gitleaks.
+  repositories under GitHub Pro. On its pricing page, repository rules on Free are for public repositories only.
+- **GitHub's own secret scanning does not help a private repository on Free.** On public repositories it "runs
+  automatically for free". That is why this workflow runs gitleaks.
 - **A red key scan means the key already reached GitHub.** Closing the pull request does not remove it. With a real
   key: change the key at the service it belongs to.
 - **Claude's reviews advise. They do not block.** Anthropic says automated security reviews "should complement, not

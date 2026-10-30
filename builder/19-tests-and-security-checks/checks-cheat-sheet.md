@@ -4,7 +4,9 @@
 
 - "Add a test test_changes.py that fails if the three lines of python3 changes.py change. Add a GitHub Actions workflow
   that runs pytest and gitleaks on every pull request. Put it on a branch and open a pull request."
-- "Make the two checks required, so nothing can merge to main while a check is red."
+- "Merge this pull request. Then make the two checks required, so nothing can merge to main while a check is red."
+- "On a new branch from main, change changes.py to rank by percent, not by pallets. Do not change the test. Open a
+  pull request, wait for the checks and tell me the result. Do not merge."
 
 Change the script name to your own.
 
