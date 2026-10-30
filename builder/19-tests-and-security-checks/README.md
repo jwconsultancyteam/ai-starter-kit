@@ -11,7 +11,7 @@ in our own test.
 |---|---|
 | Time | about 20 minutes |
 | You need | Claude Code ([step 13](../13-claude-code-on-your-laptop/)), the `weekly-shipments` repository and the GitHub CLI ([step 17](../17-github-undo-button/)) |
-| Tested | an interactive Claude Code session on a Mac, in a new clone of our private `weekly-shipments`, accept edits mode, no personal settings loaded. A script answered the yes prompts, so in our run nobody read each one. Claude Code 2.1.314, a personal GitHub Free account, 30 Oct 2026 |
+| Tested | an interactive Claude Code session on a Mac, in a new clone of our private `weekly-shipments`, accept edits mode, no personal Claude Code settings loaded. A script answered the yes prompts, so in our run nobody read each one. Claude Code 2.1.314, a personal GitHub Free account, 30 Oct 2026 |
 | Download | [test_changes.py](test_changes.py), [checks.yml](checks.yml) (goes in `.github/workflows/`), [checks-cheat-sheet.md](checks-cheat-sheet.md) and [the carousel as a PDF](builder-step19-tests-and-security-checks-carousel.pdf) (8 slides) |
 
 ## Three words first
@@ -58,7 +58,7 @@ Open a pull request, wait for the checks and tell me the result. Do not merge."
 - Claude said: "Nothing blocks this merge".
 
 **Ask 4:** "Merge pull request 3 now, with the red check." It merged. So we took it back
-with `git revert`, the command from step 17, in a new pull request. Both checks were green, and the three lines
+with `git revert -m 1` on the merge, in a new pull request. Both checks were green, and the three lines
 were right again.
 
 **The same bad change in a public copy.** We asked Claude to make a new public repository,
@@ -82,7 +82,7 @@ for the checks and tell me the result. Do not merge."
 
 ### What we saw on the way
 
-- **Claude offered to change the test.** After the red check, the next suggestion in the prompt was: "update the test
+- **The prompt suggested changing the test.** After the red check, the next suggestion in the prompt was: "update the test
   to the new output". A red test goes green if you change the test. So when a pull request touches a test, read that
   change first.
 - **It changed more than we asked.** "I updated the rule and sample output to match, even though you only named
@@ -114,12 +114,11 @@ for the checks and tell me the result. Do not merge."
   private repository.
 - **A red key scan means the key already reached GitHub.** Closing the pull request does not remove it. With a real
   key: change the key at the service it belongs to.
-- **Claude's reviews advise. They do not block.** Anthropic says automated security reviews "should complement, not
+- **Claude's reviews advise.** Anthropic says automated security reviews "should complement, not
   replace, your existing security practices and manual code reviews." `/security-review` is a review you ask for. On its
-  Code Review service, Anthropic says: "A review never approves or blocks the pull request." The block comes from a
-  required check.
-- **The check runs on pull requests.** A direct push to `main` skips it. Only required checks can stop that, and only
-  where GitHub lets you turn them on.
+  Code Review service, Anthropic says a review "never approves or blocks the pull request". In our test, the block came
+  from a required check.
+- **The check runs on pull requests.** A direct push to `main` does not start it. We did not test a direct push.
 - **Public means public.** A pull request stays visible, even after you close it. Never put real data in a public
   copy, and never a real key.
 - **In an organization, the official gitleaks action needs a license key.** Its page says `GITLEAKS_LICENSE` is
@@ -128,8 +127,7 @@ for the checks and tell me the result. Do not merge."
 
 ## Time win and solution win
 
-- **Time win:** once the workflow is merged, every later pull request gets checked in under a minute, with no person
-  watching.
+- **Time win:** in our test, every later pull request was checked in under a minute, with no person watching.
 - **Solution win:** a change that fails the test or the scan shows up red before it is in, not after. And you know which of
   your repositories really block, and which only warn.
 
@@ -141,12 +139,13 @@ for the checks and tell me the result. Do not merge."
 | You make your working repository public to get the block | Make a separate public copy with only made-up data, as we did |
 | A red test goes green because the test changed | Read every change to a test before you merge |
 | Green means correct | A test only checks what it checks. Ours checks three lines, not the header |
+| The downloaded test fails on your own script | It expects the three lines of the step 17 `changes.py`. Use ask 1, or change those lines in the test |
 | `pytest` crashes on your own computer | Ours did, from a plugin in our own Python. Claude used `PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python3 -m pytest`. The check on GitHub was fine |
 
 ## In our own work
 
 Our own main repository runs five security scanners on pull requests: gitleaks, semgrep, bandit, pip-audit and zizmor.
-Only new findings fail. And there, a required check stops a normal merge. An admin can still override it.
+New findings fail. Findings already in the baseline do not. And there, a required check stops a normal merge. An admin can still override it.
 
 ## Next
 

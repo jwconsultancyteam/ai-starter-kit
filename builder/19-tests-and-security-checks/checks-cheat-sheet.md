@@ -39,7 +39,7 @@ the key at the service it belongs to.
 
 On a private repository on GitHub Free, the last command returns the upgrade message.
 
-`mergeStateStatus` says `UNSTABLE` when a red check does not block, and `BLOCKED` when it does.
+In our test, `mergeStateStatus` said `UNSTABLE` when a red check did not block, and `BLOCKED` when it did.
 
 ## Before you merge
 

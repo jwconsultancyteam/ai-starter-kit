@@ -6,7 +6,7 @@ What changed in the kit, newest first. Dates are Brussels time.
 
 - Builder, step 19: tests and security checks on every change is live: one test and a gitleaks scan on every pull
   request, and what a red check really does. Includes the test, the workflow and a cheat sheet. Tested in an
-  interactive Claude Code session on a Mac, Claude Code 2.1.314, 30 Oct 2026, with no personal settings, on a personal
+  interactive Claude Code session on a Mac, Claude Code 2.1.314, 30 Oct 2026, with no personal Claude Code settings, on a personal
   GitHub Free account. In the private repository, GitHub refused required checks and a pull request with a red check
   merged. In a public copy with made-up data, the same merge was refused. A merge with admin rights was refused on a
   test pull request. A made-up key: GitHub stopped the push in the public copy, and gitleaks went red in the private
