@@ -53,8 +53,7 @@ red."
 **Ask 3:** "On a new branch from main, change changes.py to rank by percent, not by pallets. Do not change the test.
 Open a pull request, wait for the checks and tell me the result. Do not merge."
 
-- pytest went red: `'1. route  BE-BE                       25 ->   60  +140.0%' != '1. route  BE-BE    25 ->   60 
-  +35'`.
+- pytest went red: `'1. route  BE-BE                       25 ->   60  +140.0%' != '1. route  BE-BE    25 ->   60  +35'`.
 - gitleaks stayed green.
 - Claude said: "Nothing blocks this merge".
 
