@@ -118,9 +118,10 @@ Your page looks different from ours? Claude designs each page again. Check the n
 ## In our own work
 
 Before this test, I had 24 artifacts in my claude.ai gallery: reports, plans and dashboards. None of my 31
-repositories used GitHub Pages. We counted both on 28 Oct 2026.
+repositories used GitHub Pages. We counted both on 28 Oct 2026. Now 1 of my 32 repositories does: `pallet-changes`, the
+one from this test.
 
-My live websites run elsewhere, like Cloudflare Pages or my own server. I point my own domain to them through DNS.
+My other live websites run elsewhere, like Cloudflare Pages or my own server. I point my own domain to them through DNS.
 
 ## Next
 
