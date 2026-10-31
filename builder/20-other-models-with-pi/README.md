@@ -80,7 +80,8 @@ Count each client on its own and each route on its own, not client and route pai
 | Opus 5.5 plans, then Pi with DeepSeek builds | 2 of 2 | 2 of 2 | 75 and 95 seconds | 25 and 27 cents, as shown |
 
 So 8 of 8 runs matched our count, and 7 of 8 passed the test. The one red test had the right numbers and different
-spacing. The test pins the exact format, so it goes red on that too.
+spacing. The test pins the exact format, so it goes red on that too. In the plan row, both Opus plans already held the
+three lines, and each plan went to Pi as its task. So that row is not DeepSeek's own reading.
 
 **How we measured.** Each run started on a new copy of the step 11 repository, with only a README and the made-up CSV.
 
@@ -128,15 +129,21 @@ row. Move two of them in. Leave the test in Downloads for now, so Claude does no
 mkdir ~/ask-test
 cd ~/ask-test
 mv ~/Downloads/shipments-export-sample.csv ~/Downloads/sharper-ask.txt .
-cat sharper-ask.txt
 ```
 
-**B. Run the ask.** Copy the text that `cat` printed. Start Claude Code, paste it and press Enter. Read each question
-before you say yes. Type `/exit` when it is done.
+**B. Run the ask.** The first line copies the ask, with its exact spaces. The second starts Claude Code.
 
 ```bash
+pbcopy < sharper-ask.txt
 claude
 ```
+
+Claude Code first asks if you trust this folder. "No, exit" is picked at first, so press the Down arrow, then Enter. Press
+Cmd+V to paste the ask, then Enter.
+
+Then it asks before some commands, which can be long, and before each new file. Read each one. We chose "1. Yes" each
+time, not the options that switch mode. We did not test "No". If you are not sure about a command, press Esc and use To
+start over below. Type `/exit` when it is done.
 
 **C. Check it yourself.** Do not take the agent's word for it.
 
@@ -161,10 +168,11 @@ You want one header line, then these three lines, and `1 passed`:
 ```bash
 cd "$(mktemp -d ~/ask-try-XXXX)"
 cp ~/ask-test/shipments-export-sample.csv ~/ask-test/sharper-ask.txt .
+pbcopy < sharper-ask.txt
 claude
 ```
 
-Paste the ask. After `/exit`, download a new copy of the test and run all of step C in this folder.
+Trust the folder and paste the ask with Cmd+V, as in step B. After `/exit`, download a new copy of the test and run all of step C in this folder.
 
 **D. Try the first ask.** Look at which question your model answers. It may stop and ask you, as it did on step 11. If it
 does, pick the reading you want. Each try gets a new folder:
@@ -175,7 +183,7 @@ cp ~/ask-test/shipments-export-sample.csv .
 claude
 ```
 
-Paste the first ask from Our test above, and type `/exit` when it is done. The step 19 test is not for this try, because
+Trust the folder as in step B. Then copy the first ask from Our test above, paste it, and type `/exit` when it is done. The step 19 test is not for this try, because
 this ask does not pin the format. We ran this ask with `claude -p`, not in this kind of session.
 
 ## Why there are no Pi steps here
@@ -189,7 +197,8 @@ reach the network, and it can read your key. In our runs Pi tried to read a plan
 `/tmp`, and only the sandbox stopped it. Pi's README: "If you need stronger boundaries, containerize or sandbox Pi."
 
 **You do not need Pi for this step.** The results above are the point. If you try it, use a spare computer or a
-container, and follow Pi's own README. We give no steps for it, because we did not test the install or a run without the
+container, and follow Pi's own README. Those protect your files, not your key or what Pi can reach on the network. So use
+a key with a low credit limit if the provider offers one, and delete the key when you are done. We give no steps for it, because we did not test the install or a run without the
 flags under How we measured.
 
 ## Good to know
