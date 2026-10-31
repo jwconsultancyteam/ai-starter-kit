@@ -149,7 +149,7 @@ check names, paste what you see into Claude and ask what it means.
   private repository.
 - **A red key scan means the key already reached GitHub.** Closing the pull request or deleting the branch does not
   remove it: GitHub still showed our commit afterwards. With a real key: change the key at the service it belongs to,
-  first. If the key is only on a side branch, delete that branch, so later scans stop going red. Ask Claude which branch. If it
+  first. If the key is only on a side branch, delete that branch, so later scans stop going red. We tested that in a local copy with gitleaks, not on GitHub. Ask Claude which branch. If it
   is in `main`, do not delete `main`. Ask Claude for the options. We did not test that. In our run the log did not name the key or the file, so ask Claude to
   find it. The workflow scans the whole history. Claude warned that if the key merges, "every later PR will fail
   gitleaks, even after config.py is deleted, unless the key is removed from history or allowlisted". We did not test that.

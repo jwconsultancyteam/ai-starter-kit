@@ -37,7 +37,7 @@ Do not guess. Open a bad pull request, do not merge it, and read `mergeStateStat
 | Private, GitHub Free | The push went through, and gitleaks went red |
 
 A red scan means the key already reached GitHub. Closing the pull request or deleting the branch does not remove it. With a real
-key: change the key at the service it belongs to, first. If the key is only on a side branch, delete that branch, so later scans stop going red. Ask Claude which branch. If it
+key: change the key at the service it belongs to, first. If the key is only on a side branch, delete that branch, so later scans stop going red. We tested that in a local copy with gitleaks, not on GitHub. Ask Claude which branch. If it
 is in `main`, do not delete `main`. Ask Claude for the options. We did not test that. A `.gitignore` only keeps out the files it names.
 
 ## See it yourself
