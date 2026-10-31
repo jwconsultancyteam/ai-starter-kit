@@ -8,7 +8,7 @@
 - "On a new branch from main, change changes.py to rank by percent, not by pallets. Do not change the test. Open a
   pull request, wait for the checks and tell me the result. Do not merge."
 
-- For a public copy, only with made-up data: "Make a new public repository called weekly-shipments-public with the same
+- For a public copy, only with made-up data, and add "One new commit, no old history" (we did not test that wording): "Make a new public repository called weekly-shipments-public with the same
   files as this one. The data is made up, so that is fine. Keep this repository private. In the new repository, make the
   two checks required, with no exception for admins, so nothing can merge to main while a check is red." Then, there:
   "In weekly-shipments-public, on a new branch, change changes.py to rank by percent, not by pallets. Do not change the test. Open a pull request, wait for the checks, and then try to merge it. Tell me exactly what GitHub says."
@@ -45,7 +45,8 @@ the key at the service it belongs to. A `.gitignore` only keeps out the files it
 
 On a private repository on GitHub Free, the last command returns the upgrade message.
 
-In our test, `mergeStateStatus` said `UNSTABLE` when a red check did not block, and `BLOCKED` when it did.
+In our test, `mergeStateStatus` said `UNSTABLE` when a red check did not block, and `BLOCKED` when it did, with no
+exception for admins. `BLOCKED` alone does not tell you if an admin can still merge.
 
 ## Before you merge
 

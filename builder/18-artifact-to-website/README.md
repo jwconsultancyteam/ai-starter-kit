@@ -125,4 +125,4 @@ My other live websites run elsewhere, like Cloudflare Pages or my own server. I 
 
 ## Next
 
-Step 19 (Saturday): tests and security checks on every change.
+Step 19 (Saturday): tests and security checks on every pull request.

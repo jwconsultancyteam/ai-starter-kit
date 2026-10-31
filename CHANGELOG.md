@@ -4,7 +4,7 @@ What changed in the kit, newest first. Dates are Brussels time.
 
 ## 31 Oct 2026
 
-- Builder, step 19: tests and security checks on every change is live: one test and a gitleaks scan on every pull
+- Builder, step 19: tests and security checks on every pull request is live: one test and a gitleaks scan on every pull
   request, and what a red check really does. Includes the test, the workflow and a cheat sheet. Tested in an
   interactive Claude Code session on a Mac, Claude Code 2.1.314, 30 Oct 2026, with no personal Claude Code settings, on a personal
   GitHub Free account. In the private repository, GitHub refused required checks and a pull request with a red check
