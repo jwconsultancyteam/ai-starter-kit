@@ -36,7 +36,8 @@ before you say yes.
 
 - `git reset --hard`: it throws away the changes you did not commit, in every file git already has. Only new files that you never added stay.
 - `git push --force`: it can overwrite commits on GitHub.
-- A `.env` file or a key in a commit. Use [gitignore.template](gitignore.template).
+- A `.env` file in a commit. Use [gitignore.template](gitignore.template). It only covers the files it names, so read
+  your change for a key in any other file.
 
 From step 17 of the AI Starter Kit. Tested with git 2.54 and Claude Code 2.1.312, 28 Oct 2026. We ran the three asks
 above in print mode, with no personal settings.

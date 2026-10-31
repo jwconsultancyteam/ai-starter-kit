@@ -1,7 +1,7 @@
 # Copy this file into your repository as .gitignore (with the dot).
 # Git never saves the files that match a line below.
 
-# Keys and passwords
+# .env files, which often hold keys and passwords
 .env
 .env.*
 
