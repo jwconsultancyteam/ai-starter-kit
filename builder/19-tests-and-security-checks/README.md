@@ -109,13 +109,13 @@ for the checks and tell me the result. Do not merge."
 1. In the terminal, go to `weekly-shipments`. Run `git switch main`, then `git pull`. Start `claude`. Press `Shift+Tab` until it says `accept edits on`.
 2. Paste ask 1. Read each command before you choose **1. Yes**. Do not choose the options that say "don't ask again" or "switch to auto mode". Choose **No** at anything you did not ask for: a write to
    another repository, a GitHub setting, a branch delete, a forced push. If you do not understand a prompt, choose
-   **No** and paste: "What does this command do, and is it needed?" Expect long commands. In our run, Claude also changed
+   **No** and paste: "What does this command do, and is it needed?" If the answer fits what you asked for, paste: "Go on and run it." If not, paste: "Do not run it. What else can you do?" We did not test that wording. Expect long commands. Some prompts carry a warning line, such as "A variable in this command can't be checked before it runs". 3 of the 7 in our ask 1 did, and a script answered them. Ask about them the same way. In our run, Claude also changed
    `changes.py` and the CSV for a moment, to prove that the test fails, and put them back. If you are not sure, choose **No**
    and ask, then, in a second terminal in `weekly-shipments`, run `git status` before you go on. If Claude has not committed yet, you want to see only the new files it made. If it has, you see nothing to commit, which is fine too. If `changes.py` or the CSV
    shows as modified, paste: "Put changes.py and the CSV back as they are on main." Then check the three lines with
-   `python3 changes.py`. We did not test that wording. If pytest or gitleaks is not on your computer, Claude may want to install
-   it. Read that prompt too. The check on GitHub installs gitleaks itself, so you can say **No** to a local gitleaks install.
-   We did not test this. Wait for two green checks. Then read the change: on GitHub, open the pull request and click **Files changed**.
+   `python3 changes.py`. We did not test that wording. pytest and gitleaks were already on our computer. No earlier step installs them, so expect Claude to ask.
+   The check on GitHub installs gitleaks itself, so you can say **No** to a local gitleaks install. For pytest, paste: "Install pytest in a .venv in this folder. Add .venv and .pytest_cache to .gitignore."
+   We did not test this. Wait for two green checks. Then read the change: on GitHub, open the pull request and click **Files changed**. A `.venv` or `.pytest_cache` folder must not be in it.
 3. Merge it: paste "Merge this pull request. Go back to main and pull." We did not test that wording. Then make a bad change as in ask 3, and see the check go red. Do not merge it. In a second terminal, go to
    `weekly-shipments` and run `gh pr view 3 --json mergeStateStatus`, with your own pull request number. In our test, `UNSTABLE` did not block and,
    with no exception for admins, `BLOCKED` blocked. `BLOCKED` alone does not tell you if an admin can still merge. Ask Claude to close the pull request and go back to `main`.
