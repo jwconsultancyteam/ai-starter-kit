@@ -5,8 +5,8 @@ What changed in the kit, newest first. Dates are Brussels time.
 ## 1 Nov 2026
 
 - Builder, step 20: other models with Pi is live: the step 11 task on 4 setups. On the first ask, 2 of 9 runs
-  matched our count, and the same model read the ask two ways. With a sharper ask, 8 of 8 matched and 7 of 8 passed the step 19 test. The reader runs it in Claude Code, and Pi
-  is optional. Tested on a Mac, Pi 0.86.0 and Claude Code 2.1.316, 31 Oct 2026, with made-up data.
+  matched our count, and the same model read the ask two ways. With a sharper ask, 8 of 8 matched and 7 of 8 passed the step 19 test. The reader runs it in Claude Code, and the step
+  gives no Pi steps. Tested on a Mac, Pi 0.86.0 and Claude Code 2.1.316, 31 Oct 2026, with made-up data.
 
 ## 31 Oct 2026
 
