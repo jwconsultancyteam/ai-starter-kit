@@ -13,6 +13,6 @@ Steps 11 to 20 of the journey. One folder per step, with the task, the sample fi
 | [17. GitHub, your real undo button](17-github-undo-button/) | Commit every change, and take one wrong change back with git revert, while the changes after it stay | Live (29 Oct 2026) |
 | [18. From artifact link to a real website](18-artifact-to-website/) | Put one page online, as a private artifact link and as a public website, while your repository stays private | Live (30 Oct 2026) |
 | [19. Tests and security checks on every pull request](19-tests-and-security-checks/) | One test and one key scan on every pull request, and find out if a red check blocks or only warns | Live (31 Oct 2026) |
-| [20. Other models with Pi](20-other-models-with-pi/) | Run the step 11 task on cheaper models with Pi, and let the step 19 test check the work | Live (1 Nov 2026) |
+| [20. Other models with Pi](20-other-models-with-pi/) | See how one ask gave two answers, make it sharper in Claude Code, and let the step 19 test check the work | Live (1 Nov 2026) |
 
 The full road, Starter to Expert, is in the [main README](../README.md).

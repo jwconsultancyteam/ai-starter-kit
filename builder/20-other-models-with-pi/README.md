@@ -1,41 +1,28 @@
 # Builder, step 20: Other models with Pi
 
-Pi is a coding agent, like Claude Code, that works with models from many companies. So you can try a cheaper model on a
-task like your real work, with made-up data. The [step 19](../19-tests-and-security-checks/) test checks the same three
-lines, whatever the model is called.
+Pi is a coding agent, like Claude Code, that works with models from many companies. We ran the step 11 task on 4 setups,
+with Pi and with Claude Code. The same model, DeepSeek V4.1 Flash, gave two different answers to the same ask. Then we
+made the ask sharper, and all 8 runs matched our count.
 
-We ran the step 11 task on 4 setups. The same model, DeepSeek V4.1 Flash, gave two different answers to the same ask. Then we made the ask
-sharper, and all 8 runs matched our count. A bigger model was not the fix here. A clearer ask was.
+So your task in this step is the sharper ask, in the Claude Code you already have. Then the
+[step 19](../19-tests-and-security-checks/) test checks the same three lines. Pi is optional, at the end, because it has
+no permission system.
 
 | | |
 |---|---|
-| Time | about 20 minutes (our estimate) |
-| You need | a Mac or Linux terminal ([step 13](../13-claude-code-on-your-laptop/)), an OpenRouter account with a little credit, and Python. You install pytest below. Windows is not covered in this step |
-| Tested | a Mac, Pi 0.86.0 and Claude Code 2.1.316, 31 Oct 2026. Each run started on a new copy of the step 11 repository, with only a README and the made-up CSV. Pi ran with `pi -p`, a new home and settings folder, no extensions, no skills, no context files and telemetry off, in a macOS sandbox. Claude Code ran with `claude -p`, `--setting-sources project,local`, accept edits mode, and single Python commands allowed. Other shell commands were refused in those runs. It ran on our real home folder with no sandbox, and in two runs it wrote test files outside the repository. A separate run with the same flags said it had no CLAUDE.md or memory instructions in its context |
+| Time | about 10 minutes (our estimate). The Pi part is extra |
+| You need | Claude Code in a terminal ([step 13](../13-claude-code-on-your-laptop/)) and Python. You install pytest below. Our commands are for a Mac. On Windows, see Good to know |
+| Tested | a Mac, Claude Code 2.1.316 and Pi 0.86.0, 31 Oct 2026. Details under How we measured |
 | Download | [sharper-ask.txt](sharper-ask.txt) and [the carousel as a PDF](builder-step20-other-models-with-pi-carousel.pdf) (8 slides). You also use [shipments-export-sample.csv](../11-claude-code-on-the-web/shipments-export-sample.csv) from step 11 and [test_changes.py](../19-tests-and-security-checks/test_changes.py) from step 19 |
 
 ## Four words first
 
 | Word | What it is |
 |---|---|
-| Pi | A coding agent for the terminal, from `earendil-works/pi`. It can use models from many companies |
+| Pi | A coding agent for the terminal, from [earendil-works/pi](https://github.com/earendil-works/pi). It can use models from many companies |
 | OpenRouter | One account and one API key for models from many companies. You pay per use |
-| API key | A secret that lets a program spend your credit. Treat it like a password |
 | Flash model | A company's cheaper model. Here: DeepSeek V4.1 Flash and Qwen3.8 Flash |
-
-## Read this before you install Pi
-
-Pi's README: "Pi does not include a built-in permission system for restricting filesystem, process, network, or
-credential access. By default, it runs with the permissions of the user and process that launched it."
-
-So Pi does not stop to ask, as Claude Code does in [step 15](../15-plan-mode-and-undo/). It can run any command that you
-can run. Pi's README: "If you need stronger boundaries, containerize or sandbox Pi."
-
-We ran it in a macOS sandbox, on a copy of the folder. **Your run below has no sandbox.** A new folder does not stop Pi:
-it can read and change any file that you can, it can reach the network, and it can read the key. In our runs Pi tried to
-go outside its folder, and only the sandbox stopped it. So use made-up data, and use a container or a spare computer if
-yours holds work you care about. We give no steps for those here: Pi's README has a section on containers. If you run
-the steps below on your own computer as they are, you accept that risk.
+| Sandbox | A wall around a program, so it can only reach what you allow. A container is one kind |
 
 ## Our test
 
@@ -59,8 +46,10 @@ together. The step 19 test is stricter, because it also pins the format of each 
 | Claude Code, Opus 5.5 | 0 of 2 | 0 of 2 | 64 and 65 seconds | 35 and 36 cents, as shown |
 | Opus 5.5 plans, then Pi with DeepSeek builds | 0 of 2 | 0 of 2 | 76 and 84 seconds | 31 cents, as shown |
 
-So 2 of 9 runs matched our count, and the step 19 test went red on all 9. The other 7 runs did not count wrong. They answered another question. "Count every client and every route" can be read
-more than one way. Step 11 lists three readings. The 7 runs counted client and route pairs. One Opus 5.5 run printed:
+So 2 of 9 runs matched our count, and the step 19 test went red on all 9: 7 runs counted client and route pairs, and the
+other 2 had our numbers in another format. The 7 did not count wrong. They answered another question. "Count every client
+and every route" can be read more than one way, and step 11 lists three readings. After a header line, one Opus 5.5 run
+printed:
 
 ```text
 1. Alpha Retail (example), BE-NL: 33 -> 0 (-33)
@@ -91,18 +80,26 @@ We added two sentences to the same task. [sharper-ask.txt](sharper-ask.txt) is t
 So 8 of 8 runs matched our count, and 7 of 8 passed the test. The one red test had the right numbers and different
 spacing. The test pins the exact format, so it goes red on that too.
 
-**How we measured.** Time is the clock around the run. Cost for Pi is the cost in Pi's own output. Cost "as shown" is
-the figure Claude Code reports, plus Pi's cost for the build. We ran Claude Code signed in with a plan, so that figure
-is not a bill we paid. In the plan setup, Claude Code stayed in plan mode and changed nothing in the project folder. It
-saved its plan in its own plans folder. Its answer went to Pi with "Carry out this plan." The sandbox kept Pi from the
-saved plan file, so Pi had only that answer.
+**How we measured.** Each run started on a new copy of the step 11 repository, with only a README and the made-up CSV.
 
-**The third DeepSeek run.** It was the first test of our script, with the same ask and model, and we did not time it.
-It is in the table because it counted.
+- Pi ran with `pi -p`, a new home and settings folder, no extensions, no skills, no context files and telemetry off, with
+  JSON output and its own session folder, in a macOS sandbox.
+- Claude Code ran with `claude -p`, `--setting-sources project,local`, accept edits mode, and single Python commands
+  allowed, with no sandbox and our real home folder reachable. In two runs it wrote test files outside the repository. A
+  separate run with the same setting sources said no CLAUDE.md or memory contents were loaded. We cannot rule out that
+  our machine played a part.
+- Time is the clock around the run. Cost for Pi is the cost in Pi's own output. Cost "as shown" is the figure Claude Code
+  reports, plus Pi's cost for the build. We ran Claude Code signed in with a plan, so that figure is not a bill we paid.
+- In the plan setup, Claude Code stayed in plan mode. It saved its plan in its own plans folder. Its answer went to Pi
+  with "Carry out this plan." The sandbox kept Pi from the saved plan file, so Pi had only that answer.
 
-**Runs not in the tables.** One DeepSeek run on the first ask finished, but our script crashed while it saved the result.
-We do not have its answer, so we ran it again. One Qwen run on the first ask hit our 4-minute limit, so we stopped it and
-ran it again. Two Claude Code runs failed before they started, from a mistake in our command, so we ran them again.
+**The third DeepSeek run.** It was an early test of our harness, with the same ask and model, and we did not time it. It
+is in the table because it counted.
+
+**Runs not in the tables.** One DeepSeek run on the first ask finished, but our harness crashed while it saved the
+result. We do not have its answer, so we ran it again. One Qwen run on the first ask hit our 4-minute limit for Pi, so we
+stopped it and ran it again. Two Claude Code runs failed before they started, from a mistake in our command, so we ran
+them again.
 
 **What this does not show.**
 
@@ -114,93 +111,106 @@ ran it again. Two Claude Code runs failed before they started, from a mistake in
 
 ## Do it yourself
 
-We ran the same models and the same asks, with the extra flags in the Tested row. Your folder also differs: it is not a
-git repository and has no README. "Step 4" below means step 4 on this page. We did not run the short command in step 4
-in this form, and we did not test the install. We give no clicks for OpenRouter: our account already existed, and we did
-not walk them.
+We ran these steps once on a Mac, in a normal Claude Code session in default permission mode, with
+`--setting-sources project,local`. It asked 4 times before it acted, and we said yes each time. It took about a minute and
+gave the three lines below. Step A, B, C or D on this page is not a kit step.
+
+**A. Make a folder.** Download `sharper-ask.txt`, `shipments-export-sample.csv` and `test_changes.py` from the Download
+row. Move two of them in. Leave the test in Downloads for now, so Claude does not write to pass it.
+
+```bash
+mkdir ~/ask-test
+cd ~/ask-test
+mv ~/Downloads/shipments-export-sample.csv ~/Downloads/sharper-ask.txt .
+cat sharper-ask.txt
+```
+
+**B. Run the ask.** Copy the text that `cat` printed. Start Claude Code, paste it and press Enter. Read each question
+before you say yes. Type `/exit` when it is done.
+
+```bash
+claude
+```
+
+**C. Check it yourself.** Do not take the agent's word for it.
+
+```bash
+mv ~/Downloads/test_changes.py .
+python3 -m venv .venv
+.venv/bin/python -m pip install pytest
+python3 changes.py
+.venv/bin/python -m pytest test_changes.py
+```
+
+You want one header line, then these three lines, and `1 passed`:
+
+```text
+1. route  BE-BE    25 ->   60  +35
+2. route  NL-BE    77 ->  101  +24
+3. route  BE-FR    71 ->   48  -23
+```
+
+**D. Try the first ask.** Look at which question your model answers. It may stop and ask you, as it did on step 11. In a
+new folder for each try:
+
+```bash
+mkdir ~/ask-test-2
+cd ~/ask-test-2
+cp ~/ask-test/shipments-export-sample.csv .
+claude
+```
+
+Paste the first ask from Our test above. We ran it with `claude -p`, not in this kind of session.
+
+## Pi is optional, and at your own risk
+
+Pi's README: "Pi does not include a built-in permission system for restricting filesystem, process, network, or
+credential access. By default, it runs with the permissions of the user and process that launched it."
+
+So Pi does not stop to ask, as Claude Code does in [step 15](../15-plan-mode-and-undo/). It can run any command that you
+can run. A new folder does not stop it. It can read and change any file that you can, it can reach the network, and it
+can read your key. In our runs Pi tried to read a plan file outside its folder and to write in `/tmp`, and only the
+sandbox stopped it. Pi's README: "If you need stronger boundaries, containerize or sandbox Pi."
+
+**If this is your only computer and it holds work you care about, do not run this part.** The results above are the point
+of this step. Run it only on a spare computer, or in a container. We give no steps for a container here.
+
+We did not test the install, the OpenRouter pages or this short command. Our runs used the flags under How we measured.
 
 1. Install Pi. Its README: "Pi requires Node.js 22.19 or newer. The macOS, Linux, and Windows installers can install it
-   if needed."
+   if needed." Then open a new terminal and run `pi --version`.
 
    ```bash
    curl -fsSL https://pi.dev/install.sh | sh
    ```
 
-   Then open a new terminal and check it. A version number means it works:
-
-   ```bash
-   pi --version
-   ```
-
-2. Make an account on openrouter.ai. Add a little credit at openrouter.ai/settings/credits and create an API key at
+2. Make an account on openrouter.ai. Add a little credit at openrouter.ai/settings/credits and create a key at
    openrouter.ai/settings/keys. We did not check the smallest amount. Our runs cost cents. Set a low credit limit on the
-   key if that page offers one. Pi can read this key. Then, in the terminal, paste this line and press Enter:
+   key if that page offers one. In the terminal, paste this line and press Enter, then paste the key and press Enter. It
+   does not show, and it does not go in your shell history:
 
    ```bash
    read -s OPENROUTER_API_KEY
    ```
 
-   Paste the key and press Enter. It does not show, and it does not go in your shell history. Then paste these two lines.
-   The second prints only the length of the key, so it must not print 0:
-
    ```bash
    export OPENROUTER_API_KEY
-   echo ${#OPENROUTER_API_KEY}
    ```
 
-3. Download `sharper-ask.txt`, `shipments-export-sample.csv` and `test_changes.py` from the Download row. Make a new
-   folder and move two of them in. Leave `test_changes.py` in Downloads for now, so Pi is less likely to find it. In our
-   runs the test was not in the folder.
-
-   ```bash
-   mkdir ~/pi-test
-   cd ~/pi-test
-   mv ~/Downloads/shipments-export-sample.csv ~/Downloads/sharper-ask.txt .
-   ```
-
-4. Run the ask. Pi does not ask before it runs a command. In our runs this took under 3 minutes. To stop Pi, press Ctrl+C
-   (we did not test this):
+3. In a new folder with the CSV and `sharper-ask.txt`, run the ask. To stop Pi, press Ctrl+C. Then do step C.
 
    ```bash
    pi -p --model openrouter/deepseek/deepseek-v4.1-flash "$(cat sharper-ask.txt)"
    ```
 
-5. Check it yourself. Do not take the agent's word for it. Now move the test in and install pytest in this folder:
-
-   ```bash
-   mv ~/Downloads/test_changes.py .
-   python3 -m venv .venv
-   .venv/bin/python -m pip install pytest
-   python3 changes.py
-   .venv/bin/python -m pytest test_changes.py
-   ```
-
-   You want one header line, then these three lines, and `1 passed`. We ran the three pytest commands on a Mac with a
-   script from our runs:
-
-   ```text
-   1. route  BE-BE    25 ->   60  +35
-   2. route  NL-BE    77 ->  101  +24
-   3. route  BE-FR    71 ->   48  -23
-   ```
-
-6. Try the first ask too. Look at which question your model answers. Models and prices change, and yours may read it
-   another way. For another run, use a new folder name each time, as our runs did. In our runs the test went red on this
-   ask, because it gives no format:
-
-   ```bash
-   mkdir ~/pi-test-2
-   cd ~/pi-test-2
-   cp ~/pi-test/shipments-export-sample.csv .
-   pi -p --model openrouter/deepseek/deepseek-v4.1-flash "Write a small Python script, changes.py, that reads shipments-export-sample.csv and prints the three biggest changes in pallets between the last week in the file and the week before. Count every client and every route, and rank by the size of the change, up or down. Use ISO weeks. Add a README that explains the rule and how to run it. Run it once on the sample file and show me the output."
-   cp ~/pi-test/test_changes.py .
-   ~/pi-test/.venv/bin/python -m pytest test_changes.py
-   ```
+4. Delete the key at openrouter.ai/settings/keys when you are done.
 
 ## Good to know
 
-- **Pi has no built-in plan mode.** Pi's README: "Pi ships with powerful defaults but skips features like sub-agents and plan
-  mode." In our test, plan and build were two runs.
+- **Windows.** We tested on a Mac only. In Claude Code on Windows, ask it to make the folder, install pytest in a `.venv`
+  as in step 19, and run the test. We did not test this.
+- **Pi has no built-in plan mode.** Pi's README: "Pi ships with powerful defaults but skips features like sub-agents and
+  plan mode." In our test, plan and build were two runs.
 - **Use an API key in Pi.** Our Pi runs used an OpenRouter key. We did not test a Claude subscription login. Check
   Anthropic's terms first.
 - **What OpenRouter stores.** Its page: "OpenRouter does not store your prompts or responses". There are exceptions on
@@ -208,11 +218,14 @@ not walk them.
 - **Model names and prices change.** We read them on 31 Oct 2026. Check them on openrouter.ai.
 - **A test checks only what it checks.** Ours pins three lines from one sample file. It went red on 3 runs with the right
   numbers, and it cannot tell you which reading you meant. So you need a count you already trust first, as in step 11.
+- **Step 12 said it too.** Step 12's brief words the rule in another way. No run here used that wording.
+- **New at Claude this week.** Max 5x is now Max, and Max 20x is now Ultra, at the same prices. Ultra has no 5-hour limit
+  on verified accounts, and the weekly limit stays. Sources: [claude.com/pricing](https://claude.com/pricing) and
+  [What is the Ultra plan?](https://support.claude.com/en/articles/17728952)
 
 ## Time win and solution win
 
-- **Time win:** the runs we timed took 27 to 216 seconds. Our limit for Pi was 4 minutes. One more Qwen run hit it, and we ran
-  it again.
+- **Time win:** in Claude Code the sharper ask took 48 and 67 seconds.
 - **Solution win:** the test checks the same three lines whatever the model, so you do not take its word for it. It
   checks only those lines.
 
@@ -220,37 +233,21 @@ not walk them.
 
 | Mistake | What to do |
 |---|---|
-| You run Pi in a folder with real work | Press Ctrl+C. Pi does not ask first, and a new folder does not limit it. Use made-up data, and a container or a spare computer if yours holds work you care about |
-| Pi is still running after 5 minutes | Press Ctrl+C, then run it again as in the box below. We did not test this |
-| You paste your key into a file | Use step 2. Pi can read any file, and a file can reach GitHub if the folder becomes a repository |
-| You put `test_changes.py` in the folder before Pi runs | Pi can read the answer or change the test. Run it again as in the box below |
-| The test is red and the numbers are right | Only the format differs. Do not edit the test. Run it again as in the box below. We did not test this |
-| The test is red and the numbers differ from step 5 | Do not edit the test. Run it again as in the box below. If it differs again, that model did not do this task here |
-| The first ask gives lines that name a client and a route | Your model counted pairs. That is the point of step 6. The sharper ask is for this |
-| `command not found` for `pi` after the install | Open a new terminal. Then do step 2 again and `cd ~/pi-test`, because a new terminal loses both. We did not test this |
-| Pi prints an error about the key, credit or model, or there is no `changes.py` | If Pi says `/login`, do not use it here. Do step 2 again in this terminal, check your credit on openrouter.ai and check the model name there. We did not test this |
-| `No module named pytest` | Use `.venv/bin/python`, as in step 5, not plain `python3` |
-
-**To run it again in a new folder:**
-
-```bash
-mkdir ~/pi-test-3
-cd ~/pi-test-3
-cp ~/pi-test/shipments-export-sample.csv ~/pi-test/sharper-ask.txt .
-pi -p --model openrouter/deepseek/deepseek-v4.1-flash "$(cat sharper-ask.txt)"
-python3 changes.py
-cp ~/pi-test/test_changes.py .
-~/pi-test/.venv/bin/python -m pytest test_changes.py
-```
-
-For another run after that, change the folder name.
+| You put `test_changes.py` in the folder before the run | Claude can read the answer. Download the test again and start over in a new folder |
+| `mv: No such file or directory` | Find the file in your browser's downloads list, then move it |
+| The test is red and the numbers are right | Only the format differs. Do not edit the test. Ask: "Change only the print format of changes.py to match sharper-ask.txt." We did not test this |
+| The test is red and the numbers differ | Do not edit the test. Start over in a new folder. If it differs again, your model read the task another way |
+| The first ask gives lines that name a client and a route | Your model counted pairs. That is a fair reading. The sharper ask is for this |
+| `No module named pytest` | Use `.venv/bin/python`, as in step C, not plain `python3` |
+| You run Pi on a computer with real work | Press Ctrl+C. Read the Pi part again before you go on |
 
 ## In our own work
 
 On step 11, in Plan mode on the web, Opus 5.5 asked us what counts as one item and recommended pairs. We picked clients
 and routes pooled, so its script gave the three route lines. On 31 Oct, with `claude -p` and nobody to answer, it chose
-pairs on 2 of 2 runs and said so. So the same ask can give another answer when nobody settles the reading. Our step 11
-ask stays as it was in this test, and the sharper ask is here.
+pairs on 2 of 2 runs and said so: its own pick was pairs both times. So the same ask can give another answer when nobody
+settles the reading. Our step 11 ask stays as it was in this test, and the sharper ask is here. This step shows Pi only in
+this test.
 
 ## Next
 
