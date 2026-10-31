@@ -8,8 +8,7 @@
 - "On a new branch from main, change changes.py to rank by percent, not by pallets. Do not change the test. Open a
   pull request, wait for the checks and tell me the result. Do not merge."
 
-- For a public copy, only with made-up data: "Make a new public repository called weekly-shipments-public with the same
-  files as this one, in one new commit, with no old history. Use my GitHub noreply address for every commit in that repository, and show it to me before you push. The data is made up, so that is fine. Keep this repository private. In the new repository, make the
+- For a public copy, only with made-up data: "Make a new public repository called weekly-shipments-public with only the files committed on main here, in one new commit, with no old history. Never copy a .env file or anything else not committed on main. Use my GitHub noreply address for every commit in that repository. Show me the file list and the address before you push. The data is made up, so that is fine. Keep this repository private. In the new repository, make the
   two checks required, with no exception for admins, so nothing can merge to main while a check is red." Then, there:
   "In weekly-shipments-public, on a new branch, with the same noreply address, change changes.py to rank by percent, not by pallets. Do not change the test. Open a pull request, wait for the checks, and then try to merge it. Tell me exactly what GitHub says."
   Then type `/exit` and start a new session in your own folder. Claude stays in the public copy otherwise.
@@ -17,7 +16,7 @@
   Afterwards: "Close that pull request without merging. Delete the branch on GitHub and on this computer. Go back to main."
 - Merged on red by accident? With your own number: "Undo the merge of pull request 3 with git revert, on a branch, in a pull request. Wait for the checks and tell me the result. Do not merge." Read that pull request. When both checks are green, merge it. Main keeps the wrong change until you do. If the red check was the key scan, a revert does not remove the key: change the key at the service first, and ask Claude for the options.
 
-We did not test the "new commit", "noreply" and "Afterwards" wording. We did not run the key scan ask in a new session in
+We did not test the "new commit", "committed on main", "noreply" and "Afterwards" wording. We did not run the key scan ask in a new session in
 the private repository: ours reached it through a follow-up ask. Change the script name to your own.
 
 ## Does a red check block, or only show red?
