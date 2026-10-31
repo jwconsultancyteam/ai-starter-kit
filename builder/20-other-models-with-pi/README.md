@@ -122,7 +122,8 @@ We ran the ask once on a Mac, in a normal Claude Code session on an Ultra plan w
 ([step 15](../15-plan-mode-and-undo/)) with `--setting-sources project,local`. Our own add-ons still ran in that session. The folder held the CSV and the ask,
 not under the name below. It asked 5 times: once to trust the folder, then before some commands and each new
 file. A script of ours typed yes each time. Then we ran the commands in step C on a copy of that folder, and got the
-three lines below and `1 passed`. Your plan and model may differ. The letters A to D are only for this page.
+three lines below and `1 passed`. Your plan and model may differ. Plain `claude` below also
+loads your personal settings and any personal CLAUDE.md, and those can change the questions or the answer. The letters A to D are only for this page.
 
 **A. Make a folder.** Open `sharper-ask.txt`, `shipments-export-sample.csv` and `test_changes.py` from the Download row.
 Each link opens a GitHub page: click the **Download raw file** button on it (arrow icon, top right of the file). Then move two of them in. Leave the test in Downloads for now, so Claude does not write to pass it.
@@ -143,10 +144,16 @@ claude
 Claude Code first asks if you trust this folder. "No, exit" is picked at first, so press the Down arrow, then Enter. Press
 Cmd+V to paste the ask, then Enter.
 
-Then it asks before some commands and before each new file. In our run, two commands were long Python with a warning
-line above the question. We chose "1. Yes" each time, not the options that switch mode. If you are not sure about a
-command, use the route from [step 19](../19-tests-and-security-checks/): choose **No** and paste "What does this command
-do, and is it needed?" We did not test "No" in this run. Type `/exit` when it is done.
+Then it asks before some commands and before each new file. In our run there were two commands, both long Python that
+read the CSV. One looked at the file. One ran `changes.py` and checked the totals a second way, which we did not ask for.
+They came with these warnings: "Quoted text in this command can't be checked before it runs" and "Contains brace with
+quote character (expansion obfuscation)". Our script chose "1. Yes" each time, not the options that switch mode. Your
+commands may differ.
+
+A command that only reads the files in this folder or runs `changes.py` fits what you asked. If you cannot tell, use the
+route from [step 19](../19-tests-and-security-checks/): choose **No** and paste "What does this command do, and is it
+needed?" If the answer fits, paste "Go on and run it." If not, paste "Do not run it. What else can you do?" We did not
+test "No" in this run. Type `/exit` when it is done.
 
 **C. Check it yourself.** Do not take the agent's word for it.
 
@@ -224,8 +231,8 @@ flags under How we measured.
 
 ## Time win and solution win
 
-- **Time win:** a rerun in Claude Code took about a minute on this small task. The first ask took 64 and 65 seconds, the
-  sharper ask 48 and 67.
+- **Time win:** about a minute a run in print mode, on this small task: 64 and 65 seconds on the first ask, 48 and 67 on
+  the sharper ask. A session where you read each question takes longer.
 - **Solution win:** the test checks the same three lines whatever the model, so you do not take its word for it. It
   checks only those lines.
 
