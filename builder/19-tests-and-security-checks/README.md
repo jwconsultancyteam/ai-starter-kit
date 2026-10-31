@@ -107,16 +107,16 @@ for the checks and tell me the result. Do not merge."
 ## Do it yourself
 
 1. In the terminal, go to `weekly-shipments`. Run `git switch main`, then `git pull`. Start `claude`. Press `Shift+Tab` until it says `accept edits on`.
-2. Paste ask 1. Read each command before you choose **1. Yes**. Choose **No** at anything you did not ask for: a write to
+2. Paste ask 1. Read each command before you choose **1. Yes**. Do not choose the options that say "don't ask again" or "switch to auto mode". Choose **No** at anything you did not ask for: a write to
    another repository, a GitHub setting, a branch delete, a forced push. If you do not understand a prompt, choose
    **No** and paste: "What does this command do, and is it needed?" Expect long commands. In our run, Claude also changed
    `changes.py` and the CSV for a moment, to prove that the test fails, and put them back. If you are not sure, choose **No**
-   and ask, then run `git status` before you go on. If Claude has not committed yet, you want to see only the new files it made. If it has, you see nothing to commit, which is fine too. If `changes.py` or the CSV
+   and ask, then, in a second terminal in `weekly-shipments`, run `git status` before you go on. If Claude has not committed yet, you want to see only the new files it made. If it has, you see nothing to commit, which is fine too. If `changes.py` or the CSV
    shows as modified, paste: "Put changes.py and the CSV back as they are on main." Then check the three lines with
    `python3 changes.py`. We did not test that wording. If pytest or gitleaks is not on your computer, Claude may want to install
    it. Read that prompt too. The check on GitHub installs gitleaks itself, so you can say **No** to a local gitleaks install.
    We did not test this. Wait for two green checks. Then read the change: on GitHub, open the pull request and click **Files changed**.
-3. Merge it. Then make a bad change as in ask 3, and see the check go red. Do not merge it. In a second terminal, go to
+3. Merge it: paste "Merge this pull request. Go back to main and pull." We did not test that wording. Then make a bad change as in ask 3, and see the check go red. Do not merge it. In a second terminal, go to
    `weekly-shipments` and run `gh pr view 3 --json mergeStateStatus`, with your own pull request number. In our test, `UNSTABLE` did not block and,
    with no exception for admins, `BLOCKED` blocked. `BLOCKED` alone does not tell you if an admin can still merge. Ask Claude to close the pull request and go back to `main`.
 4. Optional, the key scan. Only after ask 1 is merged, and only with a made-up key. In a new session in your own folder, paste:
@@ -132,7 +132,7 @@ for the checks and tell me the result. Do not merge."
    - **Use a public copy,** only if the data is made up. It shows you the block. It does not protect your working
      repository. The email in your git settings shows in the commits you push, so this ask names the noreply address
      GitHub offers. Paste: "Make a new public repository called weekly-shipments-public with only the files committed on main here, in one new commit, with no old history. Never copy a .env file or anything else not committed on main. Use my GitHub noreply address for every commit in that repository. Show me the file list and the address before you push. The data is made up, so that is fine. Keep this repository private. In the new repository, make the two checks
-     required, with no exception for admins, so nothing can merge to main while a check is red." Our ask did not say "one new commit", "noreply" or "committed on main". Claude chose one new commit. It copied the email
+     required, with no exception for admins, so nothing can merge to main while a check is red." Before you say yes, check that the list holds only made-up data and the address ends in users.noreply.github.com. Our ask did not say "one new commit", "noreply" or "committed on main". Claude chose one new commit. It copied the email
      from our git settings, which already held the noreply address. Yours may be your real email, so we added both here
      and did not test this wording. Then paste: "In weekly-shipments-public, on a new branch, with the same noreply address, change changes.py to rank by percent, not by pallets. Do not change the test. Open a pull request, wait for the checks, and then try to merge it. Tell me exactly what GitHub says." Expect a refusal. Claude
      stays in the public copy after this, so type `/exit` and start a new session in your own folder. We left our copy up.
@@ -185,7 +185,7 @@ check names, paste what you see into Claude and ask what it means.
 | You think a red check stops the merge | Check it, without merging: open a red pull request and run `gh pr view <number> --json mergeStateStatus`. On GitHub Free, in a private repository, ours said `UNSTABLE` |
 | You make your working repository public to get the block | Keep it private. A public copy with only made-up data shows you the block. It does not protect the working repository |
 | A red test goes green because the test changed | Read every change to a test before you merge |
-| Green means correct | A test only checks what it checks. Ours checks three lines, not the header |
+| Green means correct | A test only checks what it checks. Ours checks three lines, not the header. The scan only finds key formats it knows, so green does not prove there is no key |
 | The downloaded test fails on your own script | It skips a header line, then expects the three lines of the step 17 `changes.py`. Use ask 1, so Claude writes the test for your script |
 | `gitleaks` is red on your first pull request, and you added no key | It scans the whole history, so an old key counts. Ask Claude what it found. With a real key: change the key |
 | pytest is not found | It was already on our computer. Ask Claude to install it for this folder. We did not test this |
