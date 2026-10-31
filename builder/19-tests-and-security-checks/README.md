@@ -154,7 +154,7 @@ check names, paste what you see into Claude and ask what it means.
   is in `main`, do not delete `main`. Ask Claude for the options. We did not test that. In our run the log did not name the key or the file, so ask Claude to
   find it. The workflow scans the whole history. Claude warned that if the key merges, "every later PR will fail
   gitleaks, even after config.py is deleted, unless the key is removed from history or allowlisted". We did not test that.
-- **This test pins today's output.** Any change to those three lines goes red, wanted or not. If you wanted the new output, updating the test
+- **This test pins today's output.** Any change to the three lines it checks goes red, wanted or not. If you wanted the new output, updating the test
   is right. Read that the new lines are the ones you wanted.
 - **A `.gitignore` only keeps out the files it names.** The step 17 template names `.env` files. Our made-up key was in
   `config.py`.
