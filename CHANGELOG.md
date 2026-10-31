@@ -13,6 +13,8 @@ What changed in the kit, newest first. Dates are Brussels time.
   repository. We did not test GitHub Pro.
 - Builder, step 17: the `.gitignore` template heading now names `.env` files, and the cheat sheet says to check your
   change for a key in any other file. Step 18: the Next line now says every pull request.
+- Corrections: the root README no longer names post times. Builder, step 11: reading a change before it goes in is up
+  to you, nothing enforces it. Builder, step 18: your git email shows in the commits you push to a public repository.
 
 ## 30 Oct 2026
 
