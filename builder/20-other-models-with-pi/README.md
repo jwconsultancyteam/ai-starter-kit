@@ -91,7 +91,8 @@ three lines, and each plan went to Pi as its task. So that row is not DeepSeek's
 - Claude Code ran with `claude -p`, `--setting-sources project,local`, accept edits mode, and single Python commands
   allowed, with no sandbox and our real home folder reachable. Two first-ask runs made their own test files outside the
   repository, one of them next to our script that holds the answers. We searched the commands in all 8 session logs: none
-  used that script, our test or our expected output. A separate run with the same setting sources said no CLAUDE.md or memory contents were loaded. We cannot rule out that
+  used that script, our test or our expected output. A separate run with the same setting sources said no CLAUDE.md or memory contents were loaded. Our own add-ons
+  can still load with that setting, as they did in the session under Do it yourself. We cannot rule out that
   our machine played a part.
 - Time is the clock around the run. Cost for Pi is the cost in Pi's own output. Cost "as shown" is the figure Claude Code
   reports, plus Pi's cost for the build. We ran Claude Code signed in with a plan, so that figure is not a bill we paid.
@@ -194,8 +195,8 @@ credential access. By default, it runs with the permissions of the user and proc
 
 So Pi has no permission prompt of its own, as Claude Code has in [step 15](../15-plan-mode-and-undo/). In our `pi -p` runs
 it ran its commands with no question. A new folder does not stop it. It can read and change any file that you can, it can
-reach the network, and it can read your key. In our runs Pi tried to read a plan file outside its folder and to write in
-`/tmp`, and only the sandbox stopped it. Pi's README: "If you need stronger boundaries, containerize or sandbox Pi."
+reach the network, and it can read your key. In our runs Pi tried to read a plan file outside its folder, because the plan we gave it named that file, and tried to
+write in `/tmp`. Only the sandbox stopped it. Pi's README: "If you need stronger boundaries, containerize or sandbox Pi."
 
 **You do not need Pi for this step.** The results above are the point. If you try it, use a spare computer or a
 container, and follow Pi's own README. Those protect your files, not your key or what Pi can reach on the network. So use
@@ -243,7 +244,7 @@ flags under How we measured.
 
 On step 11, in Plan mode on the web, Opus 5.5 asked us what counts as one item and recommended pairs. We picked clients
 and routes pooled, so its script gave the three route lines. On 31 Oct, with `claude -p` and nobody to answer, it chose
-pairs on 2 of 2 runs and said so: its own pick was pairs both times. So the same ask can give another answer when nobody
+pairs on 2 of 2 runs and said so. So the same ask can give another answer when nobody
 settles the reading. Our step 11 ask stays as it was in this test, and the sharper ask is here. This step shows Pi only in
 this test.
 
