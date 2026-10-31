@@ -125,7 +125,7 @@ for the checks and tell me the result. Do not merge."
    repository: ours reached it through a follow-up ask.
 5. Choose your rule for `main`:
    - **Stay private on GitHub Free.** The check shows red and blocks nothing. Your rule is: never merge on red. Nothing enforces that rule
-     but you. Merged on red by accident? Paste, with your own number: "Undo the merge of pull request 3 with git revert, on a branch, in a pull request. Wait for the checks and tell me the result. Do not merge."
+     but you. Merged on red by accident? Paste, with your own number: "Undo the merge of pull request 3 with git revert, on a branch, in a pull request. Wait for the checks and tell me the result. Do not merge." Read that pull request. When both checks are green, merge it. Main keeps the wrong change until you do.
    - **Pay for a plan that has it.** GitHub lists protected branches for private repositories under GitHub Pro. After the
      upgrade, paste: "Make the two checks required, with no exception for admins, so nothing can merge to main while a
      check is red." On your own repository, you are the admin. We did not test this.
@@ -154,7 +154,7 @@ check names, paste what you see into Claude and ask what it means.
   is in `main`, do not delete `main`. Ask Claude for the options. We did not test that. In our run the log did not name the key or the file, so ask Claude to
   find it. The workflow scans the whole history. Claude warned that if the key merges, "every later PR will fail
   gitleaks, even after config.py is deleted, unless the key is removed from history or allowlisted". We did not test that.
-- **This test pins today's output.** Any change goes red, wanted or not. If you wanted the new output, updating the test
+- **This test pins today's output.** Any change to those three lines goes red, wanted or not. If you wanted the new output, updating the test
   is right. Read that the new lines are the ones you wanted.
 - **A `.gitignore` only keeps out the files it names.** The step 17 template names `.env` files. Our made-up key was in
   `config.py`.
