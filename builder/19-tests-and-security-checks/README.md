@@ -111,7 +111,7 @@ for the checks and tell me the result. Do not merge."
    another repository, a GitHub setting, a branch delete, a forced push. If you do not understand a prompt, choose
    **No** and paste: "What does this command do, and is it needed?" Expect long commands. In our run, Claude also changed
    `changes.py` and the CSV for a moment, to prove that the test fails, and put them back. If you are not sure, choose **No**
-   and ask, then run `git status` before you go on. You want to see only the new files Claude made. If `changes.py` or the CSV
+   and ask, then run `git status` before you go on. If Claude has not committed yet, you want to see only the new files it made. If it has, you see nothing to commit, which is fine too. If `changes.py` or the CSV
    shows as modified, paste: "Put changes.py and the CSV back as they are on main." Then check the three lines with
    `python3 changes.py`. We did not test that wording. If pytest or gitleaks is not on your computer, Claude may want to install
    it. Read that prompt too. The check on GitHub installs gitleaks itself, so you can say **No** to a local gitleaks install.
@@ -144,7 +144,7 @@ check names, paste what you see into Claude and ask what it means.
 
 - **A check that nobody must obey only shows red.** GitHub's plans page lists protected branches for private
   repositories under GitHub Pro. On its pricing page, repository rules on Free are for public repositories only.
-- **GitHub's own secret scanning does not help a private repository on Free.** On public repositories it "runs
+- **GitHub's own secret scanning does not help a private repository on Free, and a personal paid plan does not change that.** For private repositories, GitHub's page lists organization plans with Secret Protection and enterprise plans, not Pro. On public repositories it "runs
   automatically for free". This workflow runs gitleaks, and that worked in our
   private repository.
 - **A red key scan means the key already reached GitHub.** Closing the pull request or deleting the branch does not
