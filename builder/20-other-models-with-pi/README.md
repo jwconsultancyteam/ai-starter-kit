@@ -6,7 +6,7 @@ made the ask sharper, and all 8 runs matched our count.
 
 So your task in this step is the sharper ask, in the Claude Code you already have. Then the
 [step 19](../19-tests-and-security-checks/) test checks the same three lines. Pi is optional, at the end, because it has
-no permission system.
+no built-in permission system.
 
 | | |
 |---|---|
@@ -86,20 +86,20 @@ spacing. The test pins the exact format, so it goes red on that too.
 
 - Pi ran with `pi -p`, a new home and settings folder, no extensions, no skills, no context files and telemetry off, with
   JSON output and its own session folder, in a macOS sandbox. The sandbox blocked writes outside the run folder and
-  reads of some folders. It did not block the network or most other reads.
+  the system temp folder, and reads of some folders. It did not block the network or most other reads.
 - Claude Code ran with `claude -p`, `--setting-sources project,local`, accept edits mode, and single Python commands
-  allowed, with no sandbox and our real home folder reachable. In two runs it wrote test files outside the repository. A
-  separate run with the same setting sources said no CLAUDE.md or memory contents were loaded. We cannot rule out that
+  allowed, with no sandbox and our real home folder reachable. Two runs said in their answer that test files were outside the
+  repository. Our logs do not show where. A separate run with the same setting sources said no CLAUDE.md or memory contents were loaded. We cannot rule out that
   our machine played a part.
 - Time is the clock around the run. Cost for Pi is the cost in Pi's own output. Cost "as shown" is the figure Claude Code
   reports, plus Pi's cost for the build. We ran Claude Code signed in with a plan, so that figure is not a bill we paid.
 - In the plan setup, Claude Code stayed in plan mode. It saved its plan in its own plans folder. Its answer went to Pi
   with "Carry out this plan." The sandbox kept Pi from the saved plan file, so Pi had only that answer.
 
-**The third DeepSeek run.** It was an early test of our harness, with the same ask and model, and we did not time it. It
+**The third DeepSeek run.** It was an early test of our test script, with the same ask and model, and we did not time it. It
 is in the table because it counted.
 
-**Runs not in the tables.** One DeepSeek run on the first ask finished, but our harness crashed while it saved the
+**Runs not in the tables.** One DeepSeek run on the first ask finished, but our test script crashed while it saved the
 result. We do not have its answer, so we ran it again. One Qwen run on the first ask hit our 4-minute limit for Pi, so we
 stopped it and ran it again. Two Claude Code runs failed before they started, from a mistake in our command, so we ran
 them again.
@@ -114,11 +114,11 @@ them again.
 
 ## Do it yourself
 
-We ran the ask once on a Mac, in a normal Claude Code session on an Ultra plan with Opus 5.5, in default permission mode
-with `--setting-sources project,local`. Our own add-ons still ran in that session. The folder held the CSV and the ask,
-not under the name below. It asked 4 times before it acted, and we said yes each time. Then we ran the commands in step
-C on a copy of that folder, and got the three lines below and `1 passed`. Your plan and model may differ. Step A, B, C or D on this page is not a
-kit step.
+We ran the ask once on a Mac, in a normal Claude Code session on an Ultra plan with Opus 5.5, in manual mode
+([step 15](../15-plan-mode-and-undo/)) with `--setting-sources project,local`. Our own add-ons still ran in that session. The folder held the CSV and the ask,
+not under the name below. It asked 5 times: once to trust the folder, then before some commands and each new
+file. A script of ours typed yes each time. Then we ran the commands in step C on a copy of that folder, and got the
+three lines below and `1 passed`. Your plan and model may differ. The letters A to D are only for this page.
 
 **A. Make a folder.** Download `sharper-ask.txt`, `shipments-export-sample.csv` and `test_changes.py` from the Download
 row. Move two of them in. Leave the test in Downloads for now, so Claude does not write to pass it.
@@ -155,33 +155,27 @@ You want one header line, then these three lines, and `1 passed`:
 3. route  BE-FR    71 ->   48  -23
 ```
 
-**To start over,** in a new folder:
+**To start over.** The first line makes a new empty folder with its own name, each time:
 
 ```bash
-mkdir ~/ask-test-3
-cd ~/ask-test-3
+cd "$(mktemp -d ~/ask-try-XXXX)"
 cp ~/ask-test/shipments-export-sample.csv ~/ask-test/sharper-ask.txt .
 claude
 ```
 
-Paste the ask. After `/exit`, copy the test in and run it with the `.venv` you already have:
+Paste the ask. After `/exit`, download a new copy of the test and run all of step C in this folder.
+
+**D. Try the first ask.** Look at which question your model answers. It may stop and ask you, as it did on step 11. If it
+does, pick the reading you want. Each try gets a new folder:
 
 ```bash
-cp ~/ask-test/test_changes.py .
-~/ask-test/.venv/bin/python -m pytest test_changes.py
-```
-
-**D. Try the first ask.** Look at which question your model answers. It may stop and ask you, as it did on step 11. In a
-new folder for each try:
-
-```bash
-mkdir ~/ask-test-2
-cd ~/ask-test-2
+cd "$(mktemp -d ~/ask-try-XXXX)"
 cp ~/ask-test/shipments-export-sample.csv .
 claude
 ```
 
-Paste the first ask from Our test above. We ran it with `claude -p`, not in this kind of session.
+Paste the first ask from Our test above, and type `/exit` when it is done. The step 19 test is not for this try, because
+this ask does not pin the format. We ran this ask with `claude -p`, not in this kind of session.
 
 ## Pi is optional, and at your own risk
 
@@ -193,12 +187,12 @@ it ran its commands with no question. It can run any command that you can run. A
 can read your key. In our runs Pi tried to read a plan file outside its folder and to write in `/tmp`, and only the
 sandbox stopped it. Pi's README: "If you need stronger boundaries, containerize or sandbox Pi."
 
-**If this is your only computer and it holds work you care about, do not run this part.** The results above are the point
-of this step. Run it only on a spare computer, or in a container. We give no steps for a container here.
+**Run this part only on a spare computer or in a container. If you have neither, skip it.** The results above are the
+point of this step. We give no steps for a container here.
 
 We did not test the install, the OpenRouter pages or this short command. Our runs used the flags under How we measured.
 
-1. Install Pi. Its README: "Pi requires Node.js 22.19 or newer. The macOS, Linux, and Windows installers can install it
+1. That computer also needs Python. Install Pi. Its README: "Pi requires Node.js 22.19 or newer. The macOS, Linux, and Windows installers can install it
    if needed." Then open a new terminal and run `pi --version`.
 
    ```bash
@@ -208,7 +202,7 @@ We did not test the install, the OpenRouter pages or this short command. Our run
 2. Make an account on openrouter.ai. Add a little credit at openrouter.ai/settings/credits and create a key at
    openrouter.ai/settings/keys. We did not check the smallest amount. Our runs cost cents. Set a low credit limit on the
    key if that page offers one. In the terminal, paste this line and press Enter, then paste the key and press Enter. It
-   does not show, and it does not go in your shell history:
+   does not show, and it does not go in your shell history. Then paste the second line. Stay in this window for step 3:
 
    ```bash
    read -s OPENROUTER_API_KEY
@@ -253,15 +247,16 @@ We did not test the install, the OpenRouter pages or this short command. Our run
 - **Model names and prices change.** We read them on 31 Oct 2026. Check them on openrouter.ai.
 - **A test checks only what it checks.** Ours pins three lines from one sample file. It went red on 3 runs with the right
   numbers, and it cannot tell you which reading you meant. So you need a count you already trust first, as in step 11.
-- **Step 12 said it too.** Step 12's brief words the rule in another way. No run here used that wording.
+- **Step 12 has a line for this.** Its [example brief](../12-what-an-agent-is/agent-brief-example-step11.txt) has a "Stop and ask me when" line. No run here used it.
 - **New at Claude this week.** The plans now read: Max, USD 100 a month, 5x Pro usage. Ultra, USD 200 a month, 10x Pro
-  usage. Ultra has no 5-hour limit on verified accounts. It still has a weekly limit. Sources: [claude.com/pricing](https://claude.com/pricing) and
-  [What is the Ultra plan?](https://support.claude.com/en/articles/17728952)
+  usage. Ultra has no 5-hour limit on verified accounts. It still has a weekly limit. Fast mode for Opus 4.8 is deprecated, and is removed on 30 Nov. Sources:
+  [claude.com/pricing](https://claude.com/pricing), [What is the Ultra plan?](https://support.claude.com/en/articles/17728952)
+  and the [Claude Code changelog](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md)
 
 ## Time win and solution win
 
-- **Time win:** about a minute a run in Claude Code, so a clearer ask costs little to try. The first ask took 64 and 65
-  seconds, the sharper ask 48 and 67.
+- **Time win:** a rerun in Claude Code took about a minute on this small task. The first ask took 64 and 65 seconds, the
+  sharper ask 48 and 67.
 - **Solution win:** the test checks the same three lines whatever the model, so you do not take its word for it. It
   checks only those lines.
 
@@ -269,7 +264,7 @@ We did not test the install, the OpenRouter pages or this short command. Our run
 
 | Mistake | What to do |
 |---|---|
-| You put `test_changes.py` in the folder before the run | Claude can read the answer. Download the test again, then use To start over above with the new copy |
+| You put `test_changes.py` in the folder before the run | Claude can read the answer, and could have changed the test. Use To start over above |
 | `mv` says `No such file or directory` | Find the file in your browser's downloads list, then move it |
 | The test is red and the numbers are right | Only the format differs. Do not edit the test. Ask: "Change only the print format of changes.py to match sharper-ask.txt." We did not test this |
 | The test is red and the numbers differ | Do not edit the test. Use To start over above. If it differs again, your model read the task another way |
