@@ -2,6 +2,12 @@
 
 What changed in the kit, newest first. Dates are Brussels time.
 
+## 1 Nov 2026
+
+- Builder, step 20: other models with Pi is live: the step 11 task on 4 setups, 2 runs each. On the first ask, 2 of 8 runs
+  matched our count. With a sharper ask, 8 of 8 matched and 7 of 8 passed the step 19 test. Tested on a Mac, Pi 0.86.0 and
+  Claude Code 2.1.316, 31 Oct 2026, with made-up data.
+
 ## 31 Oct 2026
 
 - Builder, step 19: tests and security checks on every pull request is live: one test and a gitleaks scan on every pull
