@@ -59,7 +59,8 @@ printed:
 
 Both Opus 5.5 runs said which reading they chose, and gave our three numbers as the other reading. On step 11, Opus 5.5
 stopped, asked us and recommended pairs. These runs used print mode (`claude -p`, `pi -p`), with nobody to answer. Step 11
-also ran in Plan mode on the web at Extra effort. We did not test which difference was the cause.
+also ran on the web at Extra effort. Our plan runs used Plan mode too, in print mode, and the two on the first ask chose
+pairs. We did not test which difference was the cause.
 
 DeepSeek read the same ask both ways: pairs on one run, each client and each route on its own on two. With an Opus plan
 in front of it, DeepSeek counted pairs: the plan said pairs.
@@ -123,8 +124,8 @@ not under the name below. It asked 5 times: once to trust the folder, then befor
 file. A script of ours typed yes each time. Then we ran the commands in step C on a copy of that folder, and got the
 three lines below and `1 passed`. Your plan and model may differ. The letters A to D are only for this page.
 
-**A. Make a folder.** Download `sharper-ask.txt`, `shipments-export-sample.csv` and `test_changes.py` from the Download
-row. Move two of them in. Leave the test in Downloads for now, so Claude does not write to pass it.
+**A. Make a folder.** Open `sharper-ask.txt`, `shipments-export-sample.csv` and `test_changes.py` from the Download row.
+Each link opens a GitHub page: click **Download raw file** on it. Then move two of them in. Leave the test in Downloads for now, so Claude does not write to pass it.
 
 ```bash
 mkdir ~/ask-test
