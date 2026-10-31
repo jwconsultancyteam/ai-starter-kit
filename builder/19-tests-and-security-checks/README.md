@@ -57,14 +57,15 @@ Open a pull request, wait for the checks and tell me the result. Do not merge."
 - gitleaks stayed green.
 - Claude said: "Nothing blocks this merge".
 
-**Ask 4:** "Merge pull request 3 now, with the red check." It merged. So we took it back
+**Ask 4:** "Merge pull request 3 now, with the red check." It merged. So Claude took it back, on our ask,
 with `git revert -m 1` on the merge, in a new pull request. Both checks were green, and the three lines
 were right again.
 
 **The same bad change in a public copy.** We asked Claude to make a new public repository,
 [weekly-shipments-public](https://github.com/JWconsultancy1234/weekly-shipments-public), with the same files and the
 two checks required, with no exception for admins. The data is made up, so that is fine. Then the same percent change,
-and a try to merge it. GitHub answered: `Required status check "pytest" is failing.` On a test pull request that
+and a try to merge it. The GitHub API answered: `Required status check "pytest" is failing.` The `gh pr merge` command
+said: "the base branch policy prohibits the merge". On a test pull request that
 Claude opened in that copy, a merge with admin rights was refused as well. You can see
 [the blocked pull request](https://github.com/JWconsultancy1234/weekly-shipments-public/pull/2).
 
@@ -97,15 +98,19 @@ for the checks and tell me the result. Do not merge."
 
 ## Do it yourself
 
-1. In the terminal, go to `weekly-shipments` and start `claude`. Press `Shift+Tab` until it says `accept edits on`.
+1. In the terminal, go to `weekly-shipments`. Run `git switch main`, then `git pull`. Start `claude`. Press `Shift+Tab` until it says `accept edits on`.
 2. Paste ask 1. Read each command before you choose **1. Yes**. Wait for two green checks.
-3. Merge it. Then make a bad change as in ask 3, and see the check go red. Do not merge it. Close it.
+3. Merge it. Then make a bad change as in ask 3, and see the check go red. Do not merge it. Run
+   `gh pr view <number> --json mergeStateStatus`. In our test, `UNSTABLE` only warned and `BLOCKED` blocked. Close it.
 4. Choose your rule for `main`:
    - **Stay private on GitHub Free.** The check warns. Your rule is: never merge on red. Nothing enforces that rule
      but you.
    - **Pay for a plan that has it.** GitHub lists protected branches for private repositories under GitHub Pro. We did
      not test this.
-   - **Use a public repository,** with only made-up or public data in it. Then make the checks required, as above.
+   - **Use a public copy,** only if the data is made up. It shows you the block. It does not protect your working
+     repository. Paste: "Make a new public repository called weekly-shipments-public with the same files as this one.
+     The data is made up, so that is fine. Keep this repository private. In the new repository, make the two checks
+     required, with no exception for admins, so nothing can merge to main while a check is red."
 
 ## Good to know
 
@@ -118,8 +123,8 @@ for the checks and tell me the result. Do not merge."
   key: change the key at the service it belongs to.
 - **Claude's reviews advise.** Anthropic says automated security reviews "should complement, not
   replace, your existing security practices and manual code reviews." `/security-review` is a review you ask for. On its
-  Code Review service, Anthropic says a review "never approves or blocks the pull request". In our test, the block came
-  from a required check.
+  Code Review service, Anthropic says a review "never approves or blocks the pull request". In our test, the merge block came
+  from a required check, and the push block from GitHub.
 - **The check runs on pull requests.** A direct push to `main` does not start it. We did not test a direct push.
 - **Public means public.** A pull request stays visible, even after you close it. Never put real data in a public
   copy, and never a real key.
@@ -130,7 +135,7 @@ for the checks and tell me the result. Do not merge."
 ## Time win and solution win
 
 - **Time win:** in our test, every later pull request was checked in under a minute, with no person watching.
-- **Solution win:** a change that fails the test or the scan shows up red before it is in, not after. And you know
+- **Solution win:** a change that fails the test or the scan shows up red before it is merged to main, not after. And you know
   which of
   your repositories really block, and which only warn.
 
@@ -138,19 +143,19 @@ for the checks and tell me the result. Do not merge."
 
 | Mistake | Fix |
 |---|---|
-| You think a red check stops the merge | Check it: try to merge a red pull request. On GitHub Free, in a private repository, it goes through |
-| You make your working repository public to get the block | Make a separate public copy with only made-up data, as we did |
+| You think a red check stops the merge | Check it, without merging: open a red pull request and run `gh pr view <number> --json mergeStateStatus`. On GitHub Free, in a private repository, ours said `UNSTABLE` |
+| You make your working repository public to get the block | Keep it private. A public copy with only made-up data shows you the block. It does not protect the working repository |
 | A red test goes green because the test changed | Read every change to a test before you merge |
 | Green means correct | A test only checks what it checks. Ours checks three lines, not the header |
-| The downloaded test fails on your own script | It expects the three lines of the step 17 `changes.py`. Use ask 1, or change those lines in the test |
+| The downloaded test fails on your own script | It skips a header line, then expects the three lines of the step 17 `changes.py`. Use ask 1, so Claude writes the test for your script |
 | `pytest` crashes on your own computer | Ours did, from a plugin in our own Python. Claude used `PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python3 -m pytest`. The check on GitHub was fine |
 
 ## In our own work
 
 Our own main repository runs five security scanners on pull requests: gitleaks, semgrep, bandit, pip-audit and zizmor.
-New findings fail. Findings already in the baseline do not. And there, a required check stops a normal merge. An admin
+New findings fail, for pip-audit only when a dependency file changed. Findings already in the baseline do not. And there, a required check stops a normal merge. An admin
 can still override it.
 
 ## Next
 
-Step 20 (Sunday): one agent, any model.
+Step 20: one agent, any model.

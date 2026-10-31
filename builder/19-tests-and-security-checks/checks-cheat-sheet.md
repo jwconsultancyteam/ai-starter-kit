@@ -15,9 +15,9 @@ Change the script name to your own.
 | Repository | Required checks | A red check |
 |---|---|---|
 | Private, GitHub Free | Refused: "Upgrade to GitHub Pro or make this repository public to enable this feature." | Warns. The merge goes through |
-| Public, GitHub Free | Works | Blocks: `Required status check "pytest" is failing.` |
+| Public, GitHub Free | Works | Blocks. The API: `Required status check "pytest" is failing.` `gh pr merge`: "the base branch policy prohibits the merge" |
 
-Do not guess. Open a bad pull request and try to merge it.
+Do not guess. Open a bad pull request, do not merge it, and read `mergeStateStatus` below.
 
 ## A key in a change
 
