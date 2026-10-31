@@ -121,7 +121,8 @@ for the checks and tell me the result. Do not merge."
    - **Stay private on GitHub Free.** The check shows red and blocks nothing. Your rule is: never merge on red. Nothing enforces that rule
      but you.
    - **Pay for a plan that has it.** GitHub lists protected branches for private repositories under GitHub Pro. After the
-     upgrade, ask Claude to make the two checks required. We did not test this.
+     upgrade, paste: "Make the two checks required, with no exception for admins, so nothing can merge to main while a
+     check is red." On your own repository, you are the admin. We did not test this.
    - **Use a public copy,** only if the data is made up. It shows you the block. It does not protect your working
      repository. The email in your git settings shows in the commits you push, so this ask names the noreply address
      GitHub offers. Paste: "Make a new public repository called weekly-shipments-public with the same
@@ -143,21 +144,21 @@ check names, paste what you see into Claude and ask what it means.
   private repository.
 - **A red key scan means the key already reached GitHub.** Closing the pull request or deleting the branch does not
   remove it: GitHub still showed our commit afterwards. With a real key: change the key at the service it belongs to,
-  first. Then delete the branch that holds it, so later scans stop going red. Ask Claude which branch: it may not be the
-  one on this pull request. In our run the log did not name the key or the file, so ask Claude to
+  first. If the key is only on a side branch, delete that branch, so later scans stop going red. Ask Claude which branch. If it
+  is in `main`, do not delete `main`. Ask Claude for the options. We did not test that. In our run the log did not name the key or the file, so ask Claude to
   find it. The workflow scans the whole history. Claude warned that if the key merges, "every later PR will fail
   gitleaks, even after config.py is deleted, unless the key is removed from history or allowlisted". We did not test that.
 - **This test pins today's output.** Any change goes red, wanted or not. If you wanted the new output, updating the test
   is right. Read that the new lines are the ones you wanted.
 - **A `.gitignore` only keeps out the files it names.** The step 17 template names `.env` files. Our made-up key was in
   `config.py`.
-- **Claude's reviews advise.** Anthropic says automated security reviews "should complement, not
+- **A Claude review does not block by itself.** Anthropic says automated security reviews "should complement, not
   replace, your existing security practices and manual code reviews." `/security-review` is a review you ask for. On its
   Code Review service, Anthropic says a review "never approves or blocks the pull request". In our test, the merge block came
   from a required check, and the push block from push protection.
 - **The check runs on pull requests.** A direct push to `main` does not start it. We did not test a direct push.
 - **No exception for admins is about the merge.** GitHub says people with admin permissions "can manage branch
-  protection rules". So an admin can still change the rule. We did not test that.
+  protection rules". So an admin can still change the rule, and on your own repository, that is you. We did not test that.
 - **Public means public.** A pull request stays visible, even after you close it. Never put real data in a public
   copy, and never a real key.
 - **In an organization, the official gitleaks action needs a license key.** Its page says `GITLEAKS_LICENSE` is
