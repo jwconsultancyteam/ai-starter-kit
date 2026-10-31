@@ -8,19 +8,21 @@
 - "On a new branch from main, change changes.py to rank by percent, not by pallets. Do not change the test. Open a
   pull request, wait for the checks and tell me the result. Do not merge."
 
-- For a public copy, only with made-up data, and add "One new commit, no old history" (we did not test that wording): "Make a new public repository called weekly-shipments-public with the same
-  files as this one. The data is made up, so that is fine. Keep this repository private. In the new repository, make the
+- For a public copy, only with made-up data: "Make a new public repository called weekly-shipments-public with the same
+  files as this one, in one new commit, with no old history. The data is made up, so that is fine. Keep this repository private. In the new repository, make the
   two checks required, with no exception for admins, so nothing can merge to main while a check is red." Then, there:
   "In weekly-shipments-public, on a new branch, change changes.py to rank by percent, not by pallets. Do not change the test. Open a pull request, wait for the checks, and then try to merge it. Tell me exactly what GitHub says."
-- For the key scan, only with a made-up key: "On a new branch from main, add a file config.py with one made-up example API key in the format of a Stripe test key. Make it up, it must not be a real key. Open a pull request, wait for the checks and tell me the result. Do not merge."
+  Then type `/exit` and start a new session in your own folder. Claude stays in the public copy otherwise.
+- For the key scan, only with a made-up key, in a new session in your own folder: "On a new branch from main, add a file config.py with one made-up example API key in the format of a Stripe test key. Make it up, it must not be a real key. Open a pull request, wait for the checks and tell me the result. Do not merge."
+  Afterwards: "Close that pull request without merging. Delete the branch on GitHub and on this computer. Go back to main."
 
-Change the script name to your own.
+We did not test the "new commit" and "Afterwards" wording. Change the script name to your own.
 
-## Does a red check block, or only warn?
+## Does a red check block, or only show red?
 
 | Repository | Required checks | A red check |
 |---|---|---|
-| Private, GitHub Free | Refused: "Upgrade to GitHub Pro or make this repository public to enable this feature." | Warns. The merge goes through |
+| Private, GitHub Free | Refused: "Upgrade to GitHub Pro or make this repository public to enable this feature." | Blocks nothing. The merge goes through |
 | Public, GitHub Free | Works | Blocks. The API: `Required status check "pytest" is failing.` `gh pr merge`: "the base branch policy prohibits the merge" |
 
 Do not guess. Open a bad pull request, do not merge it, and read `mergeStateStatus` below.
