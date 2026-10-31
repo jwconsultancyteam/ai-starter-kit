@@ -158,4 +158,4 @@ can still override it.
 
 ## Next
 
-Step 20: one agent, any model.
+Step 20: other models with Pi.
