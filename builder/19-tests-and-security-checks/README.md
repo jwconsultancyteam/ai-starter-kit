@@ -111,7 +111,9 @@ for the checks and tell me the result. Do not merge."
    another repository, a GitHub setting, a branch delete, a forced push. If you do not understand a prompt, choose
    **No** and paste: "What does this command do, and is it needed?" Expect long commands. In our run, Claude also changed
    `changes.py` and the CSV for a moment, to prove that the test fails, and put them back. If you are not sure, choose **No**
-   and ask, then run `git status` before you go on. If pytest or gitleaks is not on your computer, Claude may want to install
+   and ask, then run `git status` before you go on. You want to see only the new files Claude made. If `changes.py` or the CSV
+   shows as modified, paste: "Put changes.py and the CSV back as they are on main." Then check the three lines with
+   `python3 changes.py`. We did not test that wording. If pytest or gitleaks is not on your computer, Claude may want to install
    it. Read that prompt too. The check on GitHub installs gitleaks itself, so you can say **No** to a local gitleaks install.
    We did not test this. Wait for two green checks.
 3. Merge it. Then make a bad change as in ask 3, and see the check go red. Do not merge it. In a second terminal, go to
@@ -123,7 +125,7 @@ for the checks and tell me the result. Do not merge."
    repository: ours reached it through a follow-up ask.
 5. Choose your rule for `main`:
    - **Stay private on GitHub Free.** The check shows red and blocks nothing. Your rule is: never merge on red. Nothing enforces that rule
-     but you.
+     but you. Merged on red by accident? Paste, with your own number: "Undo the merge of pull request 3 with git revert, on a branch, in a pull request. Wait for the checks and tell me the result. Do not merge."
    - **Pay for a plan that has it.** GitHub lists protected branches for private repositories under GitHub Pro. After the
      upgrade, paste: "Make the two checks required, with no exception for admins, so nothing can merge to main while a
      check is red." On your own repository, you are the admin. We did not test this.

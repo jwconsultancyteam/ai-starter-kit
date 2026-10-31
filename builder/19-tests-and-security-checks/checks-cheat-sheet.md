@@ -15,6 +15,7 @@
   Then type `/exit` and start a new session in your own folder. Claude stays in the public copy otherwise.
 - For the key scan, only with a made-up key, in a new session in your own folder: "On a new branch from main, add a file config.py with one made-up example API key in the format of a Stripe test key. Make it up, it must not be a real key. Open a pull request, wait for the checks and tell me the result. Do not merge."
   Afterwards: "Close that pull request without merging. Delete the branch on GitHub and on this computer. Go back to main."
+- Merged on red by accident? With your own number: "Undo the merge of pull request 3 with git revert, on a branch, in a pull request. Wait for the checks and tell me the result. Do not merge."
 
 We did not test the "new commit", "noreply" and "Afterwards" wording. We did not run the key scan ask in a new session in
 the private repository: ours reached it through a follow-up ask. Change the script name to your own.
