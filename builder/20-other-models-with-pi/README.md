@@ -125,7 +125,7 @@ file. A script of ours typed yes each time. Then we ran the commands in step C o
 three lines below and `1 passed`. Your plan and model may differ. The letters A to D are only for this page.
 
 **A. Make a folder.** Open `sharper-ask.txt`, `shipments-export-sample.csv` and `test_changes.py` from the Download row.
-Each link opens a GitHub page: click **Download raw file** on it. Then move two of them in. Leave the test in Downloads for now, so Claude does not write to pass it.
+Each link opens a GitHub page: click the **Download raw file** button on it (arrow icon, top right of the file). Then move two of them in. Leave the test in Downloads for now, so Claude does not write to pass it.
 
 ```bash
 mkdir ~/ask-test
