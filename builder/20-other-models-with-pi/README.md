@@ -60,7 +60,7 @@ printed:
 Both Opus 5.5 runs said which reading they chose, and gave our three numbers as the other reading. On step 11, Opus 5.5
 stopped, asked us and recommended pairs. These runs used print mode (`claude -p`, `pi -p`), with nobody to answer. Step 11
 also ran on the web at Extra effort. Our plan runs used Plan mode too, in print mode, and the two on the first ask chose
-pairs. We did not test which difference was the cause.
+pairs. We did not test if a difference was the cause, or if it was chance.
 
 DeepSeek read the same ask both ways: pairs on one run, each client and each route on its own on two. With an Opus plan
 in front of it, DeepSeek counted pairs: the plan said pairs.
@@ -213,7 +213,7 @@ flags under How we measured.
 
 ## Good to know
 
-- **Windows.** We tested on a Mac only, so we give no Windows steps.
+- **Windows.** We tested on a Mac only, so we give no Windows steps. On Windows you can stop here: the results above are the point.
 - **Pi has no built-in plan mode.** Pi's README: "Pi ships with powerful defaults but skips features like sub-agents and
   plan mode." In our test, plan and build were two runs.
 - **Use an API key in Pi.** Our Pi runs used an OpenRouter key. We did not test a Claude subscription login. Check
@@ -224,15 +224,15 @@ flags under How we measured.
 - **A test checks only what it checks.** Ours pins three lines from one sample file. It went red on 3 runs with the right
   numbers, and it cannot tell you which reading you meant. So you need a count you already trust first, as in step 11.
 - **Step 12 has a line for this.** Its [example brief](../12-what-an-agent-is/agent-brief-example-step11.txt) has a "Stop and ask me when" line. No run here used it.
-- **New at Claude this week.** The plans now read: Max, USD 100 a month, 5x Pro usage. Ultra, USD 200 a month, 10x Pro
+- **New at Claude, as of 31 Oct 2026.** The plans now read: Max, USD 100 a month, 5x Pro usage. Ultra, USD 200 a month, 10x Pro
   usage. Ultra has no 5-hour limit on verified accounts. It still has a weekly limit. Fast mode for Opus 4.8 is deprecated, and is removed on 30 Nov. Sources:
   [claude.com/pricing](https://claude.com/pricing), [What is the Ultra plan?](https://support.claude.com/en/articles/17728952)
   and the [Claude Code changelog](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md)
 
 ## Time win and solution win
 
-- **Time win:** about a minute a run in print mode, on this small task: 64 and 65 seconds on the first ask, 48 and 67 on
-  the sharper ask. A session where you read each question takes longer.
+- **Time win:** we measured none. In print mode the sharper ask took about as long as the first: 48 and 67 seconds against
+  64 and 65.
 - **Solution win:** the test checks the same three lines whatever the model, so you do not take its word for it. It
   checks only those lines.
 
