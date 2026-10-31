@@ -125,9 +125,10 @@ for the checks and tell me the result. Do not merge."
    - **Use a public copy,** only if the data is made up. It shows you the block. It does not protect your working
      repository. The email in your git settings shows in the commits you push, so this ask names the noreply address
      GitHub offers. Paste: "Make a new public repository called weekly-shipments-public with the same
-     files as this one, in one new commit, with no old history. Use my GitHub noreply address for the commit, and show it to me before you push. The data is made up, so that is fine. Keep this repository private. In the new repository, make the two checks
-     required, with no exception for admins, so nothing can merge to main while a check is red." Our ask did not say "one new commit" or "noreply": Claude chose those, so we added them here and did
-     not test this wording. Then paste: "In weekly-shipments-public, on a new branch, change changes.py to rank by percent, not by pallets. Do not change the test. Open a pull request, wait for the checks, and then try to merge it. Tell me exactly what GitHub says." Expect a refusal. Claude
+     files as this one, in one new commit, with no old history. Use my GitHub noreply address for every commit in that repository, and show it to me before you push. The data is made up, so that is fine. Keep this repository private. In the new repository, make the two checks
+     required, with no exception for admins, so nothing can merge to main while a check is red." Our ask did not say "one new commit" or "noreply". Claude chose one new commit. It copied the email
+     from our git settings, which already held the noreply address. Yours may be your real email, so we added both here
+     and did not test this wording. Then paste: "In weekly-shipments-public, on a new branch, with the same noreply address, change changes.py to rank by percent, not by pallets. Do not change the test. Open a pull request, wait for the checks, and then try to merge it. Tell me exactly what GitHub says." Expect a refusal. Claude
      stays in the public copy after this, so type `/exit` and start a new session in your own folder. We left our copy up.
 
 **Looks different from ours?** Wait until the checks have ended, then read the state again. For another word or other
