@@ -31,8 +31,8 @@ in our own test.
 |---|---|---|
 | Checks run on every pull request | Yes | Yes |
 | Make the checks required | Refused, HTTP 403 | Works |
-| Merge with a red check | Went through | Refused, HTTP 405 |
-| Merge with a red check and admin rights | Not needed: it merges without them | Refused, on a test pull request |
+| Merge with a red check | Went through | With the checks required: refused, HTTP 405 |
+| Merge with a red check and admin rights | Not needed: it merges without them | With no exception for admins: refused, on a test pull request |
 | Push a made-up key, one format | Went through, then gitleaks went red | Push protection was on: GitHub stopped the push |
 
 ## Our test

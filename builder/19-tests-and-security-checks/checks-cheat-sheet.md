@@ -24,7 +24,8 @@ the private repository: ours reached it through a follow-up ask. Change the scri
 | Repository | Required checks | A red check |
 |---|---|---|
 | Private, GitHub Free | Refused: "Upgrade to GitHub Pro or make this repository public to enable this feature." | Blocks nothing. The merge goes through |
-| Public, GitHub Free | Works | Blocks. The API: `Required status check "pytest" is failing.` `gh pr merge`: "the base branch policy prohibits the merge" |
+| Public, GitHub Free | Works | Blocks, only with both checks required and no exception for admins. The API: `Required status check "pytest" is failing.` `gh pr merge`: "the base branch policy prohibits the merge" |
+| Private, paid plan | We did not test this. GitHub lists protected branches under Pro | We did not test this |
 
 Do not guess. Open a bad pull request, do not merge it, and read `mergeStateStatus` below.
 
