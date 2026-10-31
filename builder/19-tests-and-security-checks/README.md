@@ -92,7 +92,7 @@ for the checks and tell me the result. Do not merge."
 
 - **The prompt suggested changing the test.** After the red check, the next suggestion in the prompt was: "update the
   test
-  to the new output". A red test goes green if you change the test. So when a pull request touches a test, read that
+  to the new output". Nobody sent it, and Claude left the test alone, as we asked. A red test goes green if you change the test. So when a pull request touches a test, read that
   change first.
 - **It changed more than we asked.** "I updated the rule and sample output to match, even though you only named
   changes.py." The README was in the pull request too. Read the whole change.
