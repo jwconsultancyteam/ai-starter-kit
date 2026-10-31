@@ -59,8 +59,7 @@ No coding. The Starter steps (1 to 10) need no GitHub account.
 ## What every step contains
 
 Every step folder has a `README.md` and the carousel of that step as a PDF. The README says what the step does, where
-to find it, the exact clicks, how to test it, and what can go wrong. Step 20 gives no clicks for OpenRouter: our account already
-existed, and we did not walk them.
+to find it, the exact clicks, how to test it, and what can go wrong.
 
 | Level | Also in the folder |
 |---|---|

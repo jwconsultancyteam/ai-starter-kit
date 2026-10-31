@@ -141,9 +141,10 @@ claude
 Claude Code first asks if you trust this folder. "No, exit" is picked at first, so press the Down arrow, then Enter. Press
 Cmd+V to paste the ask, then Enter.
 
-Then it asks before some commands, which can be long, and before each new file. Read each one. We chose "1. Yes" each
-time, not the options that switch mode. We did not test "No". If you are not sure about a command, press Esc and use To
-start over below. Type `/exit` when it is done.
+Then it asks before some commands and before each new file. In our run, two commands were long Python with a warning
+line above the question. We chose "1. Yes" each time, not the options that switch mode. If you are not sure about a
+command, use the route from [step 19](../19-tests-and-security-checks/): choose **No** and paste "What does this command
+do, and is it needed?" We did not test "No" in this run. Type `/exit` when it is done.
 
 **C. Check it yourself.** Do not take the agent's word for it.
 
