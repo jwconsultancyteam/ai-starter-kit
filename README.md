@@ -51,7 +51,7 @@ No coding. The Starter steps (1 to 10) need no GitHub account.
 | Builder | [17. GitHub, your real undo button](builder/17-github-undo-button/) | Commit every change, and take one wrong change back with git revert, while the changes after it stay | Live (29 Oct 2026) |
 | Builder | [18. From artifact link to a real website](builder/18-artifact-to-website/) | Put one page online, as a private artifact link and as a public website, while your repository stays private | Live (30 Oct 2026) |
 | Builder | [19. Tests and security checks on every pull request](builder/19-tests-and-security-checks/) | One test and one key scan on every pull request, and find out if a red check blocks or only warns | Live (31 Oct 2026) |
-| Builder | [20. Other models with Pi](builder/20-other-models-with-pi/) | Run the step 11 task on cheaper models with Pi, and let the step 19 test judge the work | Live (1 Nov 2026) |
+| Builder | [20. Other models with Pi](builder/20-other-models-with-pi/) | Run the step 11 task on cheaper models with Pi, and let the step 19 test check the work | Live (1 Nov 2026) |
 | Expert | 21 to 30 | Guardrails, workflows, AI review, second opinions, tracing every AI call, agents that run overnight, connecting your own tools, agents that talk to each other and agents with their own wallet | Coming |
 
 ---
@@ -59,7 +59,8 @@ No coding. The Starter steps (1 to 10) need no GitHub account.
 ## What every step contains
 
 Every step folder has a `README.md` and the carousel of that step as a PDF. The README says what the step does, where
-to find it, the exact clicks, how to test it, and what can go wrong.
+to find it, the exact clicks, how to test it, and what can go wrong. Step 20 gives no clicks for OpenRouter: our account already
+existed, and we did not walk them.
 
 | Level | Also in the folder |
 |---|---|
@@ -83,7 +84,7 @@ So you see exactly what that one setting does.
 ## Works with
 
 The Starter steps are made and tested on Claude on the web (claude.ai, in Chrome or another Chromium browser). The
-Builder steps from step 12 are tested in Claude Code in the terminal on a Mac. Each step says what we tested and on which
+Builder steps from step 12 are tested in Claude Code in the terminal on a Mac, and step 20 also in Pi. Each step says what we tested and on which
 date. Some features need a paid plan; each step says which menu to open, as it looked on the day we tested it. Menus
 change; if a click path is out of date, open an issue and we fix it. What changed and when: [CHANGELOG.md](CHANGELOG.md).
 
