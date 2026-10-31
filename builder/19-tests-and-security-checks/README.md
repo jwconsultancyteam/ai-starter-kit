@@ -115,7 +115,7 @@ for the checks and tell me the result. Do not merge."
    shows as modified, paste: "Put changes.py and the CSV back as they are on main." Then check the three lines with
    `python3 changes.py`. We did not test that wording. If pytest or gitleaks is not on your computer, Claude may want to install
    it. Read that prompt too. The check on GitHub installs gitleaks itself, so you can say **No** to a local gitleaks install.
-   We did not test this. Wait for two green checks.
+   We did not test this. Wait for two green checks. Then read the change: on GitHub, open the pull request and click **Files changed**.
 3. Merge it. Then make a bad change as in ask 3, and see the check go red. Do not merge it. In a second terminal, go to
    `weekly-shipments` and run `gh pr view 3 --json mergeStateStatus`, with your own pull request number. In our test, `UNSTABLE` did not block and,
    with no exception for admins, `BLOCKED` blocked. `BLOCKED` alone does not tell you if an admin can still merge. Ask Claude to close the pull request and go back to `main`.
@@ -125,7 +125,7 @@ for the checks and tell me the result. Do not merge."
    repository: ours reached it through a follow-up ask.
 5. Choose your rule for `main`:
    - **Stay private on GitHub Free.** The check shows red and blocks nothing. Your rule is: never merge on red. Nothing enforces that rule
-     but you. Merged on red by accident? Paste, with your own number: "Undo the merge of pull request 3 with git revert, on a branch, in a pull request. Wait for the checks and tell me the result. Do not merge." Read that pull request. When both checks are green, merge it. Main keeps the wrong change until you do.
+     but you. Merged on red by accident? Paste, with your own number: "Undo the merge of pull request 3 with git revert, on a branch, in a pull request. Wait for the checks and tell me the result. Do not merge." Read that pull request. When both checks are green, merge it. Main keeps the wrong change until you do. If the red check was the key scan, a revert does not remove the key: change the key at the service first, and ask Claude for the options.
    - **Pay for a plan that has it.** GitHub lists protected branches for private repositories under GitHub Pro. After the
      upgrade, paste: "Make the two checks required, with no exception for admins, so nothing can merge to main while a
      check is red." On your own repository, you are the admin. We did not test this.

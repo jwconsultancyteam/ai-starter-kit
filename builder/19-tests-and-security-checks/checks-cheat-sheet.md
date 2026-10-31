@@ -15,7 +15,7 @@
   Then type `/exit` and start a new session in your own folder. Claude stays in the public copy otherwise.
 - For the key scan, only with a made-up key, in a new session in your own folder: "On a new branch from main, add a file config.py with one made-up example API key in the format of a Stripe test key. Make it up, it must not be a real key. Open a pull request, wait for the checks and tell me the result. Do not merge."
   Afterwards: "Close that pull request without merging. Delete the branch on GitHub and on this computer. Go back to main."
-- Merged on red by accident? With your own number: "Undo the merge of pull request 3 with git revert, on a branch, in a pull request. Wait for the checks and tell me the result. Do not merge." Read that pull request. When both checks are green, merge it. Main keeps the wrong change until you do.
+- Merged on red by accident? With your own number: "Undo the merge of pull request 3 with git revert, on a branch, in a pull request. Wait for the checks and tell me the result. Do not merge." Read that pull request. When both checks are green, merge it. Main keeps the wrong change until you do. If the red check was the key scan, a revert does not remove the key: change the key at the service first, and ask Claude for the options.
 
 We did not test the "new commit", "noreply" and "Afterwards" wording. We did not run the key scan ask in a new session in
 the private repository: ours reached it through a follow-up ask. Change the script name to your own.
@@ -57,7 +57,7 @@ exception for admins. `BLOCKED` alone does not tell you if an admin can still me
 
 - [ ] Both checks are green.
 - [ ] Nobody changed a test just to make it green.
-- [ ] You read the whole change, not only the file you asked about.
+- [ ] You read the whole change under **Files changed** on the pull request, not only the file you asked about.
 - [ ] No key, password or token in the change. Only made-up or public data in a public repository.
 
 From step 19 of the AI Starter Kit. We tested this in Claude Code 2.1.314, 30 Oct 2026, on a personal GitHub Free
