@@ -100,9 +100,10 @@ for the checks and tell me the result. Do not merge."
 ## Do it yourself
 
 1. In the terminal, go to `weekly-shipments`. Run `git switch main`, then `git pull`. Start `claude`. Press `Shift+Tab` until it says `accept edits on`.
-2. Paste ask 1. Read each command before you choose **1. Yes**. Wait for two green checks.
-3. Merge it. Then make a bad change as in ask 3, and see the check go red. Do not merge it. In a second terminal, run
-   `gh pr view 3 --json mergeStateStatus`, with your own pull request number. In our test, `UNSTABLE` only warned and
+2. Paste ask 1. Read each command before you choose **1. Yes**. If pytest is not on your computer, Claude will want to
+   install it. Read that prompt too. Ours already had it, so we did not see this. Wait for two green checks.
+3. Merge it. Then make a bad change as in ask 3, and see the check go red. Do not merge it. In a second terminal, go to
+   `weekly-shipments` and run `gh pr view 3 --json mergeStateStatus`, with your own pull request number. In our test, `UNSTABLE` only warned and
    `BLOCKED` blocked. Ask Claude to close the pull request and go back to `main`.
 4. Choose your rule for `main`:
    - **Stay private on GitHub Free.** The check warns. Your rule is: never merge on red. Nothing enforces that rule
@@ -112,7 +113,8 @@ for the checks and tell me the result. Do not merge."
    - **Use a public copy,** only if the data is made up. It shows you the block. It does not protect your working
      repository. Paste: "Make a new public repository called weekly-shipments-public with the same files as this one.
      The data is made up, so that is fine. Keep this repository private. In the new repository, make the two checks
-     required, with no exception for admins, so nothing can merge to main while a check is red." Then paste ask 3 there.
+     required, with no exception for admins, so nothing can merge to main while a check is red." Then paste: "In weekly-shipments-public, on a new branch, change changes.py to rank by percent, not by pallets. Do not change the test. Open a pull request, wait for the checks, and then try to merge it. Tell me exactly what GitHub says." Expect a refusal. Claude
+     stays in the public copy after this, so type `/exit` and start a new session in your own folder. We left our copy up.
 
 **Looks different from ours?** Wait until the checks have ended, then read the state again. For another word or other
 check names, paste what you see into Claude and ask what it means.
@@ -127,11 +129,13 @@ check names, paste what you see into Claude and ask what it means.
 - **A red key scan means the key already reached GitHub.** Closing the pull request does not remove it. With a real
   key: change the key at the service it belongs to. In our run the log did not name the key or the file, so ask Claude to
   find it. The workflow scans the whole history. Claude warned that if the key merges, "every later PR will fail
-  gitleaks, even after config.py is deleted". We did not test that.
+  gitleaks, even after config.py is deleted, unless the key is removed from history or allowlisted". We did not test that.
+- **A `.gitignore` only keeps out the files it names.** The step 17 template names `.env` files. Our made-up key was in
+  `config.py`.
 - **Claude's reviews advise.** Anthropic says automated security reviews "should complement, not
   replace, your existing security practices and manual code reviews." `/security-review` is a review you ask for. On its
   Code Review service, Anthropic says a review "never approves or blocks the pull request". In our test, the merge block came
-  from a required check, and the push block from GitHub.
+  from a required check, and the push block from push protection.
 - **The check runs on pull requests.** A direct push to `main` does not start it. We did not test a direct push.
 - **No exception for admins is about the merge.** Claude set the rule with our login, so that login can also change
   the rule. We did not test that.
@@ -144,7 +148,8 @@ check names, paste what you see into Claude and ask what it means.
 ## Time win and solution win
 
 - **Time win:** in our test, every later pull request was checked in under a minute, with no person watching.
-- **Solution win:** a change that fails the test or the scan shows up red before it is merged to main, not after. And you know
+- **Solution win:** a pull request that fails the test or the scan shows up red, if you wait for the checks before you
+  merge. And you know
   which of
   your repositories really block, and which only warn.
 

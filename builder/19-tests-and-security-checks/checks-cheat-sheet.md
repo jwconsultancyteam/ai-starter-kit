@@ -10,8 +10,9 @@
 
 - For a public copy, only with made-up data: "Make a new public repository called weekly-shipments-public with the same
   files as this one. The data is made up, so that is fine. Keep this repository private. In the new repository, make the
-  two checks required, with no exception for admins, so nothing can merge to main while a check is red." Then the third
-  ask, there.
+  two checks required, with no exception for admins, so nothing can merge to main while a check is red." Then, there:
+  "In weekly-shipments-public, on a new branch, change changes.py to rank by percent, not by pallets. Do not change the test. Open a pull request, wait for the checks, and then try to merge it. Tell me exactly what GitHub says."
+- For the key scan, only with a made-up key: "On a new branch from main, add a file config.py with one made-up example API key in the format of a Stripe test key. Make it up, it must not be a real key. Open a pull request, wait for the checks and tell me the result. Do not merge."
 
 Change the script name to your own.
 
@@ -28,11 +29,11 @@ Do not guess. Open a bad pull request, do not merge it, and read `mergeStateStat
 
 | Repository | What happened to our made-up key |
 |---|---|
-| Public | GitHub stopped the push: "Push cannot contain secrets" |
+| Public, push protection on | GitHub stopped the push: "Push cannot contain secrets" |
 | Private, GitHub Free | The push went through, and gitleaks went red |
 
 A red scan means the key already reached GitHub. Closing the pull request does not remove it. With a real key: change
-the key at the service it belongs to.
+the key at the service it belongs to. A `.gitignore` only keeps out the files it names.
 
 ## See it yourself
 
