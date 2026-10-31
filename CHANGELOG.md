@@ -11,6 +11,8 @@ What changed in the kit, newest first. Dates are Brussels time.
   merged. In a public copy with made-up data, the same merge was refused. A merge with admin rights was refused on a
   test pull request. A made-up key: GitHub stopped the push in the public copy, and gitleaks went red in the private
   repository. We did not test GitHub Pro.
+- Builder, step 17: the `.gitignore` template heading now names `.env` files, and the cheat sheet says to check your
+  change for a key in any other file. Step 18: the Next line now says every pull request.
 
 ## 30 Oct 2026
 

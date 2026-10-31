@@ -194,7 +194,7 @@ check names, paste what you see into Claude and ask what it means.
 ## In our own work
 
 Our own main repository runs five security scanners on pull requests: gitleaks, semgrep, bandit, pip-audit and zizmor.
-New findings fail, for pip-audit only when a dependency file changed. Findings already in the baseline do not. That repository is private, on a paid GitHub Team plan, so a required check works there: it stops a normal merge. An admin
+New findings fail, for pip-audit only when a dependency file changed. Findings already in the baseline do not. That repository is private, on a paid GitHub Team plan, so a required check works there: a pull request with a red one reads `BLOCKED`. An admin
 can still override it.
 
 ## Next
