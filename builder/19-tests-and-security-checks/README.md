@@ -107,8 +107,8 @@ for the checks and tell me the result. Do not merge."
 ## Do it yourself
 
 1. In the terminal, go to `weekly-shipments`. Run `git switch main`, then `git pull`. Start `claude`. Press `Shift+Tab` until it says `accept edits on`.
-2. Paste ask 1. Read each command before you choose **1. Yes**. Choose **No** at anything that writes to a repository you
-   did not name, changes a GitHub setting, deletes a branch or forces a push. If you do not understand a prompt, choose
+2. Paste ask 1. Read each command before you choose **1. Yes**. Choose **No** at anything you did not ask for: a write to
+   another repository, a GitHub setting, a branch delete, a forced push. If you do not understand a prompt, choose
    **No** and paste: "What does this command do, and is it needed?" If pytest is not on your computer, Claude will want to
    install it. Read that prompt too. Ours already had it, so we did not see this. Wait for two green checks.
 3. Merge it. Then make a bad change as in ask 3, and see the check go red. Do not merge it. In a second terminal, go to
@@ -140,9 +140,10 @@ check names, paste what you see into Claude and ask what it means.
 - **GitHub's own secret scanning does not help a private repository on Free.** On public repositories it "runs
   automatically for free". This workflow runs gitleaks, and that worked in our
   private repository.
-- **A red key scan means the key already reached GitHub.** Closing the pull request does not remove it. With a real
-  key: change the key at the service it belongs to, then delete the branch that holds it. Ask Claude which
-  branch: it may not be the one on this pull request. In our run the log did not name the key or the file, so ask Claude to
+- **A red key scan means the key already reached GitHub.** Closing the pull request or deleting the branch does not
+  remove it: GitHub still showed our commit afterwards. With a real key: change the key at the service it belongs to,
+  first. Then delete the branch that holds it, so later scans stop going red. Ask Claude which branch: it may not be the
+  one on this pull request. In our run the log did not name the key or the file, so ask Claude to
   find it. The workflow scans the whole history. Claude warned that if the key merges, "every later PR will fail
   gitleaks, even after config.py is deleted, unless the key is removed from history or allowlisted". We did not test that.
 - **This test pins today's output.** Any change goes red, wanted or not. If you wanted the new output, updating the test
