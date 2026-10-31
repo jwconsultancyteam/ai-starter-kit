@@ -1,7 +1,7 @@
 # Builder, step 11: Claude Code on the web
 
 Claude Code is Claude working in the files of your project, not in a chat window. On the web it runs in a sandbox that
-Anthropic hosts, so there is nothing to install. It works on its own branch, and you read the change before it goes in.
+Anthropic hosts, so there is nothing to install. It works on its own branch. Reading the change before it goes in is up to you.
 
 This step picks up where [step 10](../../starter/10-scheduled-tasks/) stopped. There, the Monday report chose its own
 "three biggest changes" and left out route NL-BE. Here, Claude Code writes a small script with that rule written down,
@@ -119,7 +119,7 @@ We also downloaded `changes.py` from the branch and ran it ourselves: the same t
 
 ## What we call this in our own work
 
-A change on its own branch, read before it goes in. In pharma IT this is change control. Here it is one button.
+A change on its own branch. In pharma IT, change control requires a review. Here, reading it before you merge is up to you.
 
 ## Next
 

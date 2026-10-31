@@ -83,6 +83,8 @@ Your page looks different from ours? Claude designs each page again. Check the n
   repository for the site is private." Only put made-up or public data on it.
 - **Never make `weekly-shipments` public to share one page.** On GitHub Free, a Pages site needs a public repository.
   Make a new one that holds only the page, as in ask 2.
+- **Your git email shows in a public repository.** The email in your git settings shows in every commit you push. Before
+  you push, paste: "Use my GitHub noreply address for every commit in this repository." We did not test that wording.
 - **Private is not a safe.** Never push keys, passwords or tokens, not even to a private repository. Keep them in a
   `.env` file: the [`.gitignore` template from step 17](../17-github-undo-button/gitignore.template) keeps `.env` out
   of git.

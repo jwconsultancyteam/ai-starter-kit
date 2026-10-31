@@ -3,7 +3,7 @@
 **From your first chat to AI agents that work on their own: they talk to each other, have their own wallet, and pay or get paid for you.** Free templates, prompts and setups, one small step at a
 time, with the exact clicks. Claude first. Everything here is what we use ourselves to build and run real software.
 
-New step every day, weekends included: at 12:00 (Brussels time) up to step 14, at 08:00 from step 15. Starter first, then Builder, then Expert.
+New step every day, weekends included. Starter first, then Builder, then Expert.
 
 ---
 
