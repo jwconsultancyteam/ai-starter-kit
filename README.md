@@ -50,7 +50,7 @@ No coding. The Starter steps (1 to 10) need no GitHub account.
 | Builder | [16. A second brain](builder/16-second-brain/) | Let Claude Code remember what you tell it with auto memory, and let it write a wiki from your notes | Live (28 Oct 2026) |
 | Builder | [17. GitHub, your real undo button](builder/17-github-undo-button/) | Commit every change, and take one wrong change back with git revert, while the changes after it stay | Live (29 Oct 2026) |
 | Builder | [18. From artifact link to a real website](builder/18-artifact-to-website/) | Put one page online, as a private artifact link and as a public website, while your repository stays private | Live (30 Oct 2026) |
-| Builder | [19. Tests and security checks on every change](builder/19-tests-and-security-checks/) | One test and one key scan on every pull request, and find out if a red check blocks or only warns | Live (31 Oct 2026) |
+| Builder | [19. Tests and security checks on every pull request](builder/19-tests-and-security-checks/) | One test and one key scan on every pull request, and find out if a red check blocks or only warns | Live (31 Oct 2026) |
 | Builder | 20 | Other models with Pi | Coming |
 | Expert | 21 to 30 | Guardrails, workflows, AI review, second opinions, tracing every AI call, agents that run overnight, connecting your own tools, agents that talk to each other and agents with their own wallet | Coming |
 

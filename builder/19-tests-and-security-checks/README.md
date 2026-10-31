@@ -1,4 +1,4 @@
-# Builder, step 19: Tests and security checks on every change
+# Builder, step 19: Tests and security checks on every pull request
 
 In [step 17](../17-github-undo-button/), `git revert` took a wrong change back, after it was already committed. A
 test shows it earlier. A check runs on every pull request, and a red check tells you that something is wrong before
@@ -11,7 +11,7 @@ in our own test.
 |---|---|
 | Time | about 20 minutes |
 | You need | Claude Code ([step 13](../13-claude-code-on-your-laptop/)), the `weekly-shipments` repository and the GitHub CLI ([step 17](../17-github-undo-button/)) |
-| Tested | an interactive Claude Code session on a Mac, in a new clone of our private `weekly-shipments`, accept edits mode, no personal Claude Code settings loaded. A script answered the yes prompts, so in our run nobody read each one. Claude Code 2.1.314, a personal GitHub Free account, 30 Oct 2026 |
+| Tested | an interactive Claude Code session on a Mac, in a new clone of our private `weekly-shipments`, accept edits mode, no personal Claude Code settings loaded, and pytest was already on our computer. A script answered the yes prompts, so in our run nobody read each one. Claude Code 2.1.314, a personal GitHub Free account, 30 Oct 2026 |
 | Download | [test_changes.py](test_changes.py), [checks.yml](checks.yml) (goes in `.github/workflows/`), [checks-cheat-sheet.md](checks-cheat-sheet.md) and [the carousel as a PDF](builder-step19-tests-and-security-checks-carousel.pdf) (8 slides) |
 
 ## Three words first
@@ -74,7 +74,8 @@ example API key in the format of a Stripe test key. Make it up, it must not be a
 for the checks and tell me the result. Do not merge."
 
 - The session was still working in the public copy, so it tried there first. GitHub stopped the push: "Push cannot
-  contain secrets". The key never reached the public repository. GitHub offered a link to allow the key. We did
+  contain secrets". The key never reached the public repository. Push protection was on for
+  that repository, and we tried one key format. GitHub offered a link to allow the key. We did
   not use it.
 - We sent it to the private repository instead. The push went through, and gitleaks went red, pytest stayed green.
 - The red check only warned there too: GitHub's merge status was `UNSTABLE`, not `BLOCKED`. We closed the pull request
@@ -100,8 +101,9 @@ for the checks and tell me the result. Do not merge."
 
 1. In the terminal, go to `weekly-shipments`. Run `git switch main`, then `git pull`. Start `claude`. Press `Shift+Tab` until it says `accept edits on`.
 2. Paste ask 1. Read each command before you choose **1. Yes**. Wait for two green checks.
-3. Merge it. Then make a bad change as in ask 3, and see the check go red. Do not merge it. Run
-   `gh pr view <number> --json mergeStateStatus`. In our test, `UNSTABLE` only warned and `BLOCKED` blocked. Close it.
+3. Merge it. Then make a bad change as in ask 3, and see the check go red. Do not merge it. In a second terminal, run
+   `gh pr view 3 --json mergeStateStatus`, with your own pull request number. In our test, `UNSTABLE` only warned and
+   `BLOCKED` blocked. Ask Claude to close the pull request and go back to `main`.
 4. Choose your rule for `main`:
    - **Stay private on GitHub Free.** The check warns. Your rule is: never merge on red. Nothing enforces that rule
      but you.
@@ -110,7 +112,10 @@ for the checks and tell me the result. Do not merge."
    - **Use a public copy,** only if the data is made up. It shows you the block. It does not protect your working
      repository. Paste: "Make a new public repository called weekly-shipments-public with the same files as this one.
      The data is made up, so that is fine. Keep this repository private. In the new repository, make the two checks
-     required, with no exception for admins, so nothing can merge to main while a check is red."
+     required, with no exception for admins, so nothing can merge to main while a check is red." Then paste ask 3 there.
+
+**Looks different from ours?** Wait until the checks have ended, then read the state again. For another word or other
+check names, paste what you see into Claude and ask what it means.
 
 ## Good to know
 
@@ -120,12 +125,16 @@ for the checks and tell me the result. Do not merge."
   automatically for free". This workflow runs gitleaks, and that worked in our
   private repository.
 - **A red key scan means the key already reached GitHub.** Closing the pull request does not remove it. With a real
-  key: change the key at the service it belongs to.
+  key: change the key at the service it belongs to. In our run the log did not name the key or the file, so ask Claude to
+  find it. The workflow scans the whole history. Claude warned that if the key merges, "every later PR will fail
+  gitleaks, even after config.py is deleted". We did not test that.
 - **Claude's reviews advise.** Anthropic says automated security reviews "should complement, not
   replace, your existing security practices and manual code reviews." `/security-review` is a review you ask for. On its
   Code Review service, Anthropic says a review "never approves or blocks the pull request". In our test, the merge block came
   from a required check, and the push block from GitHub.
 - **The check runs on pull requests.** A direct push to `main` does not start it. We did not test a direct push.
+- **No exception for admins is about the merge.** Claude set the rule with our login, so that login can also change
+  the rule. We did not test that.
 - **Public means public.** A pull request stays visible, even after you close it. Never put real data in a public
   copy, and never a real key.
 - **In an organization, the official gitleaks action needs a license key.** Its page says `GITLEAKS_LICENSE` is
@@ -148,6 +157,8 @@ for the checks and tell me the result. Do not merge."
 | A red test goes green because the test changed | Read every change to a test before you merge |
 | Green means correct | A test only checks what it checks. Ours checks three lines, not the header |
 | The downloaded test fails on your own script | It skips a header line, then expects the three lines of the step 17 `changes.py`. Use ask 1, so Claude writes the test for your script |
+| `gitleaks` is red on your first pull request, and you added no key | It scans the whole history, so an old key counts. Ask Claude what it found. With a real key: change the key |
+| `No module named pytest` | It was already on our computer. Ask Claude to install it for this folder. We did not test this |
 | `pytest` crashes on your own computer | Ours did, from a plugin in our own Python. Claude used `PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python3 -m pytest`. The check on GitHub was fine |
 
 ## In our own work

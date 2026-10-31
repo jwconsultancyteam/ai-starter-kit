@@ -8,6 +8,11 @@
 - "On a new branch from main, change changes.py to rank by percent, not by pallets. Do not change the test. Open a
   pull request, wait for the checks and tell me the result. Do not merge."
 
+- For a public copy, only with made-up data: "Make a new public repository called weekly-shipments-public with the same
+  files as this one. The data is made up, so that is fine. Keep this repository private. In the new repository, make the
+  two checks required, with no exception for admins, so nothing can merge to main while a check is red." Then the third
+  ask, there.
+
 Change the script name to your own.
 
 ## Does a red check block, or only warn?
