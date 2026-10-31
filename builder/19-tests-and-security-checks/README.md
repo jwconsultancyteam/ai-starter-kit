@@ -11,7 +11,7 @@ in our own test.
 |---|---|
 | Time | about 20 minutes (our estimate) |
 | You need | Claude Code ([step 13](../13-claude-code-on-your-laptop/)), the `weekly-shipments` repository and the GitHub CLI ([step 17](../17-github-undo-button/)) |
-| Tested | an interactive Claude Code session on a Mac, in a new clone of our private `weekly-shipments`, accept edits mode, no personal Claude Code settings loaded, and pytest was already on our computer. A script answered the yes prompts, so in our run nobody read each one. Claude Code 2.1.314, a personal GitHub Free account, 30 Oct 2026 |
+| Tested | an interactive Claude Code session on a Mac, in a new clone of our private `weekly-shipments`, accept edits mode, no personal Claude Code settings loaded, and pytest and gitleaks were already on our computer. A script answered the yes prompts, so in our run nobody read each one. Claude Code 2.1.314, a personal GitHub Free account, 30 Oct 2026 |
 | Download | [test_changes.py](test_changes.py), [checks.yml](checks.yml) (goes in `.github/workflows/`), [checks-cheat-sheet.md](checks-cheat-sheet.md) and [the carousel as a PDF](builder-step19-tests-and-security-checks-carousel.pdf) (8 slides) |
 
 ## Six words first
@@ -109,14 +109,18 @@ for the checks and tell me the result. Do not merge."
 1. In the terminal, go to `weekly-shipments`. Run `git switch main`, then `git pull`. Start `claude`. Press `Shift+Tab` until it says `accept edits on`.
 2. Paste ask 1. Read each command before you choose **1. Yes**. Choose **No** at anything you did not ask for: a write to
    another repository, a GitHub setting, a branch delete, a forced push. If you do not understand a prompt, choose
-   **No** and paste: "What does this command do, and is it needed?" If pytest is not on your computer, Claude will want to
-   install it. Read that prompt too. Ours already had it, so we did not see this. Wait for two green checks.
+   **No** and paste: "What does this command do, and is it needed?" Expect long commands. In our run, Claude also changed
+   `changes.py` and the CSV for a moment, to prove that the test fails, and put them back. If you are not sure, choose **No**
+   and ask, then run `git status` before you go on. If pytest or gitleaks is not on your computer, Claude may want to install
+   it. Read that prompt too. The check on GitHub installs gitleaks itself, so you can say **No** to a local gitleaks install.
+   We did not test this. Wait for two green checks.
 3. Merge it. Then make a bad change as in ask 3, and see the check go red. Do not merge it. In a second terminal, go to
    `weekly-shipments` and run `gh pr view 3 --json mergeStateStatus`, with your own pull request number. In our test, `UNSTABLE` did not block and,
    with no exception for admins, `BLOCKED` blocked. `BLOCKED` alone does not tell you if an admin can still merge. Ask Claude to close the pull request and go back to `main`.
 4. Optional, the key scan. Only after ask 1 is merged, and only with a made-up key. In a new session in your own folder, paste:
    "On a new branch from main, add a file config.py with one made-up example API key in the format of a Stripe test key. Make it up, it must not be a real key. Open a pull request, wait for the checks and tell me the result. Do not merge."
-   Afterwards, paste: "Close that pull request without merging. Delete the branch on GitHub and on this computer. Go back to main." We did not test that wording.
+   Afterwards, paste: "Close that pull request without merging. Delete the branch on GitHub and on this computer. Go back to main." We did not test that wording. We also did not run this ask in a new session in the private
+   repository: ours reached it through a follow-up ask.
 5. Choose your rule for `main`:
    - **Stay private on GitHub Free.** The check shows red and blocks nothing. Your rule is: never merge on red. Nothing enforces that rule
      but you.
