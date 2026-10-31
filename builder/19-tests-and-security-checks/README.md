@@ -14,13 +14,16 @@ in our own test.
 | Tested | an interactive Claude Code session on a Mac, in a new clone of our private `weekly-shipments`, accept edits mode, no personal Claude Code settings loaded, and pytest was already on our computer. A script answered the yes prompts, so in our run nobody read each one. Claude Code 2.1.314, a personal GitHub Free account, 30 Oct 2026 |
 | Download | [test_changes.py](test_changes.py), [checks.yml](checks.yml) (goes in `.github/workflows/`), [checks-cheat-sheet.md](checks-cheat-sheet.md) and [the carousel as a PDF](builder-step19-tests-and-security-checks-carousel.pdf) (8 slides) |
 
-## Three words first
+## Six words first
 
 | Word | What it is |
 |---|---|
 | Pull request | A proposed change on its own branch. You see it and its checks before it goes into `main` |
 | Check | A job that GitHub Actions runs on the pull request. It ends green or red |
 | Required check | A check that must be green before GitHub allows the merge |
+| pytest | A program that runs your tests |
+| gitleaks | A program that looks for keys in your files and history. This is the key scan |
+| Push protection | A GitHub setting that refuses a push when it finds a key |
 
 ## The two ways at a glance
 
@@ -79,10 +82,11 @@ for the checks and tell me the result. Do not merge."
   not use it.
 - We sent it to the private repository instead. The push went through, and gitleaks went red, pytest stayed green.
 - The red check did not block there either: GitHub's merge status was `UNSTABLE`, not `BLOCKED`. We closed the pull
-  request without merging, and deleted the branch. We did not test if a branch left on GitHub keeps later scans red.
+  request without merging, and deleted the branch.
 - Claude said it plainly: "closing PR #5 won't remove the key from the private repo".
-- To try it, only with a made-up key: start a new session in your own folder and paste that ask. Afterwards, paste:
-  "Close that pull request without merging. Delete the branch on GitHub and on this computer. Go back to main." We did not test that wording.
+- Claude also said: "Other PRs only pick up the key if the branch merges, or if they're built on top of it." Our own
+  test says otherwise. In a local test, without GitHub, the same scan went red on a later branch without the key while
+  the key branch still existed. It was clean once that branch was deleted. So delete the branch too.
 
 ### What we saw on the way
 
@@ -108,17 +112,20 @@ for the checks and tell me the result. Do not merge."
 3. Merge it. Then make a bad change as in ask 3, and see the check go red. Do not merge it. In a second terminal, go to
    `weekly-shipments` and run `gh pr view 3 --json mergeStateStatus`, with your own pull request number. In our test, `UNSTABLE` did not block and,
    with no exception for admins, `BLOCKED` blocked. `BLOCKED` alone does not tell you if an admin can still merge. Ask Claude to close the pull request and go back to `main`.
-4. Choose your rule for `main`:
+4. Optional, the key scan. Only after ask 1 is merged, and only with a made-up key. In a new session in your own folder, paste:
+   "On a new branch from main, add a file config.py with one made-up example API key in the format of a Stripe test key. Make it up, it must not be a real key. Open a pull request, wait for the checks and tell me the result. Do not merge."
+   Afterwards, paste: "Close that pull request without merging. Delete the branch on GitHub and on this computer. Go back to main." We did not test that wording.
+5. Choose your rule for `main`:
    - **Stay private on GitHub Free.** The check shows red and blocks nothing. Your rule is: never merge on red. Nothing enforces that rule
      but you.
    - **Pay for a plan that has it.** GitHub lists protected branches for private repositories under GitHub Pro. After the
      upgrade, ask Claude to make the two checks required. We did not test this.
    - **Use a public copy,** only if the data is made up. It shows you the block. It does not protect your working
-     repository. The email in your git settings shows in the commits you push, so run `git config user.email` first.
-     GitHub offers a noreply address. Paste: "Make a new public repository called weekly-shipments-public with the same
-     files as this one, in one new commit, with no old history. The data is made up, so that is fine. Keep this repository private. In the new repository, make the two checks
-     required, with no exception for admins, so nothing can merge to main while a check is red." Our ask did not say "one new commit": Claude chose that, so we added it here and did not
-     test this wording. Then paste: "In weekly-shipments-public, on a new branch, change changes.py to rank by percent, not by pallets. Do not change the test. Open a pull request, wait for the checks, and then try to merge it. Tell me exactly what GitHub says." Expect a refusal. Claude
+     repository. The email in your git settings shows in the commits you push, so this ask names the noreply address
+     GitHub offers. Paste: "Make a new public repository called weekly-shipments-public with the same
+     files as this one, in one new commit, with no old history. Use my GitHub noreply address for the commit, and show it to me before you push. The data is made up, so that is fine. Keep this repository private. In the new repository, make the two checks
+     required, with no exception for admins, so nothing can merge to main while a check is red." Our ask did not say "one new commit" or "noreply": Claude chose those, so we added them here and did
+     not test this wording. Then paste: "In weekly-shipments-public, on a new branch, change changes.py to rank by percent, not by pallets. Do not change the test. Open a pull request, wait for the checks, and then try to merge it. Tell me exactly what GitHub says." Expect a refusal. Claude
      stays in the public copy after this, so type `/exit` and start a new session in your own folder. We left our copy up.
 
 **Looks different from ours?** Wait until the checks have ended, then read the state again. For another word or other
@@ -132,7 +139,7 @@ check names, paste what you see into Claude and ask what it means.
   automatically for free". This workflow runs gitleaks, and that worked in our
   private repository.
 - **A red key scan means the key already reached GitHub.** Closing the pull request does not remove it. With a real
-  key: change the key at the service it belongs to. In our run the log did not name the key or the file, so ask Claude to
+  key: change the key at the service it belongs to, and delete the branch. In our run the log did not name the key or the file, so ask Claude to
   find it. The workflow scans the whole history. Claude warned that if the key merges, "every later PR will fail
   gitleaks, even after config.py is deleted, unless the key is removed from history or allowlisted". We did not test that.
 - **This test pins today's output.** Any change goes red, wanted or not. If you wanted the new output, updating the test
@@ -176,7 +183,7 @@ check names, paste what you see into Claude and ask what it means.
 ## In our own work
 
 Our own main repository runs five security scanners on pull requests: gitleaks, semgrep, bandit, pip-audit and zizmor.
-New findings fail, for pip-audit only when a dependency file changed. Findings already in the baseline do not. And there, a required check stops a normal merge. An admin
+New findings fail, for pip-audit only when a dependency file changed. Findings already in the baseline do not. That repository is private, on a paid GitHub Team plan, so a required check works there: it stops a normal merge. An admin
 can still override it.
 
 ## Next
