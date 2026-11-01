@@ -60,7 +60,7 @@ printed:
 Both Opus 5.5 runs said which reading they chose, and gave our three numbers as the other reading. On step 11, Opus 5.5
 stopped, asked us and recommended pairs. These runs used print mode (`claude -p`, `pi -p`), with nobody to answer. Step 11
 also ran on the web, at the Extra effort setting in the model menu. Our plan runs used Plan mode too, in print mode, and the two on the first ask chose
-pairs. Both plans said the tool to submit a plan for approval was not available in their session, so they could not stop for an answer. We did not test if a difference was the cause, or if it was chance.
+pairs. Both plans said the tool to submit a plan for approval was not available in their session. Each chose pairs and said so, without asking us which reading we meant. We did not test if a difference was the cause, or if it was chance.
 
 DeepSeek read the same ask both ways: pairs on one run, each client and each route on its own on two. With an Opus plan
 in front of it, DeepSeek counted pairs: the plan said pairs.
@@ -120,9 +120,9 @@ them again.
 ## Do it yourself
 
 We ran the ask once on a Mac, in a normal Claude Code session on an Ultra plan with Opus 5.5, in manual mode
-([step 15](../15-plan-mode-and-undo/)) with `--setting-sources project,local` and `--model claude-opus-5-5`, at medium effort. A script typed the ask. You do not need those flags. Our own add-ons still ran in that session. The folder held the CSV and the ask,
+([step 15](../15-plan-mode-and-undo/)) with `--setting-sources project,local` and `--model claude-opus-5-5`, at medium effort. A script typed the ask. We did not test the download button, the `mv` lines, `pbcopy`, Cmd+V or the To start over block. You do not need those flags. Our own add-ons still ran in that session. The folder held the CSV and the ask,
 not under the name below. It asked 5 times: once to trust the folder, then before some commands and each new
-file. A script of ours typed yes each time. Then we ran the commands in step C in that folder, and got the
+file. A script of ours typed yes each time. Then we ran the venv, pip, `changes.py` and pytest lines of step C in that folder, and got the
 three lines below and `1 passed`. Your plan and model may differ. Plain `claude` below also
 loads your personal settings and any personal CLAUDE.md, and those can change the questions or the answer. The letters A to D are only for this page.
 
