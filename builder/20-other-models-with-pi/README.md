@@ -60,7 +60,7 @@ printed:
 Both Opus 5.5 runs said which reading they chose, and gave our three numbers as the other reading. On step 11, Opus 5.5
 stopped, asked us and recommended pairs. These runs used print mode (`claude -p`, `pi -p`), with nobody to answer. Step 11
 also ran on the web, at the Extra effort setting in the model menu. Our plan runs used Plan mode too, in print mode, and the two on the first ask chose
-pairs. So Plan mode does not always stop to ask. We did not test if a difference was the cause, or if it was chance.
+pairs. Both plans said the tool to submit a plan for approval was not available in their session, so they could not stop for an answer. We did not test if a difference was the cause, or if it was chance.
 
 DeepSeek read the same ask both ways: pairs on one run, each client and each route on its own on two. With an Opus plan
 in front of it, DeepSeek counted pairs: the plan said pairs.
@@ -88,7 +88,7 @@ three lines, and each plan went to Pi as its task. So that row is not DeepSeek's
 
 - Pi ran with `pi -p`, a new home and settings folder, no extensions, no skills, no context files and `PI_TELEMETRY=0`, with
   JSON output and its own session folder, in a macOS sandbox. The sandbox blocked writes outside the run folder and
-  the system temp folder, and reads of some folders. It did not block the network or most other reads, so Pi could also read the folder with our answers. We searched the tool calls in the 13 Pi run logs we kept: none read our answer files.
+  the system temp folder, and reads of some folders. It did not block the network or most other reads, so Pi could also read the folder with our answers. We searched the tool calls in the logs of the 13 Pi runs we kept: none read our answer files.
 - Claude Code ran with `claude -p`, `--setting-sources project,local`, accept edits mode, and single Python commands
   allowed, with no sandbox and our real home folder reachable. Two first-ask runs made their own test files outside the
   repository, one of them next to our script that holds the answers. We searched the tool calls in all 8 session logs: none
@@ -103,8 +103,8 @@ three lines, and each plan went to Pi as its task. So that row is not DeepSeek's
 **The third DeepSeek run.** It was an early test of our test script, with the same ask and model, and we did not time it. It
 is in the table because it counted.
 
-**Runs not in the tables.** One DeepSeek run on the first ask finished, but our test script crashed while it saved the
-result. We do not have its answer, so we ran it again. One Qwen run on the first ask hit our 4-minute limit for Pi, so we
+**Runs not in the tables.** One DeepSeek run on the first ask finished, but our run script crashed while it saved the
+result. We do not have its answer, so we ran it again. One Qwen run on the first ask hit our 4-minute limit for Pi, so our script
 stopped it and ran it again. Two Claude Code runs failed before they started, from a mistake in our command, so we ran
 them again.
 
@@ -119,7 +119,7 @@ them again.
 ## Do it yourself
 
 We ran the ask once on a Mac, in a normal Claude Code session on an Ultra plan with Opus 5.5, in manual mode
-([step 15](../15-plan-mode-and-undo/)) with `--setting-sources project,local`. You do not need that flag. Our own add-ons still ran in that session. The folder held the CSV and the ask,
+([step 15](../15-plan-mode-and-undo/)) with `--setting-sources project,local` and `--model claude-opus-5-5`, at medium effort. A script typed the ask. You do not need those flags. Our own add-ons still ran in that session. The folder held the CSV and the ask,
 not under the name below. It asked 5 times: once to trust the folder, then before some commands and each new
 file. A script of ours typed yes each time. Then we ran the commands in step C on a copy of that folder, and got the
 three lines below and `1 passed`. Your plan and model may differ. Plain `claude` below also
@@ -141,7 +141,8 @@ pbcopy < sharper-ask.txt
 claude
 ```
 
-Claude Code first asks if you trust this folder. "No, exit" is picked at first, so press the Down arrow, then Enter. Press
+Claude Code first asks if you trust this folder. "No, exit" is picked at first, so press the Down arrow, then Enter. The
+bottom line should say `manual mode on`. If not, press `Shift+Tab` until it does ([step 15](../15-plan-mode-and-undo/)). Press
 Cmd+V to paste the ask, then Enter.
 
 Then it asks before some commands and before each new file. In our run there were two commands, both long Python that
@@ -228,8 +229,9 @@ flags under How we measured.
 - **Step 12 has a line for this.** Its [example brief](../12-what-an-agent-is/agent-brief-example-step11.txt) has a "Stop and ask me when" line. No run here used it.
 - **News, as of 31 Oct 2026.** Claude: The plans now read: Max, USD 100 a month, 5x Pro usage. Ultra, USD 200 a month, 10x Pro
   usage. Ultra has no 5-hour limit on verified accounts. It still has a weekly limit. Fast mode for Opus 4.8 is deprecated, and is removed on 30 Nov. If you use it, move to Opus 5.5 to keep the speedup.
-  ChatGPT: GPT-6.1 Terra is in Work and Codex, not Chat, since 26 Oct. DeepSeek: Search and Fetch calls are billed from
-  31 Oct, USD 0.75 per 1,000 calls per endpoint. Sources:
+  ChatGPT: GPT-6.1 Terra is rolling out in Work and Codex on Plus, Pro, Business, Enterprise and Edu, since 26 Oct.
+  DeepSeek: Search and Fetch calls through Claude Code, Codex or DeepSeek Harness are billed from 31 Oct, USD 0.75 per
+  1,000 calls per endpoint. Sources:
   [claude.com/pricing](https://claude.com/pricing), [What is the Ultra plan?](https://support.claude.com/en/articles/17728952)
   the [Claude Code changelog](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md),
   [Introducing GPT-6.1 Terra](https://openai.com/index/introducing-gpt-6-1-terra/) and
