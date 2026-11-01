@@ -6,7 +6,7 @@ computer, in your own folders. The install is one line in the terminal.
 | | |
 |---|---|
 | Time | about 10 minutes |
-| You need | a paid Claude plan (Pro, Max, Team or Enterprise), and a Mac or a Windows computer |
+| You need | a paid Claude plan (Pro, Max, Ultra, Team or Enterprise), and a Mac or a Windows computer |
 | Tested | the Mac install and the three questions, Claude Code 2.1.310, 24 Oct 2026. Windows: we read both install scripts and checked that the 2.1.310 Windows downloads exist, but we did not run them on Windows |
 | Download | [install-steps.md](install-steps.md), [first-three-questions.txt](first-three-questions.txt), [shipments-export-sample.csv](shipments-export-sample.csv) and [the carousel as a PDF](builder-step13-claude-code-on-your-laptop-carousel.pdf) (8 slides) |
 
@@ -59,7 +59,7 @@ When an answer matters, ask which lines it read.
 
 ## Good to know
 
-- **Not on Free.** Claude Code needs Pro, Max, Team or Enterprise. It uses your normal Claude limits.
+- **Not on Free.** Claude Code needs Pro, Max, Ultra, Team or Enterprise. It uses your normal Claude limits.
 - **No terminal?** The Claude desktop app has a **Code** tab with Claude Code inside. See the end of
   [install-steps.md](install-steps.md). We did not test that route today.
 - **In your editor.** Claude Code has an extension for VS Code (what I use) and Cursor, and other VS Code forks can
@@ -88,7 +88,7 @@ When an answer matters, ask which lines it read.
 | You start it in your home folder or Downloads | Start it in one test folder with only the sample file |
 | You ask in Auto mode and it starts to make files | Press Shift + Tab until it says `plan mode on` before you ask |
 | You trust the first answer | Check it, or ask which lines of the file it read |
-| You are on the Free plan | Claude Code needs Pro, Max, Team or Enterprise |
+| You are on the Free plan | Claude Code needs Pro, Max, Ultra, Team or Enterprise |
 
 ## Next
 

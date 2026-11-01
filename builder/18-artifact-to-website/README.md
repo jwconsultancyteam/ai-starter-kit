@@ -13,7 +13,7 @@ Claude Code can do that in two ways, each from one sentence:
 | | |
 |---|---|
 | Time | about 15 minutes |
-| You need | Claude Code on a Pro, Max, Team or Enterprise plan, signed in with `/login` ([step 13](../13-claude-code-on-your-laptop/)), the `weekly-shipments` repository and the GitHub CLI from [step 17](../17-github-undo-button/) |
+| You need | Claude Code on a Pro, Max, Ultra, Team or Enterprise plan, signed in with `/login` ([step 13](../13-claude-code-on-your-laptop/)), the `weekly-shipments` repository and the GitHub CLI from [step 17](../17-github-undo-button/) |
 | Tested | an interactive Claude Code session on a Mac, in our `weekly-shipments` clone, accept edits mode, no personal settings loaded, Claude Max. Claude Code 2.1.312, 28 Oct 2026. Not in print mode: there, artifacts are off |
 | Download | [index.html](index.html) (the page we put online), [publish-cheat-sheet.md](publish-cheat-sheet.md) and [the carousel as a PDF](builder-step18-artifact-to-website-carousel.pdf) (8 slides) |
 
