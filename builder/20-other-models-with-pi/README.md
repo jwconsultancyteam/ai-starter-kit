@@ -150,7 +150,7 @@ Then it asks before some commands and before each new file. In our run there wer
 read the CSV. One looked at the file. One ran `changes.py` and checked the totals a second way, which we did not ask for.
 They came with these warnings: "Quoted text in this command can't be checked before it runs" and "Contains brace with
 quote character (expansion obfuscation)". Our script chose "1. Yes" each time, not the options that switch mode. Your
-commands may differ. At each new file, choose **1. Yes**. Do not choose the options that switch mode.
+commands may differ. At each new file in this folder, choose **1. Yes**. If the path is outside this folder, choose **No** and paste "Keep all files in this folder." Do not choose the options that switch mode.
 
 A command that only reads the files in this folder or runs `changes.py` fits what you asked: choose **1. Yes**. If you cannot tell, use the
 route from [step 19](../19-tests-and-security-checks/): choose **No** and paste "What does this command do, and is it
