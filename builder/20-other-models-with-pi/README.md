@@ -113,7 +113,8 @@ them again.
 - A few runs of one small task. It does not rank these models.
 - Each model ran in one tool only: Opus 5.5 in Claude Code, the Flash models in Pi. So this does not separate the model
   from the tool.
-- We wrote the sharper ask after we knew the answer, and its format line says `route`. No run tested the first sentence
+- We wrote the sharper ask after we knew the answer. Its first sentence also fits step 11's third reading, a top 3 of
+  each, and its format line says `route`. No run tested the first sentence
   alone. On real work you do not know the answer first.
 
 ## Do it yourself
@@ -121,7 +122,7 @@ them again.
 We ran the ask once on a Mac, in a normal Claude Code session on an Ultra plan with Opus 5.5, in manual mode
 ([step 15](../15-plan-mode-and-undo/)) with `--setting-sources project,local` and `--model claude-opus-5-5`, at medium effort. A script typed the ask. You do not need those flags. Our own add-ons still ran in that session. The folder held the CSV and the ask,
 not under the name below. It asked 5 times: once to trust the folder, then before some commands and each new
-file. A script of ours typed yes each time. Then we ran the commands in step C on a copy of that folder, and got the
+file. A script of ours typed yes each time. Then we ran the commands in step C in that folder, and got the
 three lines below and `1 passed`. Your plan and model may differ. Plain `claude` below also
 loads your personal settings and any personal CLAUDE.md, and those can change the questions or the answer. The letters A to D are only for this page.
 
@@ -229,12 +230,10 @@ flags under How we measured.
 - **Step 12 has a line for this.** Its [example brief](../12-what-an-agent-is/agent-brief-example-step11.txt) has a "Stop and ask me when" line. No run here used it.
 - **News, as of 31 Oct 2026.** Claude: The plans now read: Max, USD 100 a month, 5x Pro usage. Ultra, USD 200 a month, 10x Pro
   usage. Ultra has no 5-hour limit on verified accounts. It still has a weekly limit. Fast mode for Opus 4.8 is deprecated, and is removed on 30 Nov. If you use it, move to Opus 5.5 to keep the speedup.
-  ChatGPT: GPT-6.1 Terra is rolling out in Work and Codex on Plus, Pro, Business, Enterprise and Edu, since 26 Oct.
-  DeepSeek: Search and Fetch calls through Claude Code, Codex or DeepSeek Harness are billed from 31 Oct, USD 0.75 per
-  1,000 calls per endpoint. Sources:
+  DeepSeek: for DeepSeek API users, Search and Fetch calls through Claude Code, Codex or DeepSeek Harness are billed from
+  31 Oct, 16:00 UTC, USD 0.75 per 1,000 calls per endpoint. Sources:
   [claude.com/pricing](https://claude.com/pricing), [What is the Ultra plan?](https://support.claude.com/en/articles/17728952)
-  the [Claude Code changelog](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md),
-  [Introducing GPT-6.1 Terra](https://openai.com/index/introducing-gpt-6-1-terra/) and
+  the [Claude Code changelog](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md) and
   [DeepSeek Search and Fetch](https://api-docs.deepseek.com/news/news261017)
 
 ## Time win and solution win
@@ -249,7 +248,7 @@ flags under How we measured.
 | Mistake | What to do |
 |---|---|
 | You put `test_changes.py` in the folder before the run | Claude can read the answer, and could have changed the test. Use To start over above |
-| `mv` says `No such file or directory` | Find the file in your browser's downloads list, then move it |
+| `mv` says `No such file or directory` | Find the file in your browser's downloads list, then move it. We did not test this |
 | The test is red and the numbers are right | Only the format differs. Do not edit the test. Move it out with `mv test_changes.py ~/Downloads/`, start `claude` in the folder and ask: "Change only the print format of changes.py to match sharper-ask.txt." Then run step C again. We did not test this |
 | The test is red and the numbers differ | Do not edit the test. Use To start over above, once. If it differs again, your model read the task another way, and you can stop here: the test did its job |
 | `python3 changes.py` prints an error | Use To start over above, once. If it happens again, you can stop here: you have seen what the test is for. We did not test this |
