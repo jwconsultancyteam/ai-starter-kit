@@ -29,7 +29,7 @@ Can the report still be written if the source stays untouched?
 - THE TEST: Run the same four commands with the guardrails off and on.
 
 ```text
-# the real run, 2 Nov 2026, macOS 27.0.1
+# the real run: macOS 27.0.1, Python 3.12.3
 Guardrails OFF
 Guardrails ON
 ```
