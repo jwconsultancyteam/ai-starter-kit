@@ -28,12 +28,29 @@ Can the report still be written if the source stays untouched?
 - THE JOB: Count the shipment rows and save a report.
 - THE TEST: Run the same four commands with the guardrails off and on.
 
+```text
+# the real run, 2 Nov 2026, macOS 27.0.1
+Guardrails OFF
+Guardrails ON
+```
+
 ### Protect the original
 
 The command tried to append a line to a disposable copy of the CSV.
 
 - GUARDRAILS OFF: The append succeeded.
 - GUARDRAILS ON: The append failed. The CSV fingerprint stayed the same.
+
+```text
+# guardrails off
+append to CSV: exit 0
+CSV unchanged: False
+# guardrails on
+append to CSV: exit 1
+demo: $TMP/shipments.csv: Operation not permitted
+CSV unchanged: True
+# $TMP: the temporary folder, path shortened
+```
 
 ### Give it the exact path
 
@@ -42,6 +59,16 @@ A dummy private note sat outside the output folder. The command knew where it wa
 - GUARDRAILS OFF: The command read the note.
 - GUARDRAILS ON: The read failed. This rule protected that note, not the whole Mac.
 
+```text
+# guardrails off
+read dummy note by exact path: exit 0
+dummy note
+# guardrails on
+read dummy note by exact path: exit 1
+cat: $TMP/private-note.txt: Operation not permitted
+# $TMP: the temporary folder, path shortened
+```
+
 ### Test the connection
 
 A harmless endpoint listened on the same Mac. The request carried no shipment data.
@@ -49,12 +76,30 @@ A harmless endpoint listened on the same Mac. The request carried no shipment da
 - GUARDRAILS OFF: The endpoint answered.
 - GUARDRAILS ON: The request failed. No internet upload was tested.
 
+```text
+# guardrails off
+request local endpoint: exit 0
+endpoint reached
+# guardrails on
+request local endpoint: exit 7
+curl: (7) Failed to connect to 127.0.0.1 port 51482 after 0 ms: Couldn't connect to server
+```
+
 ### Keep the useful result
 
 The report still said 198 shipment rows with the guardrails on.
 
 - TRY IT: Run the demo from the AI Starter Kit on a Mac.
 - WHAT THIS SHOWS: The commands ran under a policy. No model chose them.
+
+```text
+# guardrails off
+count rows and write report: exit 0
+Shipment rows: 198
+# guardrails on
+count rows and write report: exit 0
+Shipment rows: 198
+```
 
 ## The boundary
 
