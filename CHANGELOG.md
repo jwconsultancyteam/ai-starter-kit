@@ -1,5 +1,10 @@
 # Changelog
 
+## 2 Nov 2026
+
+Expert step 21 adds a reproducible Mac tool-permission exercise and its carousel.
+
+
 What changed in the kit, newest first. Dates are Brussels time.
 
 ## 1 Nov 2026
