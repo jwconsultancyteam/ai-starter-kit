@@ -6,4 +6,4 @@
 
 ## Step 22: A hook that guards one file
 
-[Add the hook](22-a-hook-that-guards-one-file/). A small script blocks Claude Code from changing one file, even after you override your own CLAUDE.md rule.
+[Add the hook](22-a-hook-that-guards-one-file/). A small script blocks Claude Code's edits and a short list of shell commands on one file, even after you override your own CLAUDE.md rule. It is a guard for the commands it knows, not a lock on the file.

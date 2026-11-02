@@ -4,7 +4,8 @@ What changed in the kit, newest first. Dates are Brussels time.
 
 ## 3 Nov 2026
 
-- Expert, step 22: a hook that guards one file. With the step 14 CLAUDE.md alone, the CSV did not change on a plain ask (0 of 2 runs). After an override in the ask, it changed in 2 of 5 runs without the hook and 0 of 5 with it. Tested in Claude Code 2.1.316 on a Mac, 2 Nov 2026, with only the folder's own settings.
+- Expert, step 22: a hook that guards one file. With the step 14 CLAUDE.md alone, the CSV did not change on a plain ask (0 of 2 runs). After an override in the ask, it changed in 2 of 5 runs without the hook and 0 of 5 with it. Tested in Claude Code 2.1.316 on a Mac, 2 Nov 2026, with only the folder's own settings. The hook guards a short list of commands, not every way to change the file.
+- Step 14 now points to step 22 for the hook. Step 21 now has a Next line.
 
 ## 2 Nov 2026
 
