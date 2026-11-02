@@ -103,7 +103,7 @@ To check that it loaded, type `/context` in Claude Code. Your CLAUDE.md is in th
 | You keep the whole `/init` output | Keep the two lines that say what the folder is. Add your own rules |
 | "Start with a table" | "Your first line is the table." Write it so anyone can check it |
 | Rules for every job in one file | One context pack per job. One pointer line in CLAUDE.md |
-| A Never line you rely on | CLAUDE.md can be ignored. Keep a Never line, and add a hard block later (Expert, step 21) |
+| A Never line you rely on | CLAUDE.md can be ignored. Keep a Never line, and add a hard block later (Claude Code hooks, in a later Expert step) |
 | You test in a folder inside another project | A CLAUDE.md in a folder above also loads. Test in a clean folder |
 
 ## Next

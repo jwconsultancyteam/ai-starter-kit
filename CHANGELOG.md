@@ -2,6 +2,13 @@
 
 What changed in the kit, newest first. Dates are Brussels time.
 
+## 2 Nov 2026
+
+- Expert, step 21: three guardrails for one spreadsheet: a script runs the same four commands with a macOS sandbox
+  policy off and on. With it on, the CSV append, the dummy note read and the local request fail, and the report still
+  says 198 shipment rows. No model chooses the commands. Tested on a Mac, macOS 27.0.1.
+- Step 14 no longer says step 21 teaches hooks. Claude Code hooks come in a later Expert step.
+
 ## 1 Nov 2026
 
 - Builder, step 20: other models with Pi is live: the step 11 task on 4 setups. On the first ask, 2 of 9 runs

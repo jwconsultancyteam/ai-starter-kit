@@ -11,7 +11,7 @@ to almost every task in the folder.
 | Two rules that disagree | Anthropic: "Claude may pick one arbitrarily" | One rule. Delete the other |
 | More than about 200 lines | Anthropic: longer files "consume more context and reduce adherence" | Split by job, or move rules for some files into `.claude/rules/` with `paths:` |
 | Passwords, API keys, client data | The file is plain text, and you may share or commit it | Nowhere in the folder |
-| A rule that must never be broken | CLAUDE.md is "context, not enforced configuration". It can be ignored | Keep it as a Never line, and add a hard block later (Expert, step 21: hooks) |
+| A rule that must never be broken | CLAUDE.md is "context, not enforced configuration". It can be ignored | Keep it as a Never line, and add a hard block later (Claude Code hooks, in a later Expert step) |
 
 Sources: [code.claude.com/docs/en/memory](https://code.claude.com/docs/en/memory) and
 [code.claude.com/docs/en/best-practices](https://code.claude.com/docs/en/best-practices), read on 24 Oct 2026.
