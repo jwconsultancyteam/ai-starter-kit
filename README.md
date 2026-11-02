@@ -1,7 +1,7 @@
 # AI Starter Kit
 
 **From your first chat to AI agents that work on their own: they talk to each other, have their own wallet, and pay or get paid for you.** Free templates, prompts and setups, one small step at a
-time, with the exact clicks. Claude first. Everything here is what we use ourselves to build and run real software. Steps 20 and 21 include controlled experiments.
+time, with the exact clicks. Claude first. Everything here is what we use ourselves to build and run real software. Steps 20 to 22 include controlled experiments.
 
 New step every day, weekends included. Starter first, then Builder, then Expert.
 
@@ -53,7 +53,8 @@ No coding. The Starter steps (1 to 10) need no GitHub account.
 | Builder | [19. Tests and security checks on every pull request](builder/19-tests-and-security-checks/) | One test and one key scan on every pull request, and find out if a red check blocks or only warns | Live (31 Oct 2026) |
 | Builder | [20. Other models with Pi](builder/20-other-models-with-pi/) | See how one ask gave two answers, make it sharper in Claude Code, and let the step 19 test check the work | Live (1 Nov 2026) |
 | Expert | [21. Three guardrails for one spreadsheet](expert/21-three-guardrails/) | Test a file write, a private note and a local connection | See step |
-| Expert | 22 to 30 | Claude Code hooks, workflows, AI review, second opinions, tracing every AI call, agents that run overnight, connecting your own tools, agents that talk to each other and agents with their own wallet | Coming |
+| Expert | [22. A hook that guards one file](expert/22-a-hook-that-guards-one-file/) | Add a hook that blocks changes to one file, and see where it stops | See step |
+| Expert | 23 to 30 | Workflows, AI review, second opinions, tracing every AI call, agents that run overnight, connecting your own tools, agents that talk to each other and agents with their own wallet | Coming |
 
 ---
 
