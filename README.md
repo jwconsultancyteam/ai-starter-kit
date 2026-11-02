@@ -52,7 +52,7 @@ No coding. The Starter steps (1 to 10) need no GitHub account.
 | Builder | [18. From artifact link to a real website](builder/18-artifact-to-website/) | Put one page online, as a private artifact link and as a public website, while your repository stays private | Live (30 Oct 2026) |
 | Builder | [19. Tests and security checks on every pull request](builder/19-tests-and-security-checks/) | One test and one key scan on every pull request, and find out if a red check blocks or only warns | Live (31 Oct 2026) |
 | Builder | [20. Other models with Pi](builder/20-other-models-with-pi/) | See how one ask gave two answers, make it sharper in Claude Code, and let the step 19 test check the work | Live (1 Nov 2026) |
-| Expert | [21. Three guardrails for one spreadsheet](expert/21-three-guardrails/) | Test a file write, a private note and a local connection | See step |
+| Expert | [21. Three guardrails for one spreadsheet](expert/21-three-guardrails/) | Test a file write, a private note and a local connection | Live (2 Nov 2026) |
 | Expert | [22. A hook that guards one file](expert/22-a-hook-that-guards-one-file/) | Add a hook that blocks changes to one file, and see where it stops | See step |
 | Expert | 23 to 30 | Workflows, AI review, second opinions, tracing every AI call, agents that run overnight, connecting your own tools, agents that talk to each other and agents with their own wallet | Coming |
 
@@ -67,6 +67,7 @@ to find it, the exact clicks, how to test it, and what can go wrong.
 |---|---|
 | Starter (1 to 10) | The template or sample files of that step, if it has any (for example `template.txt` and `example-john-doe.txt` in step 1), and `images/` with screenshots of the before and after |
 | Builder (11 to 20) | The sample files, templates and cheat sheet of that step, if it has any. Step 11 also has `images/` and `expected-output.md` |
+| Expert (21 to 30) | The scripts and settings of that step, if it has any (for example `protect_export.py` and `settings.json` in step 22) |
 
 Most steps show a **before and after**, or a test with the result we got: the same question, with one thing changed.
 So you see exactly what that one setting does.
@@ -85,7 +86,7 @@ So you see exactly what that one setting does.
 ## Works with
 
 The Starter steps are made and tested on Claude on the web (claude.ai, in Chrome or another Chromium browser). The
-Builder steps from step 12 are tested in Claude Code in the terminal on a Mac, and step 20 also in Pi. Each step says what we tested and on which
+Builder steps from step 12 are tested in Claude Code in the terminal on a Mac, and step 20 also in Pi. The Expert steps so far are tested on a Mac too. Each step says what we tested and on which
 date. Some features need a paid plan; each step says which menu to open, as it looked on the day we tested it. Menus
 change; if a click path is out of date, open an issue and we fix it. What changed and when: [CHANGELOG.md](CHANGELOG.md).
 

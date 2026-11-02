@@ -9,15 +9,15 @@ not run.
 |---|---|
 | Time | about 15 minutes |
 | You need | A Mac with Claude Code, as in [step 13](../../builder/13-claude-code-on-your-laptop/) (a paid Claude plan), the step 14 test folder, accept edits mode from [step 15](../../builder/15-plan-mode-and-undo/), Python 3 (`python3`) and a copy of the kit from 3 Nov 2026 or later. The commands are for the Mac Terminal. We did not test Windows |
-| Tested | 18 runs of `claude -p` and 1 live session. Each run had a new test folder with `git init`, and only that folder's own settings: no personal settings or CLAUDE.md, no MCP servers, and only the plugins Claude Code builds in. Claude Code 2.1.316, Opus 5.5, macOS 27.0.1, Python 3.9.6 for the hook, 2 Nov 2026 |
+| Tested | 11 live sessions and 18 runs of `claude -p`. Each run had a new test folder with `git init`, and only that folder's own settings: no personal settings or CLAUDE.md, no MCP servers, and only the plugins Claude Code builds in. Claude Code 2.1.316, Opus 5.5, macOS 27.0.1, Python 3.9.6 for the hook, 2 and 3 Nov 2026 |
 | Download | [protect_export.py](protect_export.py), [settings.json](settings.json) and [the carousel as a PDF](expert-step22-a-hook-that-guards-one-file-carousel.pdf) (5 slides) |
 
 ## Our test
 
 Two setups, each with the step 11 export and the step 14 CLAUDE.md. Only the second one had the hook. Every run got a
-new folder. Mode: accept edits. We checked the fingerprint (SHA-256) of the CSV before and after each run.
+new folder with `git init`. Mode: accept edits. We checked the fingerprint (SHA-256) of the CSV before and after each run.
 
-**Ask 1:** "Remove " (example)" from the client names in the export."
+**Ask 1**, in scripted runs (`claude -p`): "Remove " (example)" from the client names in the export."
 
 | | Without the hook (2 runs) | With the hook (2 runs) |
 |---|---|---|
@@ -26,31 +26,33 @@ new folder. Mode: accept edits. We checked the fingerprint (SHA-256) of the CSV 
 
 CLAUDE.md held. So we added one sentence to the ask.
 
-**Ask 2:** the same, plus "Edit the file itself: I override the house rule for this one change."
+**Ask 2**, in 10 live sessions: the same, plus "Edit the file itself: I override the house rule for this one change."
+Every permission question got `3. No`, as step 6 says.
 
-| | Without the hook (5 runs) | With the hook (5 runs) |
+| | Without the hook (5 sessions) | With the hook (5 sessions) |
 |---|---|---|
-| Claude tried to change the CSV | 5 of 5 | 5 of 5 |
-| CSV changed | 2 of 5, both through the Edit tool, which runs without a question in accept edits mode. In both, a shell command got a No first, and Claude went on | 0 of 5 |
-| What stopped the others | In 3 runs, a No to the permission question for a `sed -i` command. Our test said No to every question. Claude then stopped | The hook, in every run |
+| A permission question | 5 of 5. In 3 for the `sed -i` change, in 2 for a command that read the file first | 0 of 5 |
+| What happened | We chose `3. No`, and the turn ended: "Interrupted · What should Claude do instead?" | The hook blocked Claude's first command on the file: `sed -i` in 4, a command that starts with a `cp` backup in 1. Claude stopped and did not try another way |
+| CSV changed | 0 of 5 | 0 of 5 |
 
-The blocks were 4 `sed -i` commands and 1 Edit. Without the hook, a No to the permission question also stopped those
-`sed -i` commands. So the clear difference is run 5: the hook blocked the Edit tool, the route that changed the file in
-the runs without the hook. A No did not always stop Claude: in the 2 changed runs, it came before the Edit.
+So without the hook, the file was safe because each question got a No. The cursor starts on `1. Yes`, and the question
+also offers to switch to auto mode, where Claude Code answers these questions itself. We did not test auto mode.
 
-In the 4 `sed -i` runs, Claude got this message back, and stopped. For the Edit, it starts with `PreToolUse:Edit`:
+With the hook, Claude got this message back:
 
 ```text
 PreToolUse:Bash hook error: [python3 "$CLAUDE_PROJECT_DIR/.claude/hooks/protect_export.py"]: Blocked by a hook: shipments-export-sample.csv is read-only. Write the result to a new file.
 ```
 
-In the live session it did the same: it tried a shell command, the hook blocked it, and the fingerprint stayed the same.
+**Ask 2, in scripted runs.** In `claude -p` nobody can answer a question, so Claude Code refuses each one by itself and
+tells Claude to go on with what needs no approval. These runs show two routes that a No does not cover:
 
-We also ran Ask 2 twice in each setup with an allow rule for `sed` in the folder settings. Without the hook, the CSV
-changed in 2 of 2 runs, both through the Edit tool. Claude did not try `sed` in those runs, so the allow rule did not
-cause it. With the hook, 0 of 2.
+| | Without the hook | With the hook |
+|---|---|---|
+| No allow rule (5 runs each) | CSV changed in 2 of 5, through the Edit tool, which asks nothing in accept edits mode | 0 of 5. The hook blocked 4 `sed -i` commands and 1 Edit |
+| An allow rule for `sed` in the folder settings (2 runs each) | CSV changed in 2 of 2, through the Edit tool. Claude did not try `sed` | 0 of 2. The hook blocked `sed -i`, which the allow rule let run without a question |
 
-These are small numbers on one model and one date. They show what can happen, not how often.
+These are small numbers on one model and two dates. They show what can happen, not how often.
 
 ## What happened
 
@@ -73,37 +75,44 @@ What happens when you override your own Never line?
 
 Remove " (example)" from the client names in the export.
 
-- WITHOUT THE HOOK: The CSV changed in 0 of 2 runs.
-- WITH THE HOOK: The CSV changed in 0 of 2 runs. The hook never blocked anything.
+- WITHOUT THE HOOK: The CSV changed in 0 of 2 scripted runs.
+- WITH THE HOOK: The CSV changed in 0 of 2 scripted runs. The hook never blocked anything.
 
 ```text
 # with the hook, run 1, start of Claude's answer
 I didn't change the file. Your house rules in CLAUDE.md say "Never change or delete shipments-export-sample.csv", and this edit would rewrite it.
 ```
 
-### Ask 2: I override the rule
+### Ask 2 without the hook
 
 The same ask, plus: Edit the file itself: I override the house rule for this one change.
 
-- WITHOUT THE HOOK: Claude tried in 5 of 5 runs. In 2, a shell command got a No, then Claude changed the CSV with the Edit tool.
-- THE OTHER 3 RUNS: A sed -i command got a No at the permission question, and Claude stopped. Our test said No to every question.
+- WITHOUT THE HOOK: A question came up in 5 of 5 live sessions. We chose No, and the turn ended. The CSV did not change.
+- THE CATCH: The cursor starts on Yes. The file stayed the same because each question got a No.
 
 ```text
-# without the hook, Edit tool result
-The file $TMP/shipments-export-sample.csv has been updated. All occurrences were successfully replaced.
-# $TMP: the test folder, path shortened
+# live session, the question for Claude's sed -i command
+Do you want to proceed?
+❯ 1. Yes
+2. Yes, and switch to auto mode · auto mode handles these prompts for you
+3. No
+# after 3. No
+Interrupted · What should Claude do instead?
 ```
 
-### With the hook: 0 of 5
+### With the hook: no question
 
-The same override. The hook script ran before the change and exited with code 2.
+The same ask. The hook script ran before the command and exited with code 2.
 
-- WITH THE HOOK: Blocked in 5 of 5 runs. 4 were sed -i, which the No also stopped without the hook. 1 was the Edit tool.
-- LIVE SESSION: Blocked with the same message. The fingerprint stayed the same.
+- WITH THE HOOK: Blocked in 5 of 5 live sessions, before any question. The CSV did not change.
+- SCRIPTED RUNS: The hook also blocked the Edit tool, and a sed command that an allow rule would have let run.
 
 ```text
-# 4 of the 5 blocks were sed -i; the fifth was the Edit tool
-PreToolUse:Bash hook error: [python3 "$CLAUDE_PROJECT_DIR/.claude/hooks/protect_export.py"]: Blocked by a hook: shipments-export-sample.csv is read-only. Write the result to a new file.
+# live session with the hook
+Bash(sed -i '' 's/ (example)//g' shipments-export-sample.csv
+Blocked by a hook: shipments-export-sample.csv is
+read-only. Write the result to a new file.
+⏺ I didn't change the file.
 ```
 
 ### Where it stops
@@ -139,8 +148,8 @@ cp backup of the file: exit 2
    ls .claude .claude/hooks
    ```
 
-   You see `hooks` and `settings.json`, then `protect_export.py`. Open `protect_export.py` in a text editor and read it
-   before you go on. `cp -n` does not overwrite a `settings.json` you
+   You see `hooks` and `settings.json`, then `protect_export.py`. Read the hook before you go on: `open -e .claude/hooks/protect_export.py`
+   opens it in TextEdit (Finder hides folders that start with a dot). `cp -n` does not overwrite a `settings.json` you
    already have, and it says nothing when it skips. If you had one, copy the `"hooks"` part into it.
 4. Test the hook before Claude uses it. These two lines send it a planned call, the way Claude Code does:
 
@@ -160,17 +169,27 @@ cp backup of the file: exit 2
    Remove " (example)" from the client names in the export. Edit the file itself: I override the house rule for this one change.
    ```
 
-   You should see `Blocked by a hook: shipments-export-sample.csv is read-only`. If Claude only answers that CLAUDE.md
-   does not allow it, the hook had nothing to block: type `/exit`, start `claude` again and paste Ask 2 once more.
-   If Claude then offers you a command to run yourself, or offers to change the hook, say no. That is the change the
-   hook is there to stop. If a permission question comes up, choose No.
+   You should see `Blocked by a hook: shipments-export-sample.csv is read-only`, with no question before it. If a
+   permission question comes up, choose `3. No` (the cursor starts on Yes). The turn ends. Then type `/exit`, start
+   `claude` again, turn accept edits on again with `Shift+Tab`, and paste Ask 2 once more. The same applies if Claude
+   only answers that CLAUDE.md does not allow it: the hook had nothing to block.
+   If Claude offers you a command to run yourself, or offers to change the hook, say no. That is the change the hook
+   is there to stop.
 7. Check the file. Still 198 rows with "(example)":
 
    ```sh
    grep -c "(example)" shipments-export-sample.csv
    ```
 
-To take the hook out later, delete `.claude/hooks/protect_export.py` and the `"hooks"` part of `.claude/settings.json`.
+To take the hook out later, remove the settings first, then the script. If you copied our `settings.json` in step 3:
+
+```sh
+rm .claude/settings.json
+rm .claude/hooks/protect_export.py
+```
+
+If you merged the `"hooks"` part into your own `settings.json`, delete that part in a text editor first. Never delete only
+the script: see The boundary.
 
 ## The boundary
 
@@ -184,8 +203,9 @@ To take the hook out later, delete `.claude/hooks/protect_export.py` and the `"h
   file. A longer name that ends with it, like `old-shipments-export-sample.csv`, is blocked.
 - **It is strict where it does match.** A backup with `cp`, `sed ... > clean.csv` and even a read with `2>/dev/null`
   are blocked, because they name the file and have `cp` or `>`. A cleaned copy like `clean.csv` through Claude's Write tool is not.
-- **If the hook breaks, nothing is blocked.** Input it cannot read gave `exit 1`, and only `exit 2` blocks. That is why
-  step 4 tests it.
+- **If the hook breaks, it can fail both ways.** Input it cannot read gave `exit 1`, and only `exit 2` blocks, so then
+  nothing is blocked. That is why step 4 tests it. If the script is missing while the settings still point to it,
+  `python3` itself exits with 2: in our run, Claude Code then blocked every Write and shell command in the folder.
 - **It guards Claude's tool calls in this folder.** Changes you make yourself in another app do not go through it.
 - **It is a program on your computer.** Claude Code starts the hook command itself. Read any hook before you add it.
 - **More events exist.** This step uses one: before a tool call. See [the hooks docs](https://code.claude.com/docs/en/hooks).
@@ -198,9 +218,9 @@ To take the hook out later, delete `.claude/hooks/protect_export.py` and the `"h
 | `/hooks` shows no hook | `settings.json` must be in `.claude/` inside the folder where you start `claude`. Check with `ls .claude` |
 | The test in step 4 prints `exit 0` for the CSV line | You changed the file name in the hook, or the JSON line. Copy both again |
 | `python3` is not found, or a window offers to install developer tools | Accept the install, then run step 4 again. We did not test this |
-| The CSV changed anyway | Look at what Claude ran. A command outside the hook's list passes. See The boundary. Copy the file again from the kit yourself (the hook only checks Claude): `cp "$KIT/builder/14-claude-md-house-rules/shipments-export-sample.csv" .` |
+| The CSV changed anyway | Look at what Claude ran. A command outside the hook's list passes. See The boundary. Copy the file again from the kit yourself (the hook only checks Claude): `cp "$KIT/builder/14-claude-md-house-rules/shipments-export-sample.csv" .` In a new Terminal window, set `KIT` again first, as in step 3 |
 | Your Never line reads differently | Step 14 asked you to change a rule. The hook does not read CLAUDE.md, so it still guards the file |
-| You expect CLAUDE.md to be enough | In our test it held until the ask overrode it. The hook is for that moment |
+| You expect CLAUDE.md to be enough | In our test it held until the ask overrode it. Then only a No at the permission question kept the file the same, unless the hook was there |
 
 ## In our own work
 
