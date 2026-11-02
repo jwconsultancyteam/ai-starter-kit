@@ -11,11 +11,18 @@ Step 19 checked a result. Step 20 compared model runs. Here the question is what
 
 ## Do it yourself
 
-From the kit root, run:
+1. Get the kit. On the [kit page](https://github.com/jwconsultancyteam/ai-starter-kit), click the green **Code** button,
+   then **Download ZIP**, and unzip it. If you cloned the kit earlier, open that folder in Terminal and run `git pull`
+   instead, so you have this step. We did not test these download steps.
+2. In Terminal, type `cd ` with a space after it, drag the kit folder onto the Terminal window, and press Enter.
+3. Run:
 
 ```sh
 python3 expert/21-three-guardrails/demo.py
 ```
+
+4. Compare your output with What happened below. Both reports say `Shipment rows: 198`, and with the guardrails on the
+   append, the read and the request fail. Your temporary folder path and port number will differ from ours.
 
 [Read the script](demo.py) before running it. It copies the CSV into a temporary directory, creates a dummy private note and starts a local HTTP listener. It runs four commands without its policy, resets the CSV and removes the first report, then runs the same commands under the policy. The first command counts lines below the header with awk. This works for this fixture: the script also checks the count with Python's CSV reader. Do not generalise that line-counting shortcut to CSV files with multiline records.
 
@@ -100,6 +107,17 @@ Shipment rows: 198
 count rows and write report: exit 0
 Shipment rows: 198
 ```
+
+## Common mistakes
+
+| Mistake | What to do |
+|---|---|
+| `can't open file '.../expert/21-three-guardrails/demo.py': [Errno 2] No such file or directory` | You are not in the kit folder, or your copy is older than this step. Do steps 1 and 2 again |
+| `This exercise needs macOS with /usr/bin/sandbox-exec.` | The script runs only on a Mac. On Windows or Linux, read What happened and stop here |
+| You downloaded only `demo.py` | It reads the CSV from step 11, so it needs the whole kit. Use step 1. We did not test this |
+| `Unexpected result. Stop and inspect the output.` or `Unexpected report or fingerprint.` | A command did not do what our run did. Do not change the policy. Compare your output with What happened. We did not see this in our runs |
+| Your temporary path or port number differs from ours | Normal. The script makes a new temporary folder and picks a free port on every run |
+| `python3` is not found, or a window offers to install developer tools | Accept the install, then run step 3 again. We did not test this |
 
 ## The boundary
 
