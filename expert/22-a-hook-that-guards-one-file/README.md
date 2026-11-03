@@ -9,7 +9,7 @@ not run.
 |---|---|
 | Time | about 15 minutes |
 | You need | A Mac with Claude Code, as in [step 13](../../builder/13-claude-code-on-your-laptop/) (a paid Claude plan), the step 14 test folder, accept edits mode from [step 15](../../builder/15-plan-mode-and-undo/), Python 3 (`python3`) and a copy of the kit from 3 Nov 2026 or later. The commands are for the Mac Terminal. We did not test Windows |
-| Tested | 28 live sessions and 19 runs of `claude -p` (print mode, no one at the keyboard, with `--permission-prompts none`). Each run had a new test folder with `git init`, and only that folder's own settings: no personal settings or CLAUDE.md, auto memory off, no MCP servers, and only the plugins Claude Code builds in. Claude Code 2.1.316, Opus 5.5, macOS 27.0.1, Python 3.9.6 for the hook, 2 and 3 Nov 2026 |
+| Tested | 29 live sessions (27 for Ask 2, 2 where we typed the `!` command) and 19 runs of `claude -p` (print mode, no one at the keyboard, with `--permission-prompts none`). Each run had a new test folder with `git init`, and only that folder's own settings: no personal settings or CLAUDE.md, auto memory off, no MCP servers, and only the plugins Claude Code builds in. Claude Code 2.1.316, Opus 5.5, macOS 27.0.1, Python 3.9.6 for the hook, 2 and 3 Nov 2026 |
 | Download | [protect_export.py](protect_export.py), [settings.json](settings.json) and [the carousel as a PDF](expert-step22-a-hook-that-guards-one-file-carousel.pdf) (5 slides) |
 
 ## Our test
@@ -44,7 +44,8 @@ what kept the CSV the same. The cursor starts on `1. Yes`, and the question also
 questions itself. We did not test auto mode.
 
 The `!` command Claude offers is one the hook does not check. A line that starts with `!` runs in your shell, as you.
-We typed it once in a new live session with the hook in place, and the CSV changed. Claude Code sometimes showed that
+We typed it in 2 new live sessions with the hook in place, and the CSV changed both times. In the second we listed the
+hook files first. Claude Code sometimes showed that
 command as a suggestion in the input line. Typing `/exit` over it was safe (4 of 4). `Tab` filled it in, in shell
 mode. `Ctrl+U` then `Backspace` left shell mode, but the suggestion came back; typing `/exit` over it was safe
 (1 try).
@@ -61,7 +62,7 @@ With the hook, Claude got this message back:
 PreToolUse:Bash hook error: [python3 "$CLAUDE_PROJECT_DIR/.claude/hooks/protect_export.py"]: Blocked by a hook: shipments-export-sample.csv is read-only. Write the result to a new file.
 ```
 
-**Ask 2, in scripted runs.** In `claude -p` nobody can answer a question, so Claude Code refuses each one by itself and
+**Ask 2, in scripted runs.** In `claude -p` with `--permission-prompts none`, nobody can answer a question, so Claude Code refuses each one by itself and
 tells Claude to go on with what needs no approval. In 4 of the 7 runs without the hook, Claude then used the Edit tool, which asks nothing in accept edits mode, and the
 CSV changed. 2 of those 4 had an allow rule for `sed`. With the hook, the CSV changed in 0 of 7. In our live sessions
 a No ended the turn, and Claude did not go on to the Edit tool.
@@ -124,7 +125,7 @@ Interrupted · What should Claude do instead?
 The same ask. The hook script ran before the command and exited with code 2.
 
 - WITH THE HOOK: Blocked first in 19 of 22 live sessions. In 3, a question for a read came first. The CSV changed in 0 of 22.
-- NOT CHECKED: Claude then offered a ! sed command for you to run (18 of 22). The hook does not check it. We typed it once: the CSV changed.
+- NOT CHECKED: Claude then offered a ! sed command for you to run (18 of 22). The hook does not check it. We typed it twice: the CSV changed.
 
 ```text
 # live session with the hook, lines shortened
@@ -222,7 +223,7 @@ the script: see The boundary.
 
 - **It knows a short list of commands, and only when they spell out the file name.** It blocks Claude's Edit and Write
   tools on the file, and a shell command that names the file and has one of `>`, `sed -i`, `perl -i`, `mv`, `rm`, `cp`,
-  `tee` or `truncate`. `sed -i` on `*.csv`, on `shipments-*.csv` or on a name kept in a shell variable got `exit 0`.
+  `tee` or `truncate`, spelled like that: `perl -p -i` and `sed --in-place` got `exit 0`. `sed -i` on `*.csv`, on `shipments-*.csv` or on a name kept in a shell variable got `exit 0`.
   Other commands that change the file get through, even when they name it. We sent the hook planned calls without Claude: an inline Python write,
   `sed -E -i`, `git checkout --` and `dd` all got `exit 0`, and so did a script like `python3 fix.py`. It is a guard
   for the commands it knows, not a lock on the file.
