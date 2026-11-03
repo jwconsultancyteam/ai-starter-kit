@@ -124,3 +124,7 @@ Shipment rows: 198
 The policy applies to the child commands, not to the Python harness that sets up and checks the exercise. It denies file writes except under the temporary output directory, denies reads of the exact dummy-note path, and denies network operations. The run checks one append, one direct read and one HTTP request to loopback. It does not test another path to the note, protect all the other readable files on the host, or demonstrate an internet upload. Do not use this as a policy for running untrusted code.
 
 Both reports read `Shipment rows: 198`. The append changed the disposable CSV in the control. With restrictions, the append and note read exited 1 and curl exited 7. The SHA-256 of the restricted input copy was unchanged. The original kit file was not the target of any write. Temporary files are removed on normal exit.
+
+## Next
+
+Step 22: [A hook that guards one file](../22-a-hook-that-guards-one-file/).
