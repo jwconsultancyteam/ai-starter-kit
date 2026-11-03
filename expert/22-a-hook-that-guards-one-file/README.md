@@ -9,7 +9,7 @@ not run.
 |---|---|
 | Time | about 15 minutes |
 | You need | A Mac with Claude Code, as in [step 13](../../builder/13-claude-code-on-your-laptop/) (a paid Claude plan), the step 14 test folder, accept edits mode from [step 15](../../builder/15-plan-mode-and-undo/), Python 3 (`python3`) and a copy of the kit from 3 Nov 2026 or later. The commands are for the Mac Terminal. We did not test Windows |
-| Tested | 29 live sessions (27 for Ask 2, 2 where we typed the `!` command) and 19 runs of `claude -p` (print mode, no one at the keyboard, with `--permission-prompts none`). Each run had a new test folder with `git init`, and only that folder's own settings: no personal settings or CLAUDE.md, auto memory off, no MCP servers, and only the plugins Claude Code builds in. Claude Code 2.1.316, Opus 5.5, macOS 27.0.1, Python 3.9.6 for the hook, 2 and 3 Nov 2026 |
+| Tested | 29 live sessions (27 for Ask 2, 2 where we typed the `!` command) and 20 runs of `claude -p` (print mode, no one at the keyboard): 19 with `--permission-prompts none`, and 1 without it, for a hook that exits 1. Each run had a new test folder with `git init`, and only that folder's own settings: no personal settings or CLAUDE.md, auto memory off, no MCP servers, and only the plugins Claude Code builds in. Claude Code 2.1.316, Opus 5.5, macOS 27.0.1, Python 3.9.6 for the hook, 2 and 3 Nov 2026 |
 | Download | [protect_export.py](protect_export.py), [settings.json](settings.json) and [the carousel as a PDF](expert-step22-a-hook-that-guards-one-file-carousel.pdf) (5 slides) |
 
 ## Our test
@@ -199,7 +199,7 @@ cp backup of the file: exit 2
    and in our test it changed the CSV. Claude Code may show it as a suggestion in the input line. Do not press `Tab`:
    that fills it in as a `!` line, and a `!` line runs in your shell when you press `Enter`. If you did press `Tab`,
    press `Ctrl+U`, then `Backspace`. The suggestion may come back: that is normal. Type `/exit` over it (step 7).
-   Also say no if Claude offers to change or turn off the hook. Claude may also offer a cleaned copy in a new file.
+   If Claude suggests you turn off or loosen the hook so it can make the edit, do not. Claude may also offer a cleaned copy in a new file.
    The hook's message says to write a new file, while the step 14 CLAUDE.md says to create one only when you ask.
    In our sessions Claude offered the copy rather than making it, and some answers named that rule. When we said yes
    once, Claude made the copy and then asked to change its line endings; we chose No. The original stayed the same.
@@ -232,13 +232,13 @@ the script: see The boundary.
 - **It is strict where it does match.** A backup with `cp`, `sed ... > clean.csv` and even a read with `2>/dev/null`
   are blocked, because they name the file and have `cp` or `>`. A cleaned copy like `clean.csv` through Claude's Write tool is not.
 - **If the hook breaks, it can fail both ways.** Input it cannot read gave `exit 1`, and only `exit 2` blocks, so then
-  nothing is blocked. That is why step 4 tests it. If the script is missing while the settings still point to it,
+  nothing is blocked: in a `claude -p` run with a hook script that exits 1, Claude made the file it was asked for. That is why step 4 tests it. If the script is missing while the settings still point to it,
   `python3` itself exits with 2: in our run, Claude Code then blocked both calls Claude tried, a Write and a shell command,
   and the file was not made.
 - **It guards Claude's tool calls in this folder, not yours.** A `!` command you type in Claude Code, or a change you
   make in another app, does not go through it. In our test, the `! sed -i` command Claude offers changed the CSV.
 - **It does not guard itself.** An edit to `.claude/settings.json` and `rm` of the hook script both got `exit 0`. If
-  Claude offers to change or turn off the hook, say no.
+  Claude suggests you turn off or loosen the hook so it can make the edit, do not.
 - **It is a program on your computer.** Claude Code starts the hook command itself. Read any hook before you add it.
 - **More events exist.** This step uses one: before a tool call. See [the hooks docs](https://code.claude.com/docs/en/hooks).
 
