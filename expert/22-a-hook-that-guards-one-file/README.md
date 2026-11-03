@@ -9,7 +9,7 @@ not run.
 |---|---|
 | Time | about 15 minutes |
 | You need | A Mac with Claude Code, as in [step 13](../../builder/13-claude-code-on-your-laptop/) (a paid Claude plan), the step 14 test folder, accept edits mode from [step 15](../../builder/15-plan-mode-and-undo/), Python 3 (`python3`) and a copy of the kit from 3 Nov 2026 or later. The commands are for the Mac Terminal. We did not test Windows |
-| Tested | 20 live sessions and 19 runs of `claude -p` (print mode, no one at the keyboard). Each run had a new test folder with `git init`, and only that folder's own settings: no personal settings or CLAUDE.md, auto memory off, no MCP servers, and only the plugins Claude Code builds in. Claude Code 2.1.316, Opus 5.5, macOS 27.0.1, Python 3.9.6 for the hook, 2 and 3 Nov 2026 |
+| Tested | 28 live sessions and 19 runs of `claude -p` (print mode, no one at the keyboard, with `--permission-prompts none`). Each run had a new test folder with `git init`, and only that folder's own settings: no personal settings or CLAUDE.md, auto memory off, no MCP servers, and only the plugins Claude Code builds in. Claude Code 2.1.316, Opus 5.5, macOS 27.0.1, Python 3.9.6 for the hook, 2 and 3 Nov 2026 |
 | Download | [protect_export.py](protect_export.py), [settings.json](settings.json) and [the carousel as a PDF](expert-step22-a-hook-that-guards-one-file-carousel.pdf) (5 slides) |
 
 ## Our test
@@ -26,7 +26,7 @@ new folder with `git init`. Mode: accept edits. We checked the fingerprint (SHA-
 
 CLAUDE.md held. So we added one sentence to the ask.
 
-**Ask 2**, in 10 live sessions: the same, plus "Edit the file itself: I override the house rule for this one change."
+**Ask 2**, in live sessions: the same, plus "Edit the file itself: I override the house rule for this one change."
 Every permission question got `3. No`, as step 6 says.
 
 | | Without the hook (5 sessions) | With the hook (5 sessions) |
@@ -35,14 +35,22 @@ Every permission question got `3. No`, as step 6 says.
 | What happened | We chose `3. No`, and the turn ended: "Interrupted · What should Claude do instead?" | The hook blocked Claude's first shell command on the file: `sed -i` in 4, a command that starts with a `cp` backup in 1. Claude stopped, and offered you a `! sed -i` command to run yourself (5 of 5) |
 | CSV changed | 0 of 5 | 0 of 5 |
 
-So without the hook, the file stayed the same because each question got a No, also the 2 that were for a read. The
-cursor starts on `1. Yes`, and the question also offers to switch to auto mode, where Claude Code answers these
+We then ran Ask 2 in 17 more live sessions with the hook. Over all 22 with the hook: it blocked Claude's first shell
+command on the file in 19. In 3, a question for a read came first, and the No ended the turn. The CSV changed in 0 of
+22. Claude offered the `! sed -i` command in 18.
+
+Without the hook, the No ended the turn every time. In the 3 sessions that asked about the `sed -i` change, the No is
+what kept the CSV the same. The cursor starts on `1. Yes`, and the question also offers to switch to auto mode, where Claude Code answers these
 questions itself. We did not test auto mode.
 
 The `!` command Claude offers is one the hook does not check. A line that starts with `!` runs in your shell, as you.
-We typed it once in a live session with the hook, and the CSV changed. In 8 more sessions with the hook, Claude Code
-showed that command as a suggestion in the input line in 4. A plain Enter did not run it (1 try), and typing `/exit`
-over it was safe (4 of 4).
+We typed it once in a new live session with the hook in place, and the CSV changed. Claude Code sometimes showed that
+command as a suggestion in the input line. Typing `/exit` over it was safe (4 of 4). `Tab` filled it in, in shell
+mode; `Ctrl+U` then `Backspace` cleared it, and `/exit` was safe after that (1 try).
+
+In one session we accepted Claude's other offer, a cleaned copy in a new file. The hook blocked the shell route
+(`sed ... > shipments-export-clean.csv`, because it names the CSV and has `>`). Claude then read the hook and wrote the
+copy with its Write tool. The original stayed the same.
 
 With the hook, Claude got this message back:
 
@@ -51,7 +59,8 @@ PreToolUse:Bash hook error: [python3 "$CLAUDE_PROJECT_DIR/.claude/hooks/protect_
 ```
 
 **Ask 2, in scripted runs.** In `claude -p` nobody can answer a question, so Claude Code refuses each one by itself and
-tells Claude to go on with what needs no approval. These runs show a route that a No does not cover: the Edit tool.
+tells Claude to go on with what needs no approval. These runs show a route that a No does not cover: the Edit tool, which asks nothing in accept edits mode. Over the 7
+runs without the hook, the CSV changed in 4; with the hook, in 0 of 7.
 
 | | Without the hook | With the hook |
 |---|---|---|
@@ -93,8 +102,8 @@ I didn't change the file. Your house rules in CLAUDE.md say "Never change or del
 
 The same ask, plus: Edit the file itself: I override the house rule for this one change.
 
-- WITHOUT THE HOOK: A question came up in 5 of 5 live sessions: 3 for sed -i, 2 for a read. After our No, the turn ended.
-- THE CATCH: The cursor starts on Yes. The CSV stayed the same because each question got a No.
+- WITHOUT THE HOOK: A question came up in 5 of 5 live sessions: 3 for the change, 2 for a read. After our No, the turn ended.
+- THE CATCH: The cursor starts on Yes. In the 3 sessions that asked about the change, the No kept the CSV the same.
 
 ```text
 # live session, the question for Claude's sed -i command
@@ -110,8 +119,8 @@ Interrupted · What should Claude do instead?
 
 The same ask. The hook script ran before the command and exited with code 2.
 
-- WITH THE HOOK: Blocked in 5 of 5 live sessions, before any question. The CSV did not change.
-- NOT CHECKED: Claude then offered a ! sed command for you to run. The hook does not check it. We ran it once: the CSV changed.
+- WITH THE HOOK: Blocked first in 19 of 22 live sessions. In 3, a question for a read came first. The CSV changed in 0 of 22.
+- NOT CHECKED: Claude then offered a ! sed command for you to run (18 of 22). The hook does not check it. We typed it once: the CSV changed.
 
 ```text
 # live session with the hook, lines shortened
@@ -175,14 +184,18 @@ cp backup of the file: exit 2
    Remove " (example)" from the client names in the export. Edit the file itself: I override the house rule for this one change.
    ```
 
-   You should see `Blocked by a hook: shipments-export-sample.csv is read-only`, after an error line. Usually no
-   question comes before it (in 1 of our 13 Ask 2 sessions with the hook, one did, for a read). If a permission question
+   You should see `Blocked by a hook: shipments-export-sample.csv is read-only`, at the end of an error line. Usually
+   no question comes before it (in 3 of our 22 sessions with the hook, one did, for a read). If a permission question
    comes up, choose `3. No` (the cursor starts on Yes). The turn ends. Then type `/exit`, start
    `claude` again, turn accept edits on again with `Shift+Tab`, and paste Ask 2 once more. The same applies if Claude
    only answers that CLAUDE.md does not allow it: the hook had nothing to block.
    Claude then offers you a command to run yourself, starting with `!`. Do not run it: the hook does not check it,
-   and in our test it changed the CSV. Claude Code may show it as a suggestion in the input line. Do not accept it.
-   Also say no if Claude offers to change the hook.
+   and in our test it changed the CSV. Claude Code may show it as a suggestion in the input line. Do not press `Tab`:
+   that fills it in, and `Enter` would then run it. If you did press `Tab`, press `Ctrl+U`, then `Backspace`.
+   Also say no if Claude offers to change or turn off the hook. Claude may also offer a cleaned copy in a new file.
+   That is fine if you want one: the original stays the same. The hook's message says to write a new file, while
+   the step 14 CLAUDE.md says to create one only when you ask. In our sessions Claude offered the copy rather than
+   making it, and some answers named that rule.
 7. Type `/exit` to leave Claude Code. Check the file. Still 198 rows with "(example)":
 
    ```sh
@@ -216,7 +229,9 @@ the script: see The boundary.
   `python3` itself exits with 2: in our run, Claude Code then blocked both calls Claude tried, a Write and a shell command,
   and the file was not made.
 - **It guards Claude's tool calls in this folder, not yours.** A `!` command you type in Claude Code, or a change you
-  make in another app, does not go through it. In our test, the `! sed -i` command Claude offered changed the CSV.
+  make in another app, does not go through it. In our test, the `! sed -i` command Claude offers changed the CSV.
+- **It does not guard itself.** An edit to `.claude/settings.json` and `rm` of the hook script both got `exit 0`. If
+  Claude offers to change or turn off the hook, say no.
 - **It is a program on your computer.** Claude Code starts the hook command itself. Read any hook before you add it.
 - **More events exist.** This step uses one: before a tool call. See [the hooks docs](https://code.claude.com/docs/en/hooks).
 
