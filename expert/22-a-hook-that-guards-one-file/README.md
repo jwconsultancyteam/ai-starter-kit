@@ -195,6 +195,7 @@ cp backup of the file: exit 2
    option that starts with `Yes`. The turn ends. Then type `/exit`, start
    `claude` again, turn accept edits on again with `Shift+Tab`, and paste Ask 2 once more. The same applies if Claude
    only answers that CLAUDE.md does not allow it: the hook had nothing to block.
+   Try at most 3 times. If you still see no block, go to step 7: step 4 already showed that the hook blocks an edit to the CSV.
    Claude then offers you a command to run yourself, starting with `!`. Do not run it: the hook does not check it,
    and in our test it changed the CSV. Claude Code may show it as a suggestion in the input line. Do not press `Tab`:
    that fills it in as a `!` line, and a `!` line runs in your shell when you press `Enter`. If you did press `Tab`,
