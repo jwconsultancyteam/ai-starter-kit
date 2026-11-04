@@ -2,6 +2,10 @@
 
 What changed in the kit, newest first. Dates are Brussels time.
 
+## 4 Nov 2026
+
+- Step 22 is live. No step went out on 3 Nov, so the README now says a new step comes most days, not every day.
+
 ## 3 Nov 2026
 
 - Expert, step 22: a hook that guards one file. With the step 14 CLAUDE.md alone, the CSV did not change on a plain ask (0 of 4 scripted runs). After an override in the ask, in 27 live sessions where every permission question got a No, the CSV changed in none: without the hook the No ended the turn (5 of 5), with the hook the command was blocked before any question in 19 of 22. Scripted runs show the hook also blocks the Edit tool in accept edits mode. A `!` command the reader types is not checked: Claude offered one in 18 of 22 sessions, and when we typed it (2 sessions), the CSV changed. Tested in Claude Code 2.1.316 on a Mac, 2 and 3 Nov 2026, with only the folder's own settings. The hook guards a short list of commands, not every way to change the file. The README says how to remove it safely: settings first, then the script.
