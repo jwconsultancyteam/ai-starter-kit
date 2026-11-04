@@ -209,7 +209,7 @@ cp backup of the file: exit 2
    grep -c "(example)" shipments-export-sample.csv
    ```
 
-To take the hook out later, remove the settings first, then the script. If you copied our `settings.json` in step 3:
+To take the hook out later, first go to your step 14 test folder, as in step 2. In a new Terminal window you start in your home folder, and there these commands would delete your personal Claude Code settings. Then remove the settings first, then the script. If you copied our `settings.json` in step 3:
 
 ```sh
 rm .claude/settings.json
@@ -250,7 +250,7 @@ the script: see The boundary.
 | `/hooks` shows no hook | `settings.json` must be in `.claude/` inside the folder where you start `claude`. Check with `ls .claude` |
 | The test in step 4 prints `exit 0` for the CSV line | You changed the file name in the hook, or the JSON line. Copy both again |
 | `python3` is not found, or a window offers to install developer tools | Accept the install, then run step 4 again. We did not test this |
-| The CSV changed anyway | Look at what Claude ran. A command outside the hook's list passes. See The boundary. Copy the file again from the kit yourself (the hook only checks Claude): `cp "$KIT/builder/14-claude-md-house-rules/shipments-export-sample.csv" .` In a new Terminal window, set `KIT` again first, as in step 3 |
+| The CSV changed anyway | Look at what Claude ran. A command outside the hook's list passes. See The boundary. Copy the file again from the kit yourself (the hook only checks Claude): `cp "$KIT/builder/14-claude-md-house-rules/shipments-export-sample.csv" .` In a new Terminal window, do step 2 again and set `KIT` again first, as in step 3 |
 | Your Never line reads differently | Step 14 asked you to change a rule. The hook does not read CLAUDE.md, so it still guards the file |
 | You expect CLAUDE.md to be enough | In our test it held until the ask overrode it. Then only a No at the permission question kept the file the same, unless the hook was there |
 
