@@ -8,7 +8,7 @@ not run.
 | | |
 |---|---|
 | Time | about 15 minutes |
-| You need | A Mac with Claude Code, as in [step 13](../../builder/13-claude-code-on-your-laptop/) (a paid Claude plan), the step 14 test folder, accept edits mode from [step 15](../../builder/15-plan-mode-and-undo/), Python 3 (`python3`) and a copy of the kit from 3 Nov 2026 or later. The commands are for the Mac Terminal. We did not test Windows |
+| You need | A Mac with Claude Code, as in [step 13](../../builder/13-claude-code-on-your-laptop/) (a paid Claude plan), the step 14 test folder, accept edits mode from [step 15](../../builder/15-plan-mode-and-undo/), Python 3 (`python3`) and a copy of the kit from 5 Nov 2026 or later. The commands are for the Mac Terminal. We did not test Windows |
 | Tested | 29 live sessions (27 for Ask 2, 2 where we typed the `!` command) and 20 runs of `claude -p` (print mode, no one at the keyboard): 19 with `--permission-prompts none`, and 1 without it, for a hook that exits 1. Each run had a new test folder with `git init`, and only that folder's own settings: no personal settings or CLAUDE.md, auto memory off, no MCP servers, and only the plugins Claude Code builds in. Claude Code 2.1.316, Opus 5.5, macOS 27.0.1, Python 3.9.6 for the hook, 2 and 3 Nov 2026 |
 | Download | [protect_export.py](protect_export.py), [settings.json](settings.json) and [the carousel as a PDF](expert-step22-a-hook-that-guards-one-file-carousel.pdf) (5 slides) |
 
@@ -165,13 +165,14 @@ cp backup of the file: exit 2
    ```sh
    mkdir -p .claude/hooks
    cp "$KIT/expert/22-a-hook-that-guards-one-file/protect_export.py" .claude/hooks/
-   cp -n "$KIT/expert/22-a-hook-that-guards-one-file/settings.json" .claude/settings.json
+   if [ -e .claude/settings.json ]; then echo "KEPT YOUR OWN settings.json: copy the hooks part into it"; else cp "$KIT/expert/22-a-hook-that-guards-one-file/settings.json" .claude/settings.json && echo "copied our settings.json"; fi
    ls .claude .claude/hooks
    ```
 
    You see `hooks` and `settings.json`, then `protect_export.py`. Read the hook before you go on: `open -e .claude/hooks/protect_export.py`
-   opens it in TextEdit (Finder hides folders that start with a dot). `cp -n` does not overwrite a `settings.json` you
-   already have, and it says nothing when it skips. If you had one, copy the `"hooks"` part into it.
+   opens it in TextEdit (Finder hides folders that start with a dot). The `if` line never overwrites a `settings.json`
+   you already have. If it says `KEPT YOUR OWN settings.json`, copy the `"hooks"` part of ours into yours, and write
+   that down: you need it when you take the hook out.
 4. Test the hook before Claude uses it. These two lines send it a planned call, the way Claude Code does:
 
    ```sh
@@ -211,7 +212,7 @@ cp backup of the file: exit 2
    grep -c "(example)" shipments-export-sample.csv
    ```
 
-To take the hook out later, first go to your step 14 test folder, as in step 2. In a new Terminal window you start in your home folder, and there these commands would delete your personal Claude Code settings. Then remove the settings first, then the script. If you copied our `settings.json` in step 3:
+To take the hook out later, first go to your step 14 test folder, as in step 2. In a new Terminal window you start in your home folder, and there these commands would delete your personal Claude Code settings. Then remove the settings first, then the script. If step 3 said `copied our settings.json`:
 
 ```sh
 rm .claude/settings.json

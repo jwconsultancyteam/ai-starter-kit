@@ -5,6 +5,8 @@ What changed in the kit, newest first. Dates are Brussels time.
 ## 5 Nov 2026
 
 - Step 22 is live. No step went out on 3 or 4 Nov, so the README now says a new step comes most days, not every day.
+- Step 22: step 1 now says to delete the old `ai-starter-kit-main` folder first, or to use `ai-starter-kit-main 2`, after a second download. The 'No such file' row checks with `ls "$KIT/expert"`.
+- Step 22: step 3 now says out loud whether it copied our `settings.json` or kept yours, so the steps to take the hook out cannot delete your own settings. You need a kit from 5 Nov or later.
 
 ## 4 Nov 2026
 
