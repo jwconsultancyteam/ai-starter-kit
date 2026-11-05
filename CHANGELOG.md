@@ -5,6 +5,9 @@ What changed in the kit, newest first. Dates are Brussels time.
 ## 5 Nov 2026
 
 - Step 22 is live. No step went out on 3 or 4 Nov, so the README now says a new step comes most days, not every day.
+
+## 4 Nov 2026
+
 - Step 22: the steps to take the hook out, and to copy the CSV back, now start in the step 14 test folder. Run from a new Terminal window, they could delete your personal Claude Code settings.
 - Step 22: step 6 now says to try Ask 2 at most 3 times.
 
