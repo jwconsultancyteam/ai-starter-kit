@@ -155,7 +155,8 @@ cp backup of the file: exit 2
 
 1. Get the latest kit. On the [kit page](https://github.com/jwconsultancyteam/ai-starter-kit), click the green **Code**
    button, then **Download ZIP**, and unzip it. If you cloned the kit, run `git pull` in it instead. An older copy has no
-   step 22 folder.
+   step 22 folder. If a folder named `ai-starter-kit-main` from an earlier step is still there, delete it before you
+   unzip. If not, the new folder is named `ai-starter-kit-main 2`, and that is the one to use in step 3.
 2. Open Terminal, type `cd ` (with a space), drag your step 14 test folder onto the window, and press Enter. The folder
    holds `shipments-export-sample.csv` and `CLAUDE.md`. No folder yet? Do step 14, steps 1 and 3.
 3. Type `KIT=` (no space after it), drag the kit folder onto the Terminal window, and press Enter. Then copy the two
@@ -247,7 +248,7 @@ the script: see The boundary.
 
 | Mistake | What to do |
 |---|---|
-| `cp: ... No such file or directory` in step 3 | Your kit copy is older than this step, or `KIT` is not set. Do step 1, then step 3 again |
+| `cp: ... No such file or directory` in step 3 | Your kit copy is older than this step, or `KIT` is not set. Type `ls "$KIT/expert"`: it must list `22-a-hook-that-guards-one-file`. If not, do step 1 again, delete the old kit folder first, then step 3 again |
 | `/hooks` shows no hook | `settings.json` must be in `.claude/` inside the folder where you start `claude`. Check with `ls .claude` |
 | The test in step 4 prints `exit 0` for the CSV line | You changed the file name in the hook, or the JSON line. Copy both again |
 | `python3` is not found, or a window offers to install developer tools | Accept the install, then run step 4 again. We did not test this |
