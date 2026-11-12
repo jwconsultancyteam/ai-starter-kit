@@ -1,6 +1,6 @@
 # Expert, step 23: A workflow with a stop rule
 
-"Keep fixing until the test passes" is a loop, and a loop needs a rule for when to stop. In a plain ask, Claude decides
+Keep fixing until the test passes: that is a loop, and a loop needs a rule for when to stop. In a plain ask, Claude decides
 that while it works. In a dynamic workflow, Claude first writes a small script that starts agents one step at a time.
 You can read that script, with its stop rule, before it runs. Here we gave the same job both ways and counted what each
 one cost.
