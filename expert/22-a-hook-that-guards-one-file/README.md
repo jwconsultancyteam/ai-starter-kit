@@ -264,4 +264,4 @@ blocked our own download of the hooks docs page.
 
 ## Next
 
-Step 23: workflows.
+[Step 23: A workflow with a stop rule](../23-a-workflow-with-a-stop-rule/).

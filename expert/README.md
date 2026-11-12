@@ -7,3 +7,7 @@
 ## Step 22: A hook that guards one file
 
 [Add the hook](22-a-hook-that-guards-one-file/). A small script blocks Claude Code's edits and a short list of shell commands on one file, even after you override your own CLAUDE.md rule. It is a guard for the commands it knows, not a lock on the file.
+
+## Step 23: A workflow with a stop rule
+
+[Run the workflow test](23-a-workflow-with-a-stop-rule/). Give one fix job as a plain ask and as a dynamic workflow, read the script's stop rule before it runs, and save it as a slash command. On this small job the plain ask did as well, with fewer questions and about half the tokens.

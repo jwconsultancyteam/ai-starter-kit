@@ -2,6 +2,12 @@
 
 What changed in the kit, newest first. Dates are Brussels time.
 
+## 16 Nov 2026
+
+- Step 23 is live: a workflow with a stop rule.
+- The README no longer says a new step comes most days. Step 22 went out on 5 Nov and step 23 on 16 Nov. It now says a new step comes when it is tested.
+- Step 22: the Next line links to step 23.
+
 ## 5 Nov 2026
 
 - Step 22 is live. No step went out on 3 or 4 Nov, so the README now says a new step comes most days, not every day.

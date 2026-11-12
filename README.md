@@ -1,9 +1,9 @@
 # AI Starter Kit
 
 **From your first chat to AI agents that work on their own: they talk to each other, have their own wallet, and pay or get paid for you.** Free templates, prompts and setups, one small step at a
-time, with the exact clicks. Claude first. Everything here is what we use ourselves to build and run real software. Steps 20 to 22 include controlled experiments.
+time, with the exact clicks. Claude first. Everything here is what we use ourselves to build and run real software. Steps 20 to 23 include controlled experiments.
 
-New step most days, weekends included. Starter first, then Builder, then Expert.
+A new step comes when it is tested. Starter first, then Builder, then Expert.
 
 ---
 
@@ -54,7 +54,8 @@ No coding. The Starter steps (1 to 10) need no GitHub account.
 | Builder | [20. Other models with Pi](builder/20-other-models-with-pi/) | See how one ask gave two answers, make it sharper in Claude Code, and let the step 19 test check the work | Live (1 Nov 2026) |
 | Expert | [21. Three guardrails for one spreadsheet](expert/21-three-guardrails/) | Test a file write, a private note and a local connection | Live (2 Nov 2026) |
 | Expert | [22. A hook that guards one file](expert/22-a-hook-that-guards-one-file/) | Add a hook that blocks changes to one file, and see where it stops | Live (5 Nov 2026) |
-| Expert | 23 to 30 | Workflows, AI review, second opinions, tracing every AI call, agents that run overnight, connecting your own tools, agents that talk to each other and agents with their own wallet | Coming |
+| Expert | [23. A workflow with a stop rule](expert/23-a-workflow-with-a-stop-rule/) | Give one fix job as a plain ask and as a workflow, read the stop rule before it runs, and save it as a slash command | Live (16 Nov 2026) |
+| Expert | 24 to 30 | AI review, second opinions, tracing every AI call, agents that run overnight, connecting your own tools, agents that talk to each other and agents with their own wallet | Coming |
 
 ---
 
@@ -67,7 +68,7 @@ to find it, the exact clicks, how to test it, and what can go wrong.
 |---|---|
 | Starter (1 to 10) | The template or sample files of that step, if it has any (for example `template.txt` and `example-john-doe.txt` in step 1), and `images/` with screenshots of the before and after |
 | Builder (11 to 20) | The sample files, templates and cheat sheet of that step, if it has any. Step 11 also has `images/` and `expected-output.md` |
-| Expert (21 to 30) | The scripts and settings of that step, if it has any (for example `protect_export.py` and `settings.json` in step 22) |
+| Expert (21 to 30) | The scripts and settings of that step, if it has any (for example `protect_export.py` and `settings.json` in step 22, or the `start` folder and `fix-changes-loop.js` in step 23) |
 
 Most steps show a **before and after**, or a test with the result we got: the same question, with one thing changed.
 So you see exactly what that one setting does.
