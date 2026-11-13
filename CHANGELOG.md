@@ -2,11 +2,11 @@
 
 What changed in the kit, newest first. Dates are Brussels time.
 
-## 16 Nov 2026
+## 13 Nov 2026
 
-- Step 23 is live: a workflow with a stop rule.
-- The README no longer says a new step comes most days. Step 22 went out on 5 Nov and step 23 on 16 Nov. It now says a new step comes when it is tested.
-- Step 22: the Next line links to step 23.
+- Expert, step 23: a workflow with a stop rule. The same fix job as a plain ask and as a dynamic workflow, 5 sessions each: the test passed in 5 of 5 both ways, and the plain ask used about half the tokens in total, and the workflow 4 to 5 times as many without cache reads. On a test that cannot pass, the plain ask stopped by its own judgement (2 of 2) and the workflow scripts stopped on their no-progress rule after 2 or 3 rounds (3 of 3). The test file and the CSV stayed the same in all 21 sessions. In accept edits mode, Claude Code asks before each workflow run, so you can read the script and its stop rule first. Tested in Claude Code 2.1.322 and 2.1.323 on a Mac, 12 and 13 Nov 2026, with only the folder's own settings.
+- The README no longer says a new step comes most days. Step 22 went out on 5 Nov. It now says a new step comes when it is tested.
+- The road table lists step 23. Step 22: the Next line links to step 23.
 
 ## 5 Nov 2026
 
