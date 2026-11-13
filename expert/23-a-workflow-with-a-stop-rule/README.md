@@ -15,7 +15,7 @@ decides how to fix. In [step 19](../../builder/19-tests-and-security-checks/), t
 |---|---|
 | Time | about 20 minutes |
 | You need | A Mac with Claude Code, as in [step 13](../../builder/13-claude-code-on-your-laptop/) (a paid Claude plan; on Pro, first turn on the Dynamic workflows row in `/config`), accept edits mode from [step 15](../../builder/15-plan-mode-and-undo/), git, Python 3 (`python3`) and a copy of the kit that has the step 23 folder. The commands are for the Mac Terminal. We did not test Windows |
-| Tested | 21 live sessions on 12 Nov 2026: 5 with the plain ask, 5 with the workflow ask, 2 with the workflow ask in auto mode, 2 that ran the saved workflow in a new session, 5 on a test that cannot pass, and 2 with the step 22 hook. Each session had a new test folder with `git init`, and only that folder's own settings: no personal settings or CLAUDE.md, auto memory off, no MCP servers and no allow rules. A test script typed our asks and answered Yes to every permission question. Then 3 more sessions on 13 Nov 2026, where the test script followed Do it yourself, steps 2 to 10, as written here. For those it started Claude Code with `--model claude-opus-5-5`, because the default model on our account was then Fable 5.2. 2 earlier sessions on a draft of the steps are not counted. Claude Code 2.1.322 (12 Nov) and 2.1.323 (13 Nov), Opus 5.5 on a Claude Ultra plan, macOS 27.0.1, Python 3.9.6 |
+| Tested | 21 live sessions on 12 Nov 2026: 5 with the plain ask, 5 with the workflow ask, 2 with the workflow ask in auto mode, 2 that ran the saved workflow in a new session, 5 on a test that cannot pass, and 2 with the step 22 hook. Each session had a new test folder with `git init`, and only that folder's own settings: no personal settings or CLAUDE.md, auto memory off, no MCP servers and no allow rules. A test script typed our asks and answered Yes to every permission question. Then 3 more sessions on 13 Nov 2026, where the test script followed Do it yourself, steps 2 to 10, of the 13 Nov draft of this page, in a temporary folder in place of `~/workflow-test`. It started Claude Code with `--model claude-opus-5-5`, because the default model on our account was then Fable 5.2. Since then, step 4 names that model, and step 10 has the stop (tested in 1 more session that day) and the checks after it. 2 earlier sessions on a draft of the steps are not counted. Claude Code 2.1.322 (12 Nov) and 2.1.323 (13 Nov), Opus 5.5 on a Claude Ultra plan, macOS 27.0.1, Python 3.9.6 |
 | Download | [fix-changes-loop.js](fix-changes-loop.js), the [start](start/) folder (4 files) and [the carousel as a PDF](expert-step23-a-workflow-with-a-stop-rule-carousel.pdf) (6 slides) |
 
 The Claude Code docs said on 12 Nov 2026: "Dynamic workflows are available on all paid plans, with Anthropic API
@@ -62,7 +62,7 @@ Run python3 test_changes.py, fix changes.py, then run the test again. Repeat unt
 Tokens are input, cache writes, cache reads and output, counted once per message in the session files, main session
 and workflow agents together. The middle session used about 159,000 (plain) and about 322,000 (workflow). Most of
 these are cache reads: 91 to 93% in the plain ask, 82 to 85% in the workflow ask. Without cache reads, the plain ask
-used about 11,000 to 14,000 tokens and the workflow ask about 49,000 to 57,000, 3.5 to 5 times as many. The
+used about 11,000 to 14,000 tokens and the workflow ask about 49,000 to 57,000, 3.6 to 5.1 times as many. The
 `/workflows` view showed a lower number for the agent, about 30,000 to 37,000 tokens in the 5 workflow-ask sessions.
 We do not know how that number is counted. We did not turn tokens into money. In the session on 13 Nov where the
 test script followed steps 4 to 8, the workflow ask used about 311,000 tokens and got 3 permission questions, 2 of them
@@ -107,7 +107,7 @@ of them the agent also changed the order of the lines, and Claude's report said:
 In the step 10 session, the script counted a round as progress when the count of failures went down or when the
 agent's description of the failure changed. Every round reported 1 failure before and 1 after. But each agent described
 the failure in its own words, so every round after the first counted as progress, and only the cap of 8 rounds ended
-the loop. In 5 of the 8 rounds, the agent's own report said to end the loop. Claude's final report said:
+the loop. In 6 of the 8 rounds (rounds 3 to 8), the agent's own report said to end the loop. Claude's final report said:
 "The workflow has a bug: it ran 8 rounds instead of stopping after 2 without progress."
 
 **The step 22 hook.** We put the [step 22](../22-a-hook-that-guards-one-file/) hook in a test folder and asked, with a
@@ -173,7 +173,7 @@ if (noProgress >= 2) return { status: 'stalled', rounds: round, history }
 The workflow runs in the background. `/workflows` shows each round.
 
 - THE VIEW: One phase, one agent per round, with its time.
-- THE QUESTIONS: The workflow agent asks before most of its shell commands: 2 or 3 times in a one-round run here.
+- THE QUESTIONS: The workflow agent asks before most of its shell commands: twice in each one-round run here.
 
 ```text
 # /workflows, after the run
@@ -187,7 +187,7 @@ fix-changes-loop
 We made the test expect -25, while 48 minus 71 is -23.
 
 - PLAIN ASK: One fix, then Claude stopped by its own judgement. 2 of 2.
-- WORKFLOW: 3 of 4 runs stopped on the no-progress rule after 2 or 3 rounds. 1 ran to its cap of 8 rounds. Claude changed neither the test nor the CSV.
+- WORKFLOW: 3 of 4 runs stopped on the no-progress rule after 2 or 3 rounds. 2 of them counted the real fix as no progress. 1 ran to its cap of 8 rounds. Claude changed neither the test nor the CSV.
 
 ```text
 # step 10 of the kit, from Claude's final report
@@ -235,8 +235,14 @@ Dynamic workflow saved to
 
    It prints `FAIL: changes.py does not print the three expected lines.` and the lines above.
 4. Make the Terminal window full screen with the green button at its top left, so the script in step 5 has room.
-   Start `claude` in the folder. If it asks whether you trust the folder, choose `Yes, I trust this folder`. Press
-   `Shift+Tab` until the bottom line says `accept edits on`. Paste the workflow ask:
+   Start Claude Code in the folder, with the model we tested:
+
+   ```sh
+   claude --model claude-opus-5-5
+   ```
+
+   If it asks whether you trust the folder, choose `Yes, I trust this folder`. Our sessions on 13 Nov started in auto
+   mode: the bottom line said `auto mode on`. Press `Shift+Tab` until it says `accept edits on`. Paste the workflow ask:
 
    ```text
    Use a workflow for this job: run python3 test_changes.py, fix changes.py, then run the test again. Repeat until the test passes, or stop after two rounds in a row with no progress. Never change test_changes.py or the CSV.
@@ -244,13 +250,19 @@ Dynamic workflow saved to
 
    Claude may ask before it runs the test first (1 of 6 sessions). Read the command and choose `1. Yes`.
 5. Claude Code asks `Run a dynamic workflow?` with three options: `1. Yes, run it`, `2. View raw script`, `3. No`.
-   Press `2`. The script is short (ours had 34 lines). Find the loop, the place where it counts a round without
-   progress, and the place where it stops after 2 of them: an `if` line or the `while` line itself. Check what it
-   compares to decide that a round made progress. In one of our runs it compared the agent's own description of the
-   failure, which changed every round, so the no-progress rule never stopped the loop. Then press `1`
-   (`Yes, run it`). In the script view, option 2 reads `View workflow summary`. Do not press `ctrl+g`: it opens the
-   script in an editor, and we did not test that. Our window was 160 by 50 and the whole script was on screen. In a
-   smaller window you may have to scroll. We did not test that.
+   Press `2`. The script is short (ours had 34 and 36 lines). Look for four things:
+
+   - The loop: a line that starts with `while` or `for`.
+   - The count of rounds without progress: a name such as `noProgress` that goes up by 1 (`noProgress++`) or back to 0.
+   - The stop: a line such as `if (noProgress >= 2)` with `break` or `return`, or the `while` line itself.
+   - A round cap, if there is one: a number of rounds the loop cannot pass. In `for (let i = 1; i <= 8; i++)`, the
+     cap is 8.
+
+   Then check what the script compares to decide that a round made progress. In one of our runs it compared the
+   agent's own description of the failure, which changed every round, so the no-progress rule never stopped the loop.
+   Then press `1` (`Yes, run it`). In the script view, option 2 reads `View workflow summary`. Do not press `ctrl+g`:
+   it opens the script in an editor, and we did not test that. Our window was 160 by 50. The 34-line script fit on the
+   screen. Of the 36-line one, the first line was off the top. You may have to scroll. We did not test that.
 
    If you cannot find a stop rule, press `3` (`No`). The docs say No cancels the run. Then ask Claude to add a stop
    rule before you run it again. We did not test that path.
@@ -299,7 +311,7 @@ Dynamic workflow saved to
    ```sh
    git checkout changes.py
    python3 test_changes.py
-   claude
+   claude --model claude-opus-5-5
    ```
 
    Press `Shift+Tab` until the bottom line says `accept edits on`, type `/` and the name from step 7 (for example `/fix-changes-loop`), and press
@@ -313,22 +325,30 @@ Dynamic workflow saved to
     git checkout changes.py
     sed -i '' 's/48  -23"/48  -25"/' test_changes.py
     python3 test_changes.py
-    claude
+    claude --model claude-opus-5-5
     ```
 
     The test prints `FAIL` and expects `3. route  BE-FR    71 ->   48  -25`. Start the saved workflow as in step 9 and
     answer the questions as in step 6. No honest fix can pass this test. The loop ends on its stop rule, or on its
     round cap if the script has one. In our run, the stop rule never fired: the loop ran all 8 rounds of its cap, with
     10 permission questions and about 708,000 tokens. When Claude reports, type `/workflows` to see how many rounds
-    ran (we saw `8/8 agents`), and press Esc. Then type `/exit` and put the test back:
+    ran (we saw `8/8 agents`), and press Esc.
+
+    To stop a run yourself, type `/workflows` while it runs. With one run, it opens that run, and the bottom line says
+    `x stop workflow`. Press `x`: the run then shows `stopped`. We tried this once, in round 3. No new round started in
+    the next 2 minutes, and Claude's answer still said `Waiting for 1 dynamic workflow to finish`. Press Esc.
+
+    Then type `/exit`, check the two files and put them back:
 
     ```sh
-    git checkout test_changes.py changes.py
+    git diff test_changes.py
+    shasum -a 256 shipments-export-sample.csv
+    git checkout test_changes.py changes.py shipments-export-sample.csv
     python3 test_changes.py
     ```
 
-    The test fails again with the planted bug, as in step 3. To stop a run yourself, the docs say: type `/workflows`,
-    select the run and press `x`. We did not test that.
+    `git diff test_changes.py` must show only your own change: on one line, `-23` became `-25`. The fingerprint of the
+    CSV must be the one in step 8. The test then fails again with the planted bug, as in step 3.
 11. To take it out: type `/exit` if Claude Code is still open, then delete the `workflow-test` folder in your home
     folder. In Finder, choose Go, then Home, to see it.
 
@@ -389,15 +409,17 @@ Previous rounds:\n${history.join('\n') || '(none)'}`,
   progress. The script in step 10 also counted a new description of the same failure as progress, so its no-progress
   rule never stopped the loop.
 - **Some scripts add a round cap, some have none.** The script above stops only on a pass or on 2 rounds without
-  progress. In step 10, the cap of 8 rounds was what ended the loop. The docs name a runtime limit of 1,000 agents per run (12 Nov 2026).
-- **A workflow cost more here.** About twice the tokens in total, 3.5 to 5 times as many without cache reads, and as
+  progress. In step 10, the cap of 8 rounds was what ended the loop. To stop a run yourself, press `x` in
+  `/workflows`, as in step 10. The docs name a runtime limit of 1,000 agents per run (12 Nov 2026).
+- **A workflow cost more here.** About twice the tokens in total, 3.6 to 5.1 times as many without cache reads, and as
   many or more permission questions on this job. The question
   before each run says it "counts against your usage limit".
-- **Accept edits mode still asks before shell commands.** The workflow agent ran the test with shell commands, so it
+- **Accept edits mode still asks before most shell commands.** The workflow agent ran the test with shell commands, so it
   asked before most of them. In auto mode we got 0 questions before commands in 2 sessions.
 - **In auto mode, you may not see the script.** The docs say auto mode asks before a workflow runs only the first
   time. After that, a new script starts without the question, so you cannot read its stop rule first.
-- **Rules in the ask and in CLAUDE.md are text, not a lock.** Claude changed neither file in the 24 sessions. For a
+- **Rules in the ask and in CLAUDE.md are text, not a lock.** Claude changed neither file in the 23 sessions without
+  the step 22 hook. In the 2 sessions with it, our ask told Claude to change the CSV, and the hook blocked that. For a
   guard, use a hook as in step 22: it ran inside the workflow agents in the 1 session that had them.
 - **The size line is advice.** After Yes, Claude Code showed `medium size (/config)`. The docs call this size
   guideline "advice, not a cap".
@@ -412,8 +434,9 @@ Previous rounds:\n${history.join('\n') || '(none)'}`,
 | `python3` or `git` is not found, or a window offers to install developer tools | Accept the install, delete the `workflow-test` folder in Finder, then run step 2 again. We did not test this |
 | No `Run a dynamic workflow?` question | The docs say that on Pro you turn workflows on in `/config`, and that an admin can turn them off for a whole organization. We did not test Pro. Put the bug back with `git checkout changes.py`, check that the ask starts with `Use a workflow for this job:`, and do step 4 again |
 | You chose option 2 at a permission question | We did not test that. Do not exit: the docs say a run stops when you exit Claude Code. Let it finish, go on with step 7, and check the two files in step 8 |
+| An error about the model when you start Claude Code | Start with `claude` alone: you then get your account's default model. We tested only Opus 5.5 |
 | Your slash command is not `/fix-changes-loop` | Use the name from the saved line in step 7 |
-| You expect the workflow to do better | Both asks fixed the bug. The workflow used about twice the tokens, 3.5 to 5 times as many without cache reads. It is worth it when you want to read the stop rule first, or run the same loop again |
+| You expect the workflow to do better | Both asks fixed the bug. The workflow used about twice the tokens, 3.6 to 5.1 times as many without cache reads. It is worth it when you want to read the stop rule first, or run the same loop again |
 
 ## In our own work
 
