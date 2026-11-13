@@ -243,7 +243,8 @@ Dynamic workflow saved to
 
    If it asks whether you trust the folder, choose `Yes, I trust this folder`. Our sessions on 13 Nov started in auto
    mode: the bottom line said `auto mode on`. In the clean test of [step 15](../../builder/15-plan-mode-and-undo/) it
-   was manual mode. Press `Shift+Tab` until the bottom line says `accept edits on`. Paste the workflow ask:
+   was manual mode. We do not know whether the new version or our account made the difference. Press `Shift+Tab`
+   until the bottom line says `accept edits on`. Paste the workflow ask:
 
    ```text
    Use a workflow for this job: run python3 test_changes.py, fix changes.py, then run the test again. Repeat until the test passes, or stop after two rounds in a row with no progress. Never change test_changes.py or the CSV.
@@ -320,13 +321,7 @@ Dynamic workflow saved to
    and `4. No`. Press `1`, and answer the permission questions as in step 6. At the end, type `/exit` and check the
    result as in step 8.
 10. Optional: test the stop rule. Put the bug back and make the test impossible: it will expect `-25` for
-    BE-FR, while 48 minus 71 is -23. Then run the saved workflow again. No honest fix can pass this test, so the
-    loop ends on its stop rule, or on its round cap if the script has one. In our run, the stop rule never fired: the
-    loop ran all 8 rounds of its cap, with 10 permission questions and about 708,000 tokens.
-
-    To stop a run yourself, type `/workflows` while it runs. With one run, it opens that run, and the bottom line says
-    `x stop workflow`. Press `x`: the run then shows `stopped`. We tried this once, in round 3. No new round started in
-    the next 2 minutes, and Claude's answer still said `Waiting for 1 dynamic workflow to finish`. Press Esc.
+    BE-FR, while 48 minus 71 is -23. Then run the saved workflow again:
 
     ```sh
     git checkout changes.py
@@ -336,8 +331,16 @@ Dynamic workflow saved to
     ```
 
     The test prints `FAIL` and expects `3. route  BE-FR    71 ->   48  -25`. Start the saved workflow as in step 9 and
-    answer the questions as in step 6. When Claude reports, type `/workflows` to see how many rounds ran (we saw
-    `8/8 agents`), and press Esc.
+    answer the questions as in step 6. No honest fix can pass this test, so the loop should end
+    on its stop rule, or on its round cap if the script has one. Ours did not stop on its rule: it ran all 8 rounds of
+    its cap, with 10 permission questions and about 708,000 tokens. Of the 9 scripts we saved on 12 Nov, 5 had no cap.
+    When Claude reports, type `/workflows` to see how many rounds ran (we saw `8/8 agents`), and press Esc.
+
+    Our runs that stopped on their rule took 2 or 3 rounds. If a 4th round starts, you can stop the run yourself: type
+    `/workflows`. With one run, it opens that run, and the bottom line says `x stop workflow`. Press `x`: the run then
+    shows `stopped`. We tried this once, in round 3. No new round started in the next 2 minutes, and Claude did not
+    report in that time: the main session still showed `Waiting for 1 dynamic workflow to finish`. So do not wait for a report.
+    Press Esc to close the view.
 
     Then type `/exit`, check the two files and put them back:
 

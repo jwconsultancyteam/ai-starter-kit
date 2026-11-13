@@ -40,8 +40,8 @@ On 24 Oct 2026 we ran the Mac line on a Mac, in a clean home folder with no earl
 2. **The check.** `claude --version` printed `2.1.310 (Claude Code)`.
 3. **The first start.** `claude` in a test folder asked for a text style, then how to sign in, then whether we trust
    the folder.
-4. **Plan mode.** Ours started in Auto mode, because of our own settings. Without them, Claude Code starts in
-   manual mode ([step 15](../15-plan-mode-and-undo/)). On 13 Nov 2026, in the clean test of [step 23](../../expert/23-a-workflow-with-a-stop-rule/), Claude Code 2.1.323 started in auto mode. Check the bottom line. We pressed Shift + Tab until it said `plan mode on`. In Plan mode
+4. **Plan mode.** On 24 Oct 2026, in 2.1.310, ours started in Auto mode, because of our own settings. Without them,
+   Claude Code started in manual mode on 26 Oct ([step 15](../15-plan-mode-and-undo/)). On 13 Nov 2026, in our test of [step 23](../../expert/23-a-workflow-with-a-stop-rule/), Claude Code 2.1.323 started in auto mode on our account. We do not know whether the new version or the account did that. Check the bottom line. We pressed Shift + Tab until it said `plan mode on`. In Plan mode
    it reads, but it does not change files.
 5. **Three questions** from [first-three-questions.txt](first-three-questions.txt), in a folder with only the sample
    export.
