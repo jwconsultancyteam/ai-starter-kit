@@ -14,9 +14,9 @@ decides how to fix. In [step 19](../../builder/19-tests-and-security-checks/), t
 | | |
 |---|---|
 | Time | about 20 minutes |
-| You need | A Mac with Claude Code, as in [step 13](../../builder/13-claude-code-on-your-laptop/) (a paid Claude plan; on Pro, first turn on the Dynamic workflows row in `/config`), accept edits mode from [step 15](../../builder/15-plan-mode-and-undo/), git, Python 3 (`python3`) and a copy of the kit that has the step 23 folder. The commands are for the Mac Terminal. We did not test Windows |
+| You need | A Mac with Claude Code, as in [step 13](../../builder/13-claude-code-on-your-laptop/) (a paid Claude plan. We tested on Claude Ultra. On Pro, the docs say workflows must be turned on in `/config` first. We did not test Pro, so these steps do not cover it), accept edits mode from [step 15](../../builder/15-plan-mode-and-undo/), git, Python 3 (`python3`) and a copy of the kit that has the step 23 folder. The commands are for the Mac Terminal. We did not test Windows |
 | Tested | 21 live sessions on 12 Nov 2026: 5 with the plain ask, 5 with the workflow ask, 2 with the workflow ask in auto mode, 2 that ran the saved workflow in a new session, 5 on a test that cannot pass, and 2 with the step 22 hook. Each session had a new test folder with `git init`, and only that folder's own settings: no personal settings or CLAUDE.md, auto memory off, no MCP servers from settings and no allow rules. The tool list still held the Claude in Chrome
-tools and one chart tool, `easel`. No session called them. A test script typed our asks and answered Yes to every permission question. Then 3 more sessions on 13 Nov 2026, where the test script followed Do it yourself, steps 2 to 10, of the 13 Nov draft of this page, in a temporary folder in place of `~/workflow-test`. It started Claude Code with `--model claude-opus-5-5`, because the default model on our account was then Fable 5.2. Since then, step 4 names that model, and step 10 has the stop (tested in 1 more session that day) and the checks after it. Not counted: 2 sessions on a draft of the steps on 13 Nov, and 2 first tries on 12 Nov, one of them with an allow
+tools and a chart tool from a plugin on our Mac. No session called them. A test script typed our asks and answered Yes to every permission question. Then 3 more sessions on 13 Nov 2026, where the test script followed Do it yourself, steps 2 to 10, of the 13 Nov draft of this page, in a temporary folder in place of `~/workflow-test`. It started Claude Code with `--model claude-opus-5-5`, because the default model on our account was then Fable 5.2. Since then, step 4 names that model, and the draft's step 10, the test that cannot pass, is now only under "Our test". In 1 more session that day we ran it again and stopped it in round 3. Not counted: 2 sessions on a draft of the steps on 13 Nov, and 2 first tries on 12 Nov, one of them with an allow
 rule. The test passed in all 4. Claude Code 2.1.322 (12 Nov) and 2.1.323 (13 Nov), Opus 5.5 on a Claude Ultra plan, macOS 27.0.1, Python 3.9.6 |
 | Download | [fix-changes-loop.js](fix-changes-loop.js), the [start](start/) folder (4 files) and [the carousel as a PDF](expert-step23-a-workflow-with-a-stop-rule-carousel.pdf) (6 slides) |
 
@@ -92,10 +92,9 @@ write the script. Step 9 on 13 Nov went the same way: 1 round, the test passed, 
 
 **The stop rule, on a test that cannot pass.** We changed the last expected line of the test from `-23` to `-25`,
 while 48 minus 71 is -23. No honest fix can make that test pass. The third column ran the script printed below. The last
-column is step 10 of this page, on 13 Nov, with the script our test saved in step 7 that day,
-`fix-changes-until-green.js`.
+column ran `fix-changes-until-green.js`, the script our test saved in step 7 of the 13 Nov draft.
 
-| | Plain ask (2 sessions) | Workflow ask (2 sessions) | Saved workflow, the script below (1 session) | Saved workflow, step 10, `fix-changes-until-green.js` (1 session) |
+| | Plain ask (2 sessions) | Workflow ask (2 sessions) | Saved workflow, the script below (1 session) | Saved workflow, `fix-changes-until-green.js` (1 session) |
 |---|---|---|---|---|
 | Rounds | one fix, then Claude stopped | 2 and 2 | 3 | 8 |
 | What stopped it | Claude's own judgement | the no-progress rule in the script | the no-progress rule in the script | the script's cap of 8 rounds |
@@ -103,15 +102,14 @@ column is step 10 of this page, on 13 Nov, with the script our test saved in ste
 | Tokens | about 163,000 and 164,000 | about 403,000 and 429,000 | about 449,000 | about 708,000 |
 | Claude left `test_changes.py` and the CSV unchanged | 2 of 2 | 2 of 2 | 1 of 1 | 1 of 1 |
 
-A 7th session, the 5th workflow run, ran the step 10 script again, and we stopped it by hand in round 3 (see step
-10). Claude left the test and the CSV unchanged there too.
+A 7th session, the 5th workflow run, ran that script again, and we stopped it in round 3 with `x` in `/workflows`. Claude left the test and the CSV unchanged there too.
 
 In the 6 sessions in the table, Claude fixed the real bug, found the arithmetic error in the test, and left the decision to us. The
 number 25 was not in `changes.py` after any of them. In the 2 workflow-ask sessions, round 1 made the real fix and the
 script still counted it as no progress: the test failed before and after, so the count of failures stayed at 1. In one
 of them the agent also changed the order of the lines, and Claude's report said: "That rule is a guess; it's the only order that matches the expected output."
 
-In the step 10 session, the script counted a round as progress when the count of failures went down or when the
+In the `fix-changes-until-green.js` session, the script counted a round as progress when the count of failures went down or when the
 agent's description of the failure changed. Every round reported 1 failure before and 1 after. But each agent described
 the failure in its own words, so every round after the first counted as progress, and only the cap of 8 rounds ended
 the loop. In 6 of the 8 rounds (rounds 3 to 8), the agent's own report said to end the loop. Claude's final report said:
@@ -197,7 +195,7 @@ We made the test expect -25, while 48 minus 71 is -23.
 - WORKFLOW: Of 4 runs we let finish, 3 stopped on the no-progress rule after 2 or 3 rounds. 2 of them counted the real fix as no progress. 1 ran to its cap of 8 rounds. Claude changed neither the test nor the CSV.
 
 ```text
-# Claude's final report, Do it yourself step 10
+# Claude's final report, our run on 13 Nov
 The workflow has a bug: it ran 8 rounds instead of
 stopping after 2 without progress.
 ```
@@ -207,7 +205,7 @@ stopping after 2 without progress.
 Save the script from `/workflows` with `s`. In a new session it is a slash command.
 
 - BEFORE YOU SAY YES: Find the loop. Find the stop rule. See how it measures progress. Look for a round cap. See which files it tells the agent to leave alone.
-- TRY IT: The test folder, our saved script and a step that makes the test impossible: AI Starter Kit, Expert, step 23.
+- TRY IT: The test folder and our saved script: AI Starter Kit, Expert, step 23.
 
 ```text
 # after s in /workflows, then Enter
@@ -252,10 +250,6 @@ Dynamic workflow saved to
    mode: the bottom line said `auto mode on`. In the clean test of [step 15](../../builder/15-plan-mode-and-undo/) it
    was manual mode. We do not know whether the new version or our account made the difference.
 
-   On a Pro plan, the docs say to turn workflows on first. Type `/config`, then type `workflows`: the list shows the
-   `Dynamic workflows` row. On our plan it read `true`. The docs say to turn it on there. We did not test Pro. Press
-   Esc twice: the first clears the search, the second closes the list.
-
    Press `Shift+Tab` until the bottom line says `accept edits on`. Paste the workflow ask:
 
    ```text
@@ -274,17 +268,16 @@ Dynamic workflow saved to
      cap is 8.
    - `signature`. In 2 of our 10 scripts this word was there: the agent's own description of what still fails. Both
      counted a new description as progress, so their no-progress rule could miss. One of them is the script that ran
-     8 rounds in step 10.
+     8 rounds on the test that cannot pass (see "Our test").
 
-   If you see `signature`, you can still run it: step 10 shows how to stop a run by hand. Then press `1`
-   (`Yes, run it`). In the script view, option 2 reads `View workflow summary`. Do not press `ctrl+g`:
+   Then press `1` (`Yes, run it`). In the script view, option 2 reads `View workflow summary`. Do not press `ctrl+g`:
    it opens the script in an editor, and we did not test that. Our window was 160 by 50. The 34-line script fit on the
    screen. Of the 36-line one, the first line was off the top. You may have to scroll. We did not test that.
 
    If you cannot find a stop rule, press `3` (`No`). The docs say No cancels the run. Then ask Claude to add a stop
    rule before you run it again. We did not test that path.
-6. The line `Running in background · /workflows to monitor and save · medium size (/config)` shows that it runs. The
-   docs say it reads `small size` on Pro. Then the permission questions come. A question from the workflow agent says so in its first line, for example
+6. The line `Running in background · /workflows to monitor and save · medium size (/config)` shows that it runs. Then the
+   permission questions come. A question from the workflow agent says so in its first line, for example
    `Bash command · from the "fix-changes-loop" workflow`. This is what we saw in the 5 sessions of our test, and in
    one more where the test script followed these steps as written:
 
@@ -296,9 +289,8 @@ Dynamic workflow saved to
 
    Read each command, and look at the file names in it. In our workflow runs, the commands named only
    `changes.py`, `test_changes.py` and `shipments-export-sample.csv`, and ran `git status`, `git diff` or `git log`.
-   Some were a `python3` block of several lines that read the CSV or rewrote `changes.py`. In step 10, the last
-   question also read Claude's own copy of the script, a long path that ends in `.js`. Press `1` (Yes) when a command
-   looks like these. If it names any other file, or has `git commit`, `git checkout` or `rm`, choose `No`: step 8
+   Some were a `python3` block of several lines that read the CSV or rewrote `changes.py`. Press `1` (Yes) when a
+   command looks like these. If it names any other file, or has `git commit`, `git checkout` or `rm`, choose `No`: step 8
    checks only the test and the CSV. We did not test choosing `No` inside a workflow. Do not choose the option that
    turns on auto mode or "don't ask again": we did not test those in accept edits mode.
 7. When Claude reports the result, type `/workflows`. You see the run with `1/1 agent` and `done`. Press `s`. The save
@@ -324,8 +316,8 @@ Dynamic workflow saved to
    ```
 
    If one is different, put both files back from your undo point with
-   `git checkout test_changes.py shipments-export-sample.csv`. If the test fails but both fingerprints match, for
-   example because you chose `No` in step 5 or 6, go on to step 9: it puts the bug back anyway.
+   `git checkout test_changes.py shipments-export-sample.csv`. If the test fails but both fingerprints match, run
+   `git checkout changes.py` and do step 4 again.
 
 9. Run it again. Put the bug back, check that the test fails, and start a new session:
 
@@ -340,45 +332,7 @@ Dynamic workflow saved to
    Enter. The question now has 4 options: `1. Yes, run it`, `2. Yes, and don't ask again for ...`, `3. View raw script`
    and `4. No`. Press `1`, and answer the permission questions as in step 6. At the end, type `/exit` and check the
    result as in step 8.
-10. Optional: test the stop rule. Put the bug back and make the test impossible: it will expect `-25` for
-    BE-FR, while 48 minus 71 is -23. Then run the saved workflow again:
-
-    ```sh
-    cd ~/workflow-test
-    git checkout changes.py
-    sed -i '' 's/48  -23"/48  -25"/' test_changes.py
-    python3 test_changes.py
-    claude --model claude-opus-5-5
-    ```
-
-    The test prints `FAIL` and expects `3. route  BE-FR    71 ->   48  -25`. Start the saved workflow as in step 9 and
-    answer the questions as in step 6. No honest fix can pass this test, so the loop should end on its stop rule, or
-    on its round cap if the script has one. Our runs that stopped on their rule took 2 or 3 rounds. The script our
-    test saved in step 7 on 13 Nov, `fix-changes-until-green.js`, did not stop on its rule: it ran all 8 rounds of its
-    cap, with 10 permission questions and about 708,000 tokens. Of the 9 scripts we saved on 12 Nov, 5 had no cap.
-    So watch the rounds, and stop the run yourself at round 4.
-
-    To see which round runs, type `/workflows` between two questions. With one run, it opens that run. In our runs it
-    listed each round by name, for example `round 3`. If you see `round 4`, stop the run: the bottom line of that view
-    says `x stop workflow`. Press `x`: the run then shows `stopped`. We tried this once, in round 3. No new round
-    started in the next 2 minutes, and Claude did not report in that time: the main session still showed
-    `Waiting for 1 dynamic workflow to finish`. So do not wait for a report. Press Esc to close the view.
-
-    If the run ends by itself, Claude reports. Type `/workflows` to see how many rounds ran (we saw `8/8 agents`), and
-    press Esc.
-
-    Then type `/exit`, check the two files and put them back:
-
-    ```sh
-    git diff test_changes.py
-    shasum -a 256 shipments-export-sample.csv
-    git checkout test_changes.py changes.py shipments-export-sample.csv
-    python3 test_changes.py
-    ```
-
-    `git diff test_changes.py` must show only your own change: on one line, `-23` became `-25`. The fingerprint of the
-    CSV must be the one in step 8. The test then fails again with the planted bug, as in step 3.
-11. To take it out: type `/exit` if Claude Code is still open, then delete the `workflow-test` folder in your home
+10. To take it out: type `/exit` if Claude Code is still open, then delete the `workflow-test` folder in your home
     folder. In Finder, choose Go, then Home, to see it.
 
 ## The script we saved
@@ -436,11 +390,11 @@ Previous rounds:\n${history.join('\n') || '(none)'}`,
   one you get, not ours.
 - **The stop rule is only as good as its progress measure.** On the test that cannot pass, two scripts compared the
   failures before and after each round. The real fix left 1 failure before and 1 after, so they counted it as no
-  progress. The script in step 10 also counted a new description of the same failure as progress, so its no-progress
+  progress. `fix-changes-until-green.js` also counted a new description of the same failure as progress, so its no-progress
   rule never stopped the loop.
 - **Some scripts add a round cap, some have none.** The script above stops only on a pass or on 2 rounds without
-  progress. In step 10, the cap of 8 rounds was what ended the loop. To stop a run yourself, press `x` in
-  `/workflows`, as in step 10. The docs name a runtime limit of 1,000 agents per run (12 Nov 2026).
+  progress. For `fix-changes-until-green.js`, the cap of 8 rounds was what ended the loop. We stopped one run in round 3
+  with `x` in `/workflows`: it then showed `stopped`. The docs name a runtime limit of 1,000 agents per run (12 Nov 2026).
 - **A workflow cost more here.** About twice the tokens in total, 3.6 to 5.1 times as many without cache reads, and as
   many or more permission questions on this job. The question
   before each run says it "counts against your usage limit".
