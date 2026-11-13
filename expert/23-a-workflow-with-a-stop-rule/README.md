@@ -254,7 +254,7 @@ Dynamic workflow saved to
 
    On a Pro plan, the docs say to turn workflows on first. Type `/config`, then type `workflows`: the list shows the
    `Dynamic workflows` row. On our plan it read `true`. The docs say to turn it on there. We did not test Pro. Press
-   Esc to close the list.
+   Esc twice: the first clears the search, the second closes the list.
 
    Press `Shift+Tab` until the bottom line says `accept edits on`. Paste the workflow ask:
 
@@ -324,7 +324,8 @@ Dynamic workflow saved to
    ```
 
    If one is different, put both files back from your undo point with
-   `git checkout test_changes.py shipments-export-sample.csv`.
+   `git checkout test_changes.py shipments-export-sample.csv`. If the test fails but both fingerprints match, for
+   example because you chose `No` in step 5 or 6, go on to step 9: it puts the bug back anyway.
 
 9. Run it again. Put the bug back, check that the test fails, and start a new session:
 
