@@ -89,9 +89,11 @@ of 8 or 10 rounds, which the ask did not name. 5 had no cap.
 write the script. Step 9 on 13 Nov went the same way: 1 round, the test passed, 3 questions, about 245,000 tokens.
 
 **The stop rule, on a test that cannot pass.** We changed the last expected line of the test from `-23` to `-25`,
-while 48 minus 71 is -23. No honest fix can make that test pass. The last column is step 10 of this page, on 13 Nov.
+while 48 minus 71 is -23. No honest fix can make that test pass. The third column ran the script printed below. The last
+column is step 10 of this page, on 13 Nov, with the script our test saved in step 7 that day,
+`fix-changes-until-green.js`.
 
-| | Plain ask (2 sessions) | Workflow ask (2 sessions) | Saved workflow (1 session) | Saved workflow, step 10 (1 session) |
+| | Plain ask (2 sessions) | Workflow ask (2 sessions) | Saved workflow, the script below (1 session) | Saved workflow, step 10, `fix-changes-until-green.js` (1 session) |
 |---|---|---|---|---|
 | Rounds | one fix, then Claude stopped | 2 and 2 | 3 | 8 |
 | What stopped it | Claude's own judgement | the no-progress rule in the script | the no-progress rule in the script | the script's cap of 8 rounds |
@@ -279,10 +281,11 @@ Dynamic workflow saved to
    | Then | the workflow agent | ran the test again. In 5 of 6 sessions the same command also made the fix with `sed -i` |
    | Last | the main session | a last check after the workflow (6 of 6), for example the test and `git diff` |
 
-   Read each command, then press `1` (Yes). Do not choose the option that turns on auto mode or "don't ask again": we
-   did not test those in accept edits mode. Some commands name `test_changes.py` to read or run it. You do not have to
-   judge each one: step 8 checks that the test and the CSV are unchanged, and puts them back if not. We did not test
-   choosing `No` inside a workflow.
+   Read each command. Press `1` (Yes) when it only reads files, runs the test or changes `changes.py`, as in the
+   table. Some commands name `test_changes.py` to read or run it. Step 8 checks only the test and the CSV, so if a
+   command does anything else, for example a `git commit`, deleting a file or work outside the folder, choose
+   `No`. We did not test choosing `No` inside a workflow. Do not choose the option that turns on auto mode or
+   "don't ask again": we did not test those in accept edits mode.
 7. When Claude reports the result, type `/workflows`. You see the run with `1/1 agent` and `done`. Press `s`. The save
    dialog shows `Project scope · .claude/workflows/` and a name. Press Enter. Note the name in the line
    `Dynamic workflow saved to ...`: we saw `fix-changes-loop`, `fix-changes-until-green` and `fix-changes-until-pass`.
@@ -332,8 +335,9 @@ Dynamic workflow saved to
 
     The test prints `FAIL` and expects `3. route  BE-FR    71 ->   48  -25`. Start the saved workflow as in step 9 and
     answer the questions as in step 6. No honest fix can pass this test, so the loop should end
-    on its stop rule, or on its round cap if the script has one. Ours did not stop on its rule: it ran all 8 rounds of
-    its cap, with 10 permission questions and about 708,000 tokens. Of the 9 scripts we saved on 12 Nov, 5 had no cap.
+    on its stop rule, or on its round cap if the script has one. The script our test saved in step 7 on 13 Nov,
+    `fix-changes-until-green.js`, did not stop on its rule: it ran all 8 rounds of its cap, with 10 permission
+    questions and about 708,000 tokens. Of the 9 scripts we saved on 12 Nov, 5 had no cap.
     When Claude reports, type `/workflows` to see how many rounds ran (we saw `8/8 agents`), and press Esc.
 
     Our runs that stopped on their rule took 2 or 3 rounds. If a 4th round starts, you can stop the run yourself: type
@@ -402,7 +406,8 @@ Previous rounds:\n${history.join('\n') || '(none)'}`,
   from the ask: fix `changes.py` only, no hard-coded output, do not touch the test or the CSV.
 - `SCHEMA` makes the agent answer with `passed` and `failing_count`, so the script can count.
 - `if (r.passed) return` stops on a pass. Line 31 counts a round without progress. Line 33 stops after 2 of them.
-- There is no round cap of its own. Only a pass or the no-progress rule ends this loop.
+- There is no round cap of its own. Only a pass or the no-progress rule ends this loop. On the test that cannot pass,
+  it stopped after 3 rounds (the third column of the table above).
 
 ## The boundary
 
