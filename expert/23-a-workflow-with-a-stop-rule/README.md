@@ -55,23 +55,25 @@ Run python3 test_changes.py, fix changes.py, then run the test again. Repeat unt
 | Test passes at the end | 5 of 5 | 5 of 5 |
 | `test_changes.py` and the CSV unchanged | 5 of 5 | 5 of 5 |
 | Workflows started | 0 | 1 in each session, with 1 agent and 1 round |
-| Permission questions (we said Yes) | 2 or 3 | 3 or 4, 2 of them from the workflow agent |
+| Permission questions before commands (we said Yes) | 2 or 3 | 3 or 4, 2 of them from the workflow agent. The `Run a dynamic workflow?` question came on top, once |
 | Tokens per session | about 118,000 to 162,000 | about 306,000 to 361,000 |
 | Files changed | `changes.py` | `changes.py`, plus the workflow file we saved |
 
 Tokens are input, cache writes, cache reads and output, counted once per message in the session files, main session
 and workflow agents together. The middle session used about 159,000 (plain) and about 322,000 (workflow). Most of
 these are cache reads: 91 to 93% in the plain ask, 82 to 85% in the workflow ask. Without cache reads, the plain ask
-used about 11,000 to 14,000 tokens and the workflow ask about 49,000 to 57,000, 4 to 5 times as many. The
+used about 11,000 to 14,000 tokens and the workflow ask about 49,000 to 57,000, 3.5 to 5 times as many. The
 `/workflows` view showed a lower number for the agent, about 30,000 to 37,000 tokens in the 5 workflow-ask sessions.
-We do not know how that number is counted. We did not turn tokens into money.
+We do not know how that number is counted. We did not turn tokens into money. In the session on 13 Nov where a test
+script followed steps 4 to 8, the workflow ask used about 403,000 tokens and got 5 permission questions, 3 of them
+from the workflow agent: more than in the 5 sessions above.
 
 On this small job the plain ask did as well, with no more questions and far fewer tokens. The workflow gave three
 other things: a script with the stop rule that you can read before it runs (in accept edits mode), a view of each round while it runs, and a
 file you can save and run again as a slash command.
 
-In auto mode, where Claude Code answers the permission questions itself, the workflow ask got 0 questions in 2 of 2
-sessions. The test passed in both, at about 357,000 and 390,000 tokens. The question from a workflow agent offers that
+In auto mode, where Claude Code answers the permission questions itself, the workflow ask got 0 questions before
+commands in 2 of 2 sessions. The test passed in both, at about 357,000 and 390,000 tokens. The question from a workflow agent offers that
 switch itself: "Yes, and switch to auto mode · workflows run best with it on". The docs say that in auto mode, Claude
 Code asks before a workflow runs only the first time, and later runs start without asking. Our 2 auto mode sessions
 each had new settings, so each one still asked. We stayed in accept edits mode for the steps below.
@@ -136,7 +138,7 @@ Got:
 Both asks fixed the bug. The plain ask used far fewer tokens and no more questions.
 
 - PLAIN ASK: Test passed in 5 of 5. 2 or 3 permission questions. About 118,000 to 162,000 tokens, most of them cache reads.
-- WORKFLOW ASK: Test passed in 5 of 5. 3 or 4 permission questions. About 306,000 to 361,000 tokens, most of them cache reads.
+- WORKFLOW ASK: Test passed in 5 of 5. 3 or 4 permission questions, plus the workflow question. About 306,000 to 361,000 tokens, most of them cache reads.
 
 ```text
 # plain ask, the edit on line 52
@@ -191,7 +193,7 @@ The cause is now in the test itself, not in changes.py.
 
 Save the script from `/workflows` with `s`. In a new session it is a slash command.
 
-- BEFORE YOU SAY YES: Find the loop. Find the stop rule. See how it measures progress. Look for a round cap. Check which files the agent may change.
+- BEFORE YOU SAY YES: Find the loop. Find the stop rule. See how it measures progress. Look for a round cap. See which files it tells the agent to leave alone.
 - TRY IT: The test folder and our saved script are in the AI Starter Kit, Expert, step 23.
 
 ```text
@@ -342,17 +344,18 @@ Previous rounds:\n${history.join('\n') || '(none)'}`,
 
 ## The boundary
 
-- **Claude writes a new script each time.** The 9 scripts we saved from the workflow ask were all different. Read the
+- **Claude writes a new script for each workflow ask.** The 9 scripts we saved from the workflow ask were all different. Read the
   one you get, not ours.
-- **The stop rule is only as good as its progress measure.** On the test that cannot pass, two scripts counted the
-  real fix in round 1 as no progress, because the test still failed.
+- **The stop rule is only as good as its progress measure.** On the test that cannot pass, two scripts compared the
+  failures before and after each round. The real fix left 1 failure before and 1 after, so they counted it as no
+  progress.
 - **Some scripts add a round cap, some have none.** The script above stops only on a pass or on 2 rounds without
   progress. The docs name a runtime limit of 1,000 agents per run (12 Nov 2026).
-- **A workflow cost more here.** About twice the tokens in total, 4 to 5 times as many without cache reads, and as
+- **A workflow cost more here.** About twice the tokens in total, 3.5 to 5 times as many without cache reads, and as
   many or more permission questions on this job. The question
   before each run says it "counts against your usage limit".
 - **Accept edits mode still asks before shell commands.** The workflow agent ran the test with shell commands, so it
-  asked before most of them. In auto mode we got 0 questions in 2 sessions.
+  asked before most of them. In auto mode we got 0 questions before commands in 2 sessions.
 - **In auto mode, you may not see the script.** The docs say auto mode asks before a workflow runs only the first
   time. After that, a new script starts without the question, so you cannot read its stop rule first.
 - **Rules in the ask and in CLAUDE.md are text, not a lock.** Both files stayed the same in all 21 sessions. For a
@@ -369,9 +372,9 @@ Previous rounds:\n${history.join('\n') || '(none)'}`,
 | `ls` in step 2 shows a folder named `start` | The `workflow-test` folder was there already. Delete it in Finder and do step 2 again |
 | `python3` or `git` is not found, or a window offers to install developer tools | Accept the install, delete the `workflow-test` folder in Finder, then run step 2 again. We did not test this |
 | No `Run a dynamic workflow?` question | The docs say that on Pro you turn workflows on in `/config`. We did not test Pro. Use the ask as written: in one try with an ask that started with `ultracode:`, Claude fixed the bug itself first and used a workflow only to check it. Before you try again, put the bug back with `git checkout changes.py` |
-| You chose option 2 at a permission question | We did not test that. Type `/exit`, then do step 8 to check the two files |
+| You chose option 2 at a permission question | We did not test that. Do not exit: the docs say a run stops when you exit Claude Code. Let it finish, go on with step 7, and check the two files in step 8 |
 | Your slash command is not `/fix-changes-loop` | Use the name from the saved line in step 7 |
-| You expect the workflow to do better | Both asks fixed the bug. The workflow used about twice the tokens, 4 to 5 times as many without cache reads. It is worth it when you want to read the stop rule first, or run the same loop again |
+| You expect the workflow to do better | Both asks fixed the bug. The workflow used about twice the tokens, 3.5 to 5 times as many without cache reads. It is worth it when you want to read the stop rule first, or run the same loop again |
 
 ## In our own work
 
