@@ -2,7 +2,7 @@
 
 Keep fixing until the test passes: that is a loop, and a loop needs a rule for when to stop. In a plain ask, Claude decides
 that while it works. In a dynamic workflow, Claude writes a small script that starts agents one step at a time. In
-accept edits mode, Claude Code asks before each run, so you can read that script, with its stop rule, first. Here we
+accept edits mode, Claude Code asks before a new workflow runs, so you can read that script, with its stop rule, first. Here we
 gave the same job both ways and counted what each one cost.
 
 The word is not new in this kit. In [step 12](../../builder/12-what-an-agent-is/), a workflow follows steps you fixed in
@@ -192,7 +192,7 @@ fix-changes-loop
 We made the test expect -25, while 48 minus 71 is -23.
 
 - PLAIN ASK: One fix, then Claude stopped by its own judgement. 2 of 2.
-- WORKFLOW: Of 4 runs we let finish, 3 stopped on the no-progress rule after 2 or 3 rounds. 2 of them counted the real fix as no progress. 1 ran to its cap of 8 rounds. Claude changed neither the test nor the CSV.
+- WORKFLOW: Of 4 runs we let finish (2 from the ask, 2 saved scripts run again), 3 stopped on the no-progress rule after 2 or 3 rounds. The 2 from the ask counted the real fix as no progress. 1 ran to its cap of 8 rounds.
 
 ```text
 # Claude's final report, our run on 13 Nov
@@ -270,9 +270,11 @@ Dynamic workflow saved to
    - A name that counts rounds without progress, with `2` next to it: the stop. Our scripts used `noProgress`,
      `stale` or `stalls`, for example `if (noProgress >= 2)` or `while (noProgress < 2)`.
    - What the script counts as progress, in the line that adds to that name. A name such as `failing_count`,
-     `failing_after_fix` or `failures_after` means it counts failing checks: a round is progress only when fewer
-     checks fail. In the 2 workflow-ask sessions on the test that cannot pass, scripts of this kind counted the real
-     fix as no progress, because 1 check failed before it and 1 after.
+     `failing_after_fix` or `failures_after` means it counts failing checks. Then see what it compares with. If it
+     compares with the count before the round (`failures_before`), a round is progress only when fewer checks fail. In
+     the 2 workflow-ask sessions on the test that cannot pass, scripts of this kind counted the real fix as no
+     progress, because 1 check failed before it and 1 after. If it compares with `best`, which starts at `Infinity`,
+     round 1 always counts as progress. A saved script of that kind stopped after 3 rounds, not 2.
    - `signature`. In 2 of our 10 scripts this word was there: the agent's own description of what still fails. Both
      counted a new description as progress, so their no-progress rule could miss. One of them ran 8 rounds on the test
      that cannot pass.
@@ -366,6 +368,8 @@ Previous rounds:\n${history.join('\n') || '(none)'}`,
   asked before most of them. In auto mode we got 0 questions before commands in 2 sessions.
 - **In auto mode, you may not see the script.** The docs say auto mode asks before a workflow runs only the first
   time. After that, a new script starts without the question, so you cannot read its stop rule first.
+- **A saved workflow can stop asking.** Its question can offer `2. Yes, and don't ask again for <name> in <folder>`.
+  The docs say later runs of it then start without the question. To read the script each time, do not choose it.
 - **Rules in the ask and in CLAUDE.md are text, not a lock.** Claude changed neither file in the 24 sessions without
   the step 22 hook. In the 2 sessions with it, our ask told Claude to change the CSV, and the hook blocked that. For a
   guard, use a hook as in step 22: it ran inside the workflow agents in the 1 session that had them.
