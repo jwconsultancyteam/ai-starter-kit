@@ -54,7 +54,7 @@ No coding. The Starter steps (1 to 10) need no GitHub account.
 | Builder | [20. Other models with Pi](builder/20-other-models-with-pi/) | See how one ask gave two answers, make it sharper in Claude Code, and let the step 19 test check the work | Live (1 Nov 2026) |
 | Expert | [21. Three guardrails for one spreadsheet](expert/21-three-guardrails/) | Test a file write, a private note and a local connection | Live (2 Nov 2026) |
 | Expert | [22. A hook that guards one file](expert/22-a-hook-that-guards-one-file/) | Add a hook that blocks changes to one file, and see where it stops | Live (5 Nov 2026) |
-| Expert | [23. A workflow with a stop rule](expert/23-a-workflow-with-a-stop-rule/) | Give one fix job as a plain ask and as a workflow, read the stop rule before it runs, and save it as a slash command | Live (16 Nov 2026) |
+| Expert | [23. A workflow with a stop rule](expert/23-a-workflow-with-a-stop-rule/) | See one fix job as a plain ask and as a workflow, then run the workflow: read the stop rule before it runs, and save it as a slash command | See step |
 | Expert | 24 to 30 | AI review, second opinions, tracing every AI call, agents that run overnight, connecting your own tools, agents that talk to each other and agents with their own wallet | Coming |
 
 ---

@@ -27,7 +27,7 @@ commands, or reach the network". Plan mode "tells Claude to research and propose
 ([code.claude.com/docs/en/permission-modes](https://code.claude.com/docs/en/permission-modes)).
 
 In our clean test, with no personal settings, Claude Code started in manual mode. If your settings start it in
-another mode, `Shift+Tab` gets you to these three. More modes exist. Leave them for later.
+another mode, `Shift+Tab` gets you to these three. More modes exist. Leave them for later. On 13 Nov 2026, in our test of [step 23](../../expert/23-a-workflow-with-a-stop-rule/), Claude Code 2.1.323 started in auto mode on our account. We do not know whether the new version or the account did that. Check the bottom line.
 
 ## Our test
 

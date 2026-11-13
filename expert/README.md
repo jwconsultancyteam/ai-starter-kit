@@ -10,4 +10,4 @@
 
 ## Step 23: A workflow with a stop rule
 
-[Run the workflow test](23-a-workflow-with-a-stop-rule/). Give one fix job as a plain ask and as a dynamic workflow, read the script's stop rule before it runs, and save it as a slash command. On this small job the plain ask did as well, with fewer questions and about half the tokens.
+[Run the workflow test](23-a-workflow-with-a-stop-rule/). See one fix job as a plain ask and as a dynamic workflow, then run the workflow: read the script's stop rule before it runs, and save it as a slash command. On this small job the plain ask did as well, with no more questions and far fewer tokens.
