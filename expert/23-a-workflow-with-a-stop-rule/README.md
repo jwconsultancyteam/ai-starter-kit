@@ -197,7 +197,7 @@ We made the test expect -25, while 48 minus 71 is -23.
 - WORKFLOW: Of 4 runs we let finish, 3 stopped on the no-progress rule after 2 or 3 rounds. 2 of them counted the real fix as no progress. 1 ran to its cap of 8 rounds. Claude changed neither the test nor the CSV.
 
 ```text
-# step 10 of the kit, from Claude's final report
+# Claude's final report, Do it yourself step 10
 The workflow has a bug: it ran 8 rounds instead of
 stopping after 2 without progress.
 ```
@@ -250,8 +250,13 @@ Dynamic workflow saved to
 
    If it asks whether you trust the folder, choose `Yes, I trust this folder`. Our sessions on 13 Nov started in auto
    mode: the bottom line said `auto mode on`. In the clean test of [step 15](../../builder/15-plan-mode-and-undo/) it
-   was manual mode. We do not know whether the new version or our account made the difference. Press `Shift+Tab`
-   until the bottom line says `accept edits on`. Paste the workflow ask:
+   was manual mode. We do not know whether the new version or our account made the difference.
+
+   On a Pro plan, the docs say to turn workflows on first. Type `/config`, then type `workflows`: the list shows the
+   `Dynamic workflows` row. On our plan it read `true`. The docs say to turn it on there. We did not test Pro. Press
+   Esc to close the list.
+
+   Press `Shift+Tab` until the bottom line says `accept edits on`. Paste the workflow ask:
 
    ```text
    Use a workflow for this job: run python3 test_changes.py, fix changes.py, then run the test again. Repeat until the test passes, or stop after two rounds in a row with no progress. Never change test_changes.py or the CSV.
@@ -259,24 +264,27 @@ Dynamic workflow saved to
 
    Claude may ask before it runs the test first (1 of 6 sessions). Read the command and choose `1. Yes`.
 5. Claude Code asks `Run a dynamic workflow?` with three options: `1. Yes, run it`, `2. View raw script`, `3. No`.
-   Press `2`. The script is short (the 10 we saved had 31 to 54 lines). Look for four things:
+   Press `2`. The script is short (the 10 we saved had 31 to 54 lines). You do not have to read all of it. Look for
+   these words:
 
-   - The loop: a line that starts with `while` or `for`.
-   - The count of rounds without progress: a name such as `noProgress` that goes up by 1 (`noProgress++`) or back to 0.
-   - The stop: a line such as `if (noProgress >= 2)` with `break` or `return`, or the `while` line itself.
-   - A round cap, if there is one: a number of rounds the loop cannot pass. In `for (let i = 1; i <= 8; i++)`, the
+   - `while` or `for`: the loop.
+   - A name that counts rounds without progress, with `2` next to it: the stop. Our scripts used `noProgress`,
+     `stale` or `stalls`, for example `if (noProgress >= 2)` or `while (noProgress < 2)`.
+   - A number of rounds the loop cannot pass, if there is one: the round cap. In `for (let i = 1; i <= 8; i++)`, the
      cap is 8.
+   - `signature`. In 2 of our 10 scripts this word was there: the agent's own description of what still fails. Both
+     counted a new description as progress, so their no-progress rule could miss. One of them is the script that ran
+     8 rounds in step 10.
 
-   Then check what the script compares to decide that a round made progress. In one of our runs it compared the
-   agent's own description of the failure, which changed every round, so the no-progress rule never stopped the loop.
-   Then press `1` (`Yes, run it`). In the script view, option 2 reads `View workflow summary`. Do not press `ctrl+g`:
+   If you see `signature`, you can still run it: step 10 shows how to stop a run by hand. Then press `1`
+   (`Yes, run it`). In the script view, option 2 reads `View workflow summary`. Do not press `ctrl+g`:
    it opens the script in an editor, and we did not test that. Our window was 160 by 50. The 34-line script fit on the
    screen. Of the 36-line one, the first line was off the top. You may have to scroll. We did not test that.
 
    If you cannot find a stop rule, press `3` (`No`). The docs say No cancels the run. Then ask Claude to add a stop
    rule before you run it again. We did not test that path.
-6. The line `Running in background · /workflows to monitor and save · medium size (/config)` shows that it runs. Then the permission
-   questions come. A question from the workflow agent says so in its first line, for example
+6. The line `Running in background · /workflows to monitor and save · medium size (/config)` shows that it runs. The
+   docs say it reads `small size` on Pro. Then the permission questions come. A question from the workflow agent says so in its first line, for example
    `Bash command · from the "fix-changes-loop" workflow`. This is what we saw in the 5 sessions of our test, and in
    one more where the test script followed these steps as written:
 
@@ -286,10 +294,13 @@ Dynamic workflow saved to
    | Then | the workflow agent | ran the test again. In 5 of 6 sessions the same command also made the fix with `sed -i` |
    | Last | the main session | a last check after the workflow (6 of 6), for example the test and `git diff` |
 
-   Read each command. Press `1` (Yes) when it only reads files, runs the test or changes `changes.py`, as in the
-   table. Some commands name `test_changes.py` to read or run it. Step 8 checks only the test and the CSV, so if a
-   command changes any other file, makes a `git commit` or deletes a file, choose `No`. We did not test choosing `No` inside a workflow. Do not choose the option that turns on auto mode or
-   "don't ask again": we did not test those in accept edits mode.
+   Read each command, and look at the file names in it. In our workflow runs, the commands named only
+   `changes.py`, `test_changes.py` and `shipments-export-sample.csv`, and ran `git status`, `git diff` or `git log`.
+   Some were a `python3` block of several lines that read the CSV or rewrote `changes.py`. In step 10, the last
+   question also read Claude's own copy of the script, a long path that ends in `.js`. Press `1` (Yes) when a command
+   looks like these. If it names any other file, or has `git commit`, `git checkout` or `rm`, choose `No`: step 8
+   checks only the test and the CSV. We did not test choosing `No` inside a workflow. Do not choose the option that
+   turns on auto mode or "don't ask again": we did not test those in accept edits mode.
 7. When Claude reports the result, type `/workflows`. You see the run with `1/1 agent` and `done`. Press `s`. The save
    dialog shows `Project scope · .claude/workflows/` and a name. Press Enter. Note the name in the line
    `Dynamic workflow saved to ...`: we saw `fix-changes-loop`, `fix-changes-until-green` and `fix-changes-until-pass`.
@@ -340,18 +351,20 @@ Dynamic workflow saved to
     ```
 
     The test prints `FAIL` and expects `3. route  BE-FR    71 ->   48  -25`. Start the saved workflow as in step 9 and
-    answer the questions as in step 6. No honest fix can pass this test, so the loop should end
-    on its stop rule, or on its round cap if the script has one. The script our test saved in step 7 on 13 Nov,
-    `fix-changes-until-green.js`, did not stop on its rule: it ran all 8 rounds of its cap, with 10 permission
-    questions and about 708,000 tokens. Of the 9 scripts we saved on 12 Nov, 5 had no cap.
-    When Claude reports, type `/workflows` to see how many rounds ran (we saw `8/8 agents`), and press Esc.
+    answer the questions as in step 6. No honest fix can pass this test, so the loop should end on its stop rule, or
+    on its round cap if the script has one. Our runs that stopped on their rule took 2 or 3 rounds. The script our
+    test saved in step 7 on 13 Nov, `fix-changes-until-green.js`, did not stop on its rule: it ran all 8 rounds of its
+    cap, with 10 permission questions and about 708,000 tokens. Of the 9 scripts we saved on 12 Nov, 5 had no cap.
+    So watch the rounds, and stop the run yourself at round 4.
 
     To see which round runs, type `/workflows` between two questions. With one run, it opens that run. In our runs it
-    listed each round by name, for example `round 3`. Our runs that stopped on their rule took 2 or 3 rounds. If you
-    see `round 4`, you can stop the run yourself: the bottom line of that view says `x stop workflow`. Press `x`: the run then
-    shows `stopped`. We tried this once, in round 3. No new round started in the next 2 minutes, and Claude did not
-    report in that time: the main session still showed `Waiting for 1 dynamic workflow to finish`. So do not wait for a report.
-    Press Esc to close the view.
+    listed each round by name, for example `round 3`. If you see `round 4`, stop the run: the bottom line of that view
+    says `x stop workflow`. Press `x`: the run then shows `stopped`. We tried this once, in round 3. No new round
+    started in the next 2 minutes, and Claude did not report in that time: the main session still showed
+    `Waiting for 1 dynamic workflow to finish`. So do not wait for a report. Press Esc to close the view.
+
+    If the run ends by itself, Claude reports. Type `/workflows` to see how many rounds ran (we saw `8/8 agents`), and
+    press Esc.
 
     Then type `/exit`, check the two files and put them back:
 
