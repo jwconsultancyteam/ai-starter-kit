@@ -173,7 +173,7 @@ if (noProgress >= 2) return { status: 'stalled', rounds: round, history }
 The workflow runs in the background. `/workflows` shows each round.
 
 - THE VIEW: One phase, one agent per round, with its time.
-- THE QUESTIONS: The workflow agent asks before most of its shell commands: twice in each one-round run here.
+- THE QUESTIONS: In accept edits mode, the workflow agent asks before most of its shell commands: twice in each one-round run here.
 
 ```text
 # /workflows, after the run
@@ -200,7 +200,7 @@ stopping after 2 without progress.
 Save the script from `/workflows` with `s`. In a new session it is a slash command.
 
 - BEFORE YOU SAY YES: Find the loop. Find the stop rule. See how it measures progress. Look for a round cap. See which files it tells the agent to leave alone.
-- TRY IT: The test folder, our saved script and the test that cannot pass are in the AI Starter Kit, Expert, step 23.
+- TRY IT: The test folder, our saved script and a step that makes the test impossible: AI Starter Kit, Expert, step 23.
 
 ```text
 # after s in /workflows, then Enter
@@ -242,7 +242,8 @@ Dynamic workflow saved to
    ```
 
    If it asks whether you trust the folder, choose `Yes, I trust this folder`. Our sessions on 13 Nov started in auto
-   mode: the bottom line said `auto mode on`. Press `Shift+Tab` until it says `accept edits on`. Paste the workflow ask:
+   mode: the bottom line said `auto mode on`. In the clean test of [step 15](../../builder/15-plan-mode-and-undo/) it
+   was manual mode. Press `Shift+Tab` until the bottom line says `accept edits on`. Paste the workflow ask:
 
    ```text
    Use a workflow for this job: run python3 test_changes.py, fix changes.py, then run the test again. Repeat until the test passes, or stop after two rounds in a row with no progress. Never change test_changes.py or the CSV.
@@ -319,7 +320,13 @@ Dynamic workflow saved to
    and `4. No`. Press `1`, and answer the permission questions as in step 6. At the end, type `/exit` and check the
    result as in step 8.
 10. Optional: test the stop rule. Put the bug back and make the test impossible: it will expect `-25` for
-    BE-FR, while 48 minus 71 is -23. Then run the saved workflow again:
+    BE-FR, while 48 minus 71 is -23. Then run the saved workflow again. No honest fix can pass this test, so the
+    loop ends on its stop rule, or on its round cap if the script has one. In our run, the stop rule never fired: the
+    loop ran all 8 rounds of its cap, with 10 permission questions and about 708,000 tokens.
+
+    To stop a run yourself, type `/workflows` while it runs. With one run, it opens that run, and the bottom line says
+    `x stop workflow`. Press `x`: the run then shows `stopped`. We tried this once, in round 3. No new round started in
+    the next 2 minutes, and Claude's answer still said `Waiting for 1 dynamic workflow to finish`. Press Esc.
 
     ```sh
     git checkout changes.py
@@ -329,14 +336,8 @@ Dynamic workflow saved to
     ```
 
     The test prints `FAIL` and expects `3. route  BE-FR    71 ->   48  -25`. Start the saved workflow as in step 9 and
-    answer the questions as in step 6. No honest fix can pass this test. The loop ends on its stop rule, or on its
-    round cap if the script has one. In our run, the stop rule never fired: the loop ran all 8 rounds of its cap, with
-    10 permission questions and about 708,000 tokens. When Claude reports, type `/workflows` to see how many rounds
-    ran (we saw `8/8 agents`), and press Esc.
-
-    To stop a run yourself, type `/workflows` while it runs. With one run, it opens that run, and the bottom line says
-    `x stop workflow`. Press `x`: the run then shows `stopped`. We tried this once, in round 3. No new round started in
-    the next 2 minutes, and Claude's answer still said `Waiting for 1 dynamic workflow to finish`. Press Esc.
+    answer the questions as in step 6. When Claude reports, type `/workflows` to see how many rounds ran (we saw
+    `8/8 agents`), and press Esc.
 
     Then type `/exit`, check the two files and put them back:
 
